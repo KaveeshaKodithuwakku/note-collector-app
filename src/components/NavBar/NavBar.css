@@ -1,0 +1,16 @@
+.nav-bar{
+    color: #10df88;
+}
+
+.navbar-custom {  
+    /* background-color: rgb(5, 187, 187) !important; */
+    background-color: rgb(105, 6, 163) !important;
+  
+}  
+  
+.navbar-text {  
+    color: rgb(252, 250, 255)  !important;  
+    font-weight: bolder;
+    
+
+}  

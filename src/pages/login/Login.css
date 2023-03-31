@@ -1,0 +1,20 @@
+.center_content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+icon_btn{
+  height: auto;
+  width: 900px;
+
+
+}
+
+.body{
+  background-image: url(/src/assets/background.jpg) !important;
+  height: 100%;
+}
