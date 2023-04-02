@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, CardActions, CardContent, CardMedia, IconButton, TextField, styled } from '@mui/material';
-import { AttachFile, PhotoCamera, Save } from '@mui/icons-material';
+import { Button, Card, CardActions, CardContent} from '@mui/material';
+import {  Save } from '@mui/icons-material';
 import './AddNotes.css';
-import SquareButton from '../../components/SquareButton/SquareButton';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { FaSave } from 'react-icons/fa';
 import Swal from 'sweetalert2'
-import { purple } from '@mui/material/colors';
 import axios from 'axios';
 
 
@@ -35,6 +30,7 @@ export default function AddNotes() {
     console.log(number.getTime());
   })
 
+  //save data
   const savePost = () => {
 
     console.log(currDate);
@@ -73,7 +69,7 @@ export default function AddNotes() {
       flexDirection: 'column'
     }}>
 
-      <Card sx={{ minWidth: 275, marginTop: 5 }}>
+      <Card sx={{ minWidth: 275, marginTop: 2 }}>
         <CardContent className='card'>
           <div >
             <h3 className='title'>Add Notes</h3>
@@ -91,7 +87,7 @@ export default function AddNotes() {
 
             <div className="mb-4">
               <pa> File or Image Upload : </pa><br></br>
-              <input type={"text"} placeholder="Title" />
+              <input className='img-placement' type={"text"} placeholder="Title" />
             </div>
 
           </div>

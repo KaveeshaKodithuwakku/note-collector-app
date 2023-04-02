@@ -13,6 +13,7 @@ color: rgb(142, 7, 184);
 justify-content: center;
 align-items: center;
 display: flex;
+width: 300px;
 }
 
 .text{
@@ -21,7 +22,7 @@ display: flex;
     background-color: transparent;
     padding: 5px;
     margin-top: 10px;
-    width: fit-content;
+    width: 300px;
 }
 
 .text-box-multi{
@@ -30,7 +31,16 @@ display: flex;
     background-color: white ;
     padding: 5px ;
     margin-top: 10px ;
-    width: fit-content ;
+    width: 300px;
+}
+
+.img-placement{
+    width: 300px;
+    border: 1px solid rgb(150, 14, 204);
+    border-radius: 50px;
+    background-color: transparent;
+    padding: 5px;
+    margin-top: 10px;
 }
 
 .card-body {
