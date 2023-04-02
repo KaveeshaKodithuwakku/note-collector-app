@@ -1,0 +1,23 @@
+
+.body{
+  background-image: url(../../assets/491368.jpg) !important;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+  @font-face {
+    font-family: RubikaMoonro;
+    src: url(../../fonts/RubikMoonrocks-Regular.ttf);
+}
+
+.font-type{
+    font-family: RubikaMoonro !important;
+}
+
+.search-btn{
+  position: relative;
+  align-content: flex-end;
+
+}
