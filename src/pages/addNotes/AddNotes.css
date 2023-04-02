@@ -1,0 +1,58 @@
+.card{
+    border-radius: 0 30px;
+    background-image: url(../../assets/wp6725865.jpg) !important;
+}
+
+.btn-style{
+    border-radius: 0 30px !important;
+}
+
+.title{
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+color: rgb(142, 7, 184);
+justify-content: center;
+align-items: center;
+display: flex;
+}
+
+.text{
+    border: 1px solid rgb(150, 14, 204);
+    border-radius: 50px;
+    background-color: transparent;
+    padding: 5px;
+    margin-top: 10px;
+    width: fit-content;
+}
+
+.text-box-multi{
+    border: 1px solid rgb(150, 14, 204) !important;
+    border-radius: 0 30px ;
+    background-color: white ;
+    padding: 5px ;
+    margin-top: 10px ;
+    width: fit-content ;
+}
+
+.card-body {
+    /* background: lightblue; */
+    background-image: url(../../assets/card_background.png) !important;
+}
+
+.btn-icon{
+    justify-content: flex-end !important;
+    color: white !important; 
+    background-color: blueviolet !important;
+  
+}
+
+.action-btn{
+    color: white !important; 
+    background-color: blueviolet !important;
+}
+
+
+
+/* .card-footer {
+ 
+    background-image: url(../../assets/wp6725865.jpg) !important;
+} */

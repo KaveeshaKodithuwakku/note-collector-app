@@ -3,7 +3,8 @@ import './Login.css';
 import { Button, Card, CardContent, FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, styled, TextField } from '@mui/material';
 import { Google, RememberMe, Style, Visibility, VisibilityOff } from '@mui/icons-material';
 import { pink, purple } from '@mui/material/colors';
-import backPic from '../../assets/background.jpg'
+
+
 
 
 

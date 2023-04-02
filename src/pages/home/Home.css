@@ -1,0 +1,45 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap');
+
+
+.body{
+    background-image: url(../../assets/back_note.jpg) !important;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+  }
+
+  .body-content{
+    font-family: 'Lobster', cursive;
+    font-size: xx-large;
+    color: purple;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 20vh;
+}
+
+
+  /* body {
+    background-image: url("/img/bg-image.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;    
+    height: 100vh;
+    width: 100vw;
+} */
+
+
+  /* @font-face {
+    font-family: RubikaMoonro;
+    src: url(../../fonts/RubikMoonrocks-Regular.ttf);
+}
+
+.font-type{
+    font-family: RubikaMoonro !important;
+} */
+
+.button{
+    border: 2px solid !important;
+    border-radius: 0 10px !important;
+}

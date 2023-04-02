@@ -5,6 +5,7 @@ import Login from './pages/login/Login'
 import Home from './pages/home/Home'
 import AddNotes from './pages/addNotes/AddNotes';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ViewNotes from './pages/viewNotes/ViewNotes';
 
 
 
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/add' element={<AddNotes/>}/> 
+        <Route path='/view' element={<ViewNotes/>}/> 
       </Routes>
         {/* <Login/> */}
     </div>

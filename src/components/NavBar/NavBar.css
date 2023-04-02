@@ -1,16 +1,56 @@
-.nav-bar{
-    color: #10df88;
-}
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Moonrocks&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Lobster&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Lobster&family=Monofett&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Lobster&family=Monofett&family=Roboto&family=Rubik+Gemstones&display=swap');
+
+
 
 .navbar-custom {  
     /* background-color: rgb(5, 187, 187) !important; */
-    background-color: rgb(105, 6, 163) !important;
-  
+    background-color: rgb(102, 8, 146) !important;
 }  
+
+.sticky-top {
+    position: -webkit-sticky !important;
+    position: sticky !;
+    top: 0 !important;
+    z-index: 1020 !important;
+}
+
+.navbar-title{
+    color: rgb(255, 255, 255)  !important;  
+    font-weight: lighter !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+    font-family: 'Rubik Gemstones', cursive;
+    font-size: xx-large;
+}
   
 .navbar-text {  
     color: rgb(252, 250, 255)  !important;  
-    font-weight: bolder;
-    
-
+    font-weight: bolder !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
 }  
+/* 
+@font-face {
+    font-family: RubikaMoonro;
+    src: url(../../fonts/RubikMoonrocks-Regular.ttf);
+}
+
+.font-type{
+    font-family: RubikaMoonro !important;
+} */
+
+.button{
+    border: 2px solid !important;
+    border-radius: 0 10px !important;
+    justify-content: center !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.navbar-icon{
+    margin-left: 20px !important;
+}
+
