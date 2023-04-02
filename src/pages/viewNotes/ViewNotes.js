@@ -1,42 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
 import { Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import CardHeader from '@mui/material/CardHeader';
-import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import { blue, green, red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { blue} from '@mui/material/colors';
 import axios from 'axios';
-import logo from '../../assets/logo.png'
 import pin from '../../assets/pin.png'
-
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import Stack from '@mui/material/Stack';
-import { Delete, Update, Upload } from '@mui/icons-material';
-
-
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+import { Delete, Update } from '@mui/icons-material';
+import Swal from 'sweetalert2'
 
 export default function ViewNotes() {
 
+  //set space
   const [spacing, setSpacing] = React.useState(2);
-
 
   const jsx = `
     <Grid container spacing={${spacing}}>
@@ -48,10 +26,12 @@ export default function ViewNotes() {
     setExpanded(!expanded);
   };
 
+  //get data from url
   const [data, setData] = useState([]);
 
+  //get all data
   const loadData = () => {
-    axios.get('https://jsonplaceholder.typicode.com/posts')
+    axios.get('http://localhost:8080/note/get-all')
       .then(function (response) {
         setData(response.data)
       })
@@ -59,6 +39,30 @@ export default function ViewNotes() {
         // handle error
         console.log(error);
       })
+  }
+
+
+  //delete data by id
+  const deleteRow = (id,e) => { 
+    e.preventDefault();
+    axios.delete(`http://localhost:8080/note/delete-note/${id}`)  
+    .then(function (response) {
+      Swal.fire(
+        'Note Deleted Success!'
+      )
+      loadData();
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
+    })
+    
   }
 
   useEffect(() => {
@@ -70,9 +74,7 @@ export default function ViewNotes() {
   return (
     <div>
      
-      <div className='search-btn'>
-      <h7 > Search by : </h7>
-      </div>
+     
       <Row xs={1} md={3} >
         {data.map((props) => {
           return (
@@ -93,8 +95,8 @@ export default function ViewNotes() {
                         //     <MoreVertIcon />
                         //   </IconButton>
                         // }
-                        title="Shrimp and Chorizo Paella"
-                        subheader="September 14, 2016"
+                        title={props.title}
+                        subheader={props.dateTime}
                       />
                       <CardMedia
                         component="img"
@@ -104,7 +106,7 @@ export default function ViewNotes() {
                       />
                       <CardContent>
                         <Typography variant="body2" color="text.secondary">
-                          {props.body}
+                          {props.description}
                         </Typography>
                       </CardContent>
                       <CardActions disableSpacing>
@@ -113,7 +115,7 @@ export default function ViewNotes() {
                           <input hidden accept="image/*" type="file" />
                           <Update />
                         </IconButton>
-                        <IconButton color="primary" aria-label="upload picture" component="label">
+                        <IconButton onClick={(e) => deleteRow(props.noteId, e)} color="primary" aria-label="upload picture" component="label">
                           <input hidden accept="image/*" />
                           <Delete />
                         </IconButton>

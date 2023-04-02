@@ -16,7 +16,7 @@ export default function AddNotes() {
 
   const currDate = new Date().toLocaleDateString();
   const currTime = new Date().toLocaleTimeString();
-
+  const number = new Date();
 
 // console.log('====================================');
 
@@ -26,20 +26,21 @@ export default function AddNotes() {
   const [userId, setUserId] = useState('');
   const [image, setImage] = useState('');
 
-  // useEffect(() => {
-  //   console.log(currDate);
-  //   console.log(currTime);
-  //   console.log('====================================');
-  //   console.log( currDate+" " +currTime);
-  //   console.log('====================================');
-  // })
+  useEffect(() => {
+    console.log(currDate);
+    console.log(currTime);
+    console.log('====================================');
+    console.log( currDate+" " +currTime);
+    console.log('====================================');
+    console.log(number.getTime());
+  })
 
   const savePost = () => {
 
     console.log(currDate);
     console.log(currTime);
 
-    axios.post('https://jsonplaceholder.typicode.com/posts', {
+    axios.post('http://localhost:8080/note/save-notes', {
       title: title,
       date: date,
       // userId: userId,
@@ -49,8 +50,6 @@ export default function AddNotes() {
       .then(function (response) {
         Swal.fire(
           'Save Success!'
-
-         
         )
       })
       .catch(function (error) {
@@ -87,7 +86,7 @@ export default function AddNotes() {
 
             <div className="mb-4">
               <pa> Description : </pa><br></br>
-              <textarea className='text-box-multi' style={{height:"150px"}} value={description} onChange={(e) => { setTitle(e.target.value) }}  type={"text"} placeholder="Description"/>
+              <textarea className='text-box-multi' style={{height:"150px"}} value={description} onChange={(e) => { setDescription(e.target.value) }}  type={"text"} placeholder="Description"/>
             </div>
 
             <div className="mb-4">
@@ -109,7 +108,7 @@ export default function AddNotes() {
           {/* <Button size="small"> <FaSave color='purple'/>Learn More</Button> */}
 
           <div style={{ display: "flex", justifyContent: 'flex-end' }}>
-            <Button onClick={savePost()} className='btn-icon' variant="contained" startIcon={<Save />}>
+            <Button onClick={savePost} className='btn-icon' variant="contained" startIcon={<Save />}>
               Save
             </Button>
 
