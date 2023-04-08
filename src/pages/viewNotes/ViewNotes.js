@@ -5,10 +5,10 @@ import { Col, Row } from 'react-bootstrap';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import { blue} from '@mui/material/colors';
+import { blue, green, purple, yellow} from '@mui/material/colors';
 import axios from 'axios';
 import pin from '../../assets/pin.png'
-import { Delete, Update } from '@mui/icons-material';
+import { Delete, Edit, Update } from '@mui/icons-material';
 import Swal from 'sweetalert2'
 
 export default function ViewNotes() {
@@ -75,18 +75,18 @@ export default function ViewNotes() {
     <div>
      
      
-      <Row xs={1} md={3} >
+      <Row  md={3} >
         {data.map((props) => {
           return (
             <Col>
 
               <Grid sx={{ flexGrow: 1 }} container spacing={2}>
                 <Grid item xs={12}>
-                  <Grid container justifyContent="center" marginTop={5} spacing={spacing}>
-                    <Card sx={{ maxWidth: 345, maxHeight: '500px' }}>
+                  <Grid container justifyContent="center" maxWidth={"500px"} marginTop={5} spacing={spacing}>
+                    <Card sx={{ maxWidth: "500px", maxHeight: '500px' }}>
                       <CardHeader
                         avatar={
-                          <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
+                          <Avatar sx={{ bgcolor: green[300] }} aria-label="recipe">
                             <img src={pin} alt="Logo" />
                           </Avatar>
                         }
@@ -113,7 +113,7 @@ export default function ViewNotes() {
 
                         <IconButton color="primary" aria-label="upload picture" component="label">
                           <input hidden accept="image/*" type="file" />
-                          <Update />
+                          <Edit />
                         </IconButton>
                         <IconButton onClick={(e) => deleteRow(props.noteId, e)} color="primary" aria-label="upload picture" component="label">
                           <input hidden accept="image/*" />

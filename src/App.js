@@ -6,6 +6,7 @@ import Home from './pages/home/Home'
 import AddNotes from './pages/addNotes/AddNotes';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ViewNotes from './pages/viewNotes/ViewNotes';
+import SignUp from './pages/signUp/SignUp';
 
 
 
@@ -13,11 +14,15 @@ import ViewNotes from './pages/viewNotes/ViewNotes';
 function App() {
   return (
     <div>
+
+    
       <NavBar/>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/add' element={<AddNotes/>}/> 
-        <Route path='/view' element={<ViewNotes/>}/> 
+        <Route  path='/home' element={<Home/>}/>
+        <Route  path='/add' element={<AddNotes/>}/> 
+        <Route  path='/view' element={<ViewNotes/>}/> 
+        <Route exact  path='/' element={<Login/>}/> 
+        <Route path='/signup' element={<SignUp/>}/> 
       </Routes>
         {/* <Login/> */}
     </div>

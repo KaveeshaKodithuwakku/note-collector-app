@@ -1,20 +1,98 @@
-.center_content{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100%;
+.center_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
 
 }
 
-icon_btn{
+.icon_btn {
   height: auto;
   width: 900px;
 
 
 }
 
-.body{
-  background-image: url(/src/assets/491368.jpg) !important;
-  height: 100%;
+.body-login {
+  background-image: url(../../assets/9wPhFd.jpg) !important;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+
+.login-title {
+  display: flex;
+  font-weight: bolder;
+  color: rgb(28, 15, 212);
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.text-box {
+  border: 1px solid rgb(150, 14, 204);
+  border-radius: 50px;
+  background-color: transparent;
+  padding: 5px;
+  margin-top: 10px;
+  width: 300px;
+}
+
+.form-text {
+  font-weight: bold !important;
+  color: black !important;
+}
+
+.image-style {
+  width: 300px;
+  height: 60vh;
+}
+
+.text_content {
+  width: 350px !important;
+  height: 30vh;
+}
+
+.login-btn {
+  width: 120px !important;
+  border-radius: 20px !important;
+  background-color: blueviolet !important;
+  color: white !important;
+}
+
+.login-google {
+  text-transform: capitalize !important;
+  width: 300px !important;
+  border-radius: 5px !important;
+  border: 2px solid rgb(137, 8, 189) !important;
+ 
+  font-variant: normal !important;
+  font-size: xx-small !important;
+  align-items: center !important;
+  display: flex !important;
+  justify-content: center !important;
+
+}
+
+.header-col1{
+  width: 200px !important;
+  padding-left: "50px" !important;
+}
+
+.header-col1-text{
+  font-style: normal !important;
+  color: darkgrey !important;
+}
+
+.header-col2-text{
+  font-style: normal !important;
+  color: rgb(54, 132, 221) !important;
+}
+
+
+.header-col2{
+  width: 30px !important;
 }

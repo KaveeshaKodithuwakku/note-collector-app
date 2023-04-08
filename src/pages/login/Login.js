@@ -1,101 +1,128 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Login.css';
-import { Button, Card, CardContent, FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, styled, TextField } from '@mui/material';
+import { Button, Card, CardContent, Divider, FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, styled, TextField } from '@mui/material';
 import { Google, RememberMe, Style, Visibility, VisibilityOff } from '@mui/icons-material';
 import { pink, purple } from '@mui/material/colors';
-
+import { Col, Form, Row } from 'react-bootstrap';
+import image from '../../assets/login-image.jpg'
+import { FcGoogle } from "react-icons/fc"
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
 
 export default function Login() {
 
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [validated, setValidated] = useState(false);
+   const navigate = useNavigate();
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+ 
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+    setValidated(true);
   };
 
-     const ColorButton = styled(Button)(({ theme }) => ({
-        color: theme.palette.getContrastText(purple[500]),
-        backgroundColor: purple[500],
-        '&:hover': {
-          backgroundColor: purple[700],
-        },
-      }));
-    
+  function handleClick() {
+    navigate('/home');
+  }
+
+  function handleClickSingUp() {
+    navigate('/signup');
+  }
+
 
 
 
   return (
-    <div >
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justify="center"
-        style={{ minHeight: '100vh'}}
-      >
 
-        <Grid item xs={3} display="flex" alignItems="center" flexDirection="column" marginTop={10}>
+    <div className='body-login' style={{
+      display: "flex",
+      alignItems: "center",
+      height: "100%",
+      flexDirection: 'column'
+    }}>
 
 
-          <Card sx={{ minWidth: 200, borderRadius: 5 }}>
-            <CardContent style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "100%",
-              flexDirection: 'column',
-              backgroundColor: 'transparent'
-            }}>
 
-              <h2>Sign In</h2>
-              <TextField sx={{ m: 1, width: '30ch' }} size="small" id="outlined-basic" label="Name" variant="outlined" margin="normal" placeholder="Enter Name" />
+      <Card sx={{ maxWidth: '1000vw', borderRadius: 5,marginTop:2 }}>
+        <CardContent style={{
+          display: "flex",
+          alignItems: "center",
+          height: "520px",
+          flexDirection: 'column',
+          marginTop:5
+        }}>
+
+          <Row>
+
+            <Col>
+              <img src={image} alt="" className='image-style' />
+            </Col>
+            <Col >
+
+              <h4 className='login-title'> Login</h4>
               <br></br>
+              <Form className='text_content' noValidate validated={validated} onSubmit={handleSubmit}>
 
-              <FormControl sx={{ m: 1, width: '30ch' }} size="small" variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={showPassword ? 'text' : 'password'}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-              </FormControl>
+                <Form.Group className="mb-3" controlId="formGroupEmail">
+                  <Form.Label className='form-text'>Email address</Form.Label>
+                  <Form.Control type="email" placeholder="Enter email" required />
+                  <Form.Control.Feedback type="invalid">
+                    Please enter valid email.
+                  </Form.Control.Feedback>
+                </Form.Group>
 
-              <br></br>
+                <Form.Group className="mb-3" controlId="formGroupPassword">
+                  <Form.Label className='form-text'>Password</Form.Label>
+                  <Form.Control type="password" placeholder="Password" required />
+                  <Form.Control.Feedback type="invalid">
+                    Please enter valid password.
+                  </Form.Control.Feedback>
+                </Form.Group>
 
-              <ColorButton style={{width:"200px"}} variant="contained">Login</ColorButton>
-              <br></br>
-              <h7>Or</h7>
-              <br></br>
-              <h7>Sign in with</h7>
-              <br></br>
-              <Button sx={{ m: 1, width: '30ch' }} variant="outlined" startIcon={<img src={"google.png"} />}>
-                Google
-              </Button>
-            </CardContent>
+                <Form.Group as={Row} className="mb-3" controlId="formHorizontalCheck">
+                  <Col>
+                    <Form.Check label="Remember me" />
+                  </Col>
+                </Form.Group>
 
-          </Card>
-        </Grid>
+                <Button className='login-btn' type="submit" onClick={handleClick}>Sign In</Button>
+                <br></br>
+                <br></br>
+
+                <Row style={{display:"flex",justifyContent:"center",alignItems: "center"}}>
+                  <Col className='header-col1'>
+                    <Form.Text className='header-col1-text'>
+                      Don't have an account?
+                    </Form.Text>
+                  </Col>
+                  <Col className='header-col2' >
+                    <Form.Text className='header-col2-text' onClick={handleClickSingUp}>
+                      Sign Up
+                    </Form.Text>
+                  </Col>
+                </Row>
+                <Divider>OR</Divider>
+                <br></br>
+                <Button className='login-google' onClick={handleClick}> <FcGoogle size={"20px"} />
+                  <InputLabel>  Sign with Google</InputLabel>
+                
+                </Button>
+
+              </Form>
+            </Col >
+
+          </Row>
+        </CardContent>
+
+      </Card>
 
 
-      </Grid>
 
 
 

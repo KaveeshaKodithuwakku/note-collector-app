@@ -18,37 +18,30 @@ export default function AddNotes() {
 // console.log('====================================');
 
   const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
+  const [cdate, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [userId, setUserId] = useState('');
   const [image, setImage] = useState(null);
-
+  const currDate = new Date().toLocaleDateString();
+  const currTime = new Date().toLocaleTimeString();
   
 
-  // useEffect(() => {
-  //   // console.log(currDate);
-  //   // console.log(currTime);
-  //   console.log('====================================');
-  //   console.log( currDate+" " +currTime);
-  //   console.log('====================================');
+  useEffect(() => {
+    // console.log(currDate);
+    // console.log(currTime);
+    console.log('====================================');
+    console.log( currDate+" " +currTime);
+    console.log('====================================');
 
-   
-  // })
+    setDate(currDate);
+  })
 
   //save data
   const savePost = () => {
 
-    const currDate = new Date().toLocaleDateString();
-    const currTime = new Date().toLocaleTimeString();
-    setDate(currDate+" " +currTime);
-    console.log(currDate);
-    console.log(currTime);
-
-
     axios.post('http://localhost:8080/note/save-notes', {
       title: title,
-      date: date,
-      // userId: userId,
+      dateTime: cdate,
       description: description,
       image: image,
     })

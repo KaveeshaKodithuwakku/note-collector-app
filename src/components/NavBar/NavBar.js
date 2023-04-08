@@ -1,13 +1,12 @@
 import React, { useRef, useState } from 'react'
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './NavBar.css';
 import logo from '../../assets/logo.png'
 import { FaHome, FaPlus, FaRegUser, FaRegUserCircle, FaUser } from "react-icons/fa";
 import { BsGrid } from "react-icons/bs";
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
 
 
 
@@ -20,6 +19,13 @@ export default function NavBar() {
     // const menuRef = useRef();
     // const imgRef = useRef();
 
+    const navigate = useNavigate();
+
+  function handleClick() {
+    navigate('/');
+  }
+
+
     return (
         <div className='sticky-top'>
             <Navbar  className='navbar navbar-custom'>
@@ -28,7 +34,7 @@ export default function NavBar() {
                         <img src={logo} alt="" className='img-center' /> MyNotes
                     </Navbar.Brand>
                     <Nav className="me-auto">
-                        <Link className='navbar-text nav-link' to={"/"}>
+                        <Link className='navbar-text nav-link' to={"/home"}>
                             <FaHome className='navbar-icon'/> Home </Link>
                         <Link className='navbar-text nav-link' to={"/add"}>
                             <FaPlus />
@@ -47,8 +53,8 @@ export default function NavBar() {
                     title="Signed in "
                     id={`offcanvasNavbarDropdown-expand-${expand}`}
                   >
-                    <NavDropdown.Item href="#action3">Profile</NavDropdown.Item>
-                    <NavDropdown.Item href="#action4">
+                    {/* <NavDropdown.Item href="#action3">Profile</NavDropdown.Item> */}
+                    <NavDropdown.Item href="#action4" onClick={handleClick}>
                      Logout
                     </NavDropdown.Item>
                     {/* <NavDropdown.Divider />
