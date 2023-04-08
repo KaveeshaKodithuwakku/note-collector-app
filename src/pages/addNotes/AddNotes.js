@@ -1,40 +1,49 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, CardActions, CardContent} from '@mui/material';
+import { Button, Card, CardActions, CardContent, IconButton} from '@mui/material';
 import {  Save } from '@mui/icons-material';
 import './AddNotes.css';
 import Swal from 'sweetalert2'
 import axios from 'axios';
+import { BiImageAdd, IconName } from "react-icons/bi";
+import { FaUpload } from 'react-icons/fa';
+
 
 
 
 export default function AddNotes() {
 
-  const currDate = new Date().toLocaleDateString();
-  const currTime = new Date().toLocaleTimeString();
+
   const number = new Date();
 
 // console.log('====================================');
 
   const [title, setTitle] = useState('');
-  const [date, setDate] = useState(currDate+" " +currTime);
+  const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [userId, setUserId] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(null);
 
-  useEffect(() => {
-    console.log(currDate);
-    console.log(currTime);
-    console.log('====================================');
-    console.log( currDate+" " +currTime);
-    console.log('====================================');
-    console.log(number.getTime());
-  })
+  
+
+  // useEffect(() => {
+  //   // console.log(currDate);
+  //   // console.log(currTime);
+  //   console.log('====================================');
+  //   console.log( currDate+" " +currTime);
+  //   console.log('====================================');
+
+   
+  // })
 
   //save data
   const savePost = () => {
 
+    const currDate = new Date().toLocaleDateString();
+    const currTime = new Date().toLocaleTimeString();
+    setDate(currDate+" " +currTime);
     console.log(currDate);
     console.log(currTime);
+
 
     axios.post('http://localhost:8080/note/save-notes', {
       title: title,
@@ -45,8 +54,11 @@ export default function AddNotes() {
     })
       .then(function (response) {
         Swal.fire(
-          'Save Success!'
+          'Good job!',
+          'Note Saved successfully!',
+          'success'
         )
+        clearFeilds();
       })
       .catch(function (error) {
         Swal.fire({
@@ -59,6 +71,13 @@ export default function AddNotes() {
 
   }
 
+  const clearFeilds = () => {
+    setTitle('');
+    setDescription('');
+   
+  }
+
+  
 
   return (
     <div style={{
@@ -76,7 +95,7 @@ export default function AddNotes() {
           </div>
           <div className="card-body">
             <div className="mb-4">
-              <pa> Title : </pa><br></br>
+              <pa className='header_title'> Title : </pa><br></br>
               <input value={title} onChange={(e) => { setTitle(e.target.value) }} className='text' type={"text"} placeholder="Title" />
                </div>
 
@@ -86,8 +105,24 @@ export default function AddNotes() {
             </div>
 
             <div className="mb-4">
-              <pa> File or Image Upload : </pa><br></br>
-              <input className='img-placement' type={"text"} placeholder="Title" />
+              <pa> File or Image Upload : </pa>
+              <IconButton color="primary" aria-label="upload picture" component="label">
+                          <input hidden accept="image/*" type="image" />
+                          <BiImageAdd color='black'/>
+                        </IconButton>
+
+                      
+              {/* <input className='img-placement' type='file' accept='image/*'
+              //  hidden onChange={({target: {files}}) => {
+              
+              //   if(files){
+              //     setImage(URL.createObjectURL(files[0]))
+              //   }
+              // }}
+               /> */}
+              
+            <img src={image} width={150} height={150} alt='image'/>
+        
             </div>
 
           </div>
@@ -115,39 +150,6 @@ export default function AddNotes() {
 
 
 
-      {/* <Card sx={{ maxWidth: 345 }}>
-
-      <h1>Hello</h1>
-
-        <CardMedia
-          sx={{ height: 140 }}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="green iguana"
-        />
-
-    <CardActions>
-    <IconButton color="primary" aria-label="upload picture" component="label">
-  <input hidden accept="image/*" type="file" />
-  <AttachFile />
-</IconButton>
-        </CardActions>
-        <CardContent>
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" margin="normal"/>
-        <br></br>
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" margin="normal"/>
-        <br></br>
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" margin="normal" />
-        <br></br>
-        <TextField id="outlined-basic" label="Outlined" variant="outlined"margin="normal" />
-        <br></br>
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" margin="normal"/>
-        <br></br>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card> */}
     </div>
   )
 }

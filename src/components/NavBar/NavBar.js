@@ -1,27 +1,24 @@
 import React, { useRef, useState } from 'react'
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 import logo from '../../assets/logo.png'
-import { Home, HomeOutlined } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
 import { FaHome, FaPlus, FaRegUser, FaRegUserCircle, FaUser } from "react-icons/fa";
-import { BsGrid, IconName } from "react-icons/bs";
+import { BsGrid } from "react-icons/bs";
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Offcanvas from 'react-bootstrap/Offcanvas';
+
 
 
 
 
 export default function NavBar() {
 
-    const Menu = ['Logout'];
-    const [open,setOpen] = useState(false);
+    // const Menu = ['Logout'];
+    // const [open,setOpen] = useState(false);
 
-    const menuRef = useRef();
-    const imgRef = useRef();
+    // const menuRef = useRef();
+    // const imgRef = useRef();
 
     return (
         <div className='sticky-top'>
