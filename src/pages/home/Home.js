@@ -2,6 +2,10 @@ import React from 'react'
 import './Home.css';
 import { pink } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
+import image from '../../assets/note-book.jpg'
+
+
 export default function Home() {
 
   const navigate = useNavigate();
@@ -15,16 +19,22 @@ export default function Home() {
   return (
 
     <div className='body'>
-   <div style={{display:'flex',alignContent: 'center',direction:'row'
 
-   }}>
-   <button className='button' onClick={handleClick}>click </button>
-   </div>
-   <div>
-  <p className='body-content'>Welcome to my notes....</p>
-   </div>
-        
-       
-</div>
+      <div style={{justifyContent:"center",alignItems:"center",display:"flex",flexDirection:"column"}}>
+        <Button className='body-button' onClick={handleClick}>Start Your Jounrney </Button>
+      </div>
+
+      <div>
+        <p className='body-title'>Welcome to my notes....</p>
+        <p className='body-content'>Capure your moments with MyNotes. </p>
+        <p className='body-content2'>......... </p>
+      </div>
+
+      {/* <div>
+      <img src={image} alt="" className='image-style' />
+      </div> */}
+
+
+    </div>
   )
 }
