@@ -17,7 +17,7 @@ function App() {
     <div>
 
 <AuthContextProvider>
-<NavBar/>
+{/* <NavBar/> */}
       <Routes>
         <Route  path='/home' element={<Home/>}/>
         <Route  path='/add' element={<AddNotes/>}/> 

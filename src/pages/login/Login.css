@@ -7,6 +7,8 @@
 
 }
 
+
+
 .icon_btn {
   height: auto;
   width: 900px;
@@ -15,7 +17,7 @@
 }
 
 .body-login {
-  background-image: url(../../assets/9wPhFd.jpg) !important;
+  background-image: url(../../assets/4007729.jpg) !important;
   background-size: cover;
   width: 100vw;
   height: 100vh;
@@ -54,6 +56,7 @@
 .text_content {
   width: 350px !important;
   height: 30vh;
+  margin-top: 0%;
 }
 
 .login-btn {
@@ -61,6 +64,7 @@
   border-radius: 20px !important;
   background-color: blueviolet !important;
   color: white !important;
+  font-size: x-small !important;
 }
 
 .login-google {
@@ -68,7 +72,6 @@
   width: 300px !important;
   border-radius: 5px !important;
   border: 2px solid rgb(137, 8, 189) !important;
- 
   font-variant: normal !important;
   font-size: xx-small !important;
   align-items: center !important;
@@ -95,4 +98,8 @@
 
 .header-col2{
   width: 30px !important;
+}
+
+.text-box{
+  font-size: x-small !important;
 }

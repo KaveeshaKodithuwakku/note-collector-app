@@ -8,9 +8,11 @@ import image from '../../assets/login-image.jpg'
 import { FcGoogle } from "react-icons/fc"
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'
-import {  signInWithEmailAndPassword   } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../utils/init-firbase';
-
+import Checkbox from '@mui/material/Checkbox';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 
 
@@ -21,9 +23,9 @@ export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
- 
+
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -42,10 +44,18 @@ export default function Login() {
     navigate('/signup');
   }
 
-  
+
   function handleRedirectToOrBack() {
     navigate('/home');
   }
+
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   // const userLogin = () => {
   //   setIsSubmitting(true)
@@ -76,27 +86,27 @@ export default function Login() {
   const onLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+      .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         navigate('/home')
         console.log(user);
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage)
-    });
-   
-}
+      });
+
+  }
 
   const signInFromGoogle = () => {
     signInWithGoogle()
-    .then(user => {
-      handleRedirectToOrBack()
-      console.log(user)
-    })
-    .catch(e => console.log(e.message))
+      .then(user => {
+        handleRedirectToOrBack()
+        console.log(user)
+      })
+      .catch(e => console.log(e.message))
   };
 
 
@@ -107,27 +117,92 @@ export default function Login() {
       display: "flex",
       alignItems: "center",
       height: "100%",
-      flexDirection: 'column'
+      flexDirection: 'column',
     }}>
 
 
 
-      <Card sx={{ maxWidth: '1000vw', borderRadius: 5,marginTop:2 }}>
+      <Card sx={{ width: '700px', borderRadius: 1, marginTop: 15, display: "flex", boxShadow: 20 }}>
         <CardContent style={{
           display: "flex",
           alignItems: "center",
-          height: "520px",
+          width: "80%",
+          height: "100%",
           flexDirection: 'column',
-          marginTop:5
         }}>
 
-          <Row>
+          <img src={image} alt="" className='image-style' />
 
-            <Col>
-              <img src={image} alt="" className='image-style' />
-            </Col>
+
+
+        </CardContent>
+
+        <CardContent style={{
+          display: "flex",
+
+          height: "100%",
+          width: "80%",
+          flexDirection: 'column',
+          backgroundColor: 'ghostwhite',
+        }}>
+
+          <div>
+            <h4 className='login-title'> Login</h4>
+          </div>
+
+          <br></br>
+          <div>
+            <TextField value={email}
+              onChange={e => setEmail(e.target.value)} id="outlined-basic" label="Email*" variant="outlined" size="small" margin="none" style={{ width: 300, fontSize: '' }} />
+          </div>
+
+          <div>
+            <TextField value={password}
+              onChange={e => setPassword(e.target.value)} id="outlined-basic" label="Password*" variant="outlined" size="small" margin="dense" style={{ width: 300 }} />
+          </div>
+
+          <div style={{ display: 'flex', justifyItems: 'baseline' }}>
+            <Form.Group as={Row} className="mb-3" controlId="formHorizontalCheck">
+              <Col>
+                <Form.Check label="Remember me" fontSize='5px' />
+              </Col>
+            </Form.Group>
+
+            {/* <Checkbox color="secondary" size="small" style={{fontSize:5}}/>
+          <p style={{fontSize:'10px',justifyContent:'center'}}>Remenber Me</p> */}
+            {/* <FormGroup style={{fontSize:'5px'}}>
+              <FormControlLabel control={<Checkbox color="secondary" size="small" style={{fontSize:5}}/>} label="Remember Me" />
+
+            </FormGroup> */}
+          </div>
+
+
+          <div>
+            <Button className='login-btn' type="submit" onClick={onLogin}>Sign In</Button>
+          </div>
+
+          <div style={{ display: 'flex', fontSize: '12px', marginTop: 5 }}>
+            <p>Don't you have an account?</p>
+            <p style={{ color: 'blue', fontWeight: 'bold' }} onClick={handleClickSingUp}>Sign Up</p>
+          </div>
+
+
+          <div>
+            <Divider style={{ fontSize: '13px' }}> OR</Divider>
+          </div>
+
+          <br></br>
+          <div>
+            <Button className='login-google' onClick={signInFromGoogle}> <FcGoogle size={"20px"} />
+              <InputLabel style={{ fontSize: '13px' }}>  Sign with Google</InputLabel>
+
+            </Button>
+          </div>
+
+
+
+          {/* <Row>
             <Col >
-
               <h4 className='login-title'> Login</h4>
               <br></br>
               <Form className='text_content' noValidate validated={validated} onSubmit={handleSubmit}>
@@ -183,7 +258,7 @@ export default function Login() {
               </Form>
             </Col >
 
-          </Row>
+          </Row> */}
         </CardContent>
 
       </Card>

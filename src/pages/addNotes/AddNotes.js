@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 import axios from 'axios';
 import { BiImageAdd, IconName } from "react-icons/bi";
 import { FaUpload } from 'react-icons/fa';
+import NavBar from '../../components/NavBar/NavBar';
 
 
 
@@ -73,6 +74,11 @@ export default function AddNotes() {
   
 
   return (
+
+    <div>
+
+  
+    <NavBar/>
     <div style={{
       display: "flex",
       alignItems: "center",
@@ -80,6 +86,8 @@ export default function AddNotes() {
       height: "100%",
       flexDirection: 'column'
     }}>
+
+
 
       <Card sx={{ minWidth: 275, marginTop: 2 }}>
         <CardContent className='card'>
@@ -144,5 +152,7 @@ export default function AddNotes() {
 
 
     </div>
+    </div>
+
   )
 }

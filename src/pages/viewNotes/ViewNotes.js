@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid';
-import { Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardActions, CardContent, CardMedia, Divider, Typography } from '@mui/material';
 import { Col, Row } from 'react-bootstrap';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
@@ -10,6 +10,8 @@ import axios from 'axios';
 import pin from '../../assets/pin.png'
 import { Delete, Edit, Update } from '@mui/icons-material';
 import Swal from 'sweetalert2'
+import NavBar from '../../components/NavBar/NavBar';
+
 
 export default function ViewNotes() {
 
@@ -73,14 +75,24 @@ export default function ViewNotes() {
 
   return (
     <div>
+
+<NavBar/>
+
+      <Row>
+        <p>Note List</p>
+
+        {/* <p>Note List</p> */}
+      </Row>
+
+      <Divider></Divider>
      
      
-      <Row  md={3} >
+      <Row  md={4} style={{paddingLeft:20}}>
         {data.map((props) => {
           return (
             <Col>
 
-              <Grid sx={{ flexGrow: 1 }} container spacing={2}>
+              <Grid sx={{ flexGrow: 1 }} container spacing={3}>
                 <Grid item xs={12}>
                   <Grid container justifyContent="center" maxWidth={"500px"} marginTop={5} spacing={spacing}>
                     <Card sx={{ maxWidth: "500px", maxHeight: '500px' }}>
@@ -101,6 +113,7 @@ export default function ViewNotes() {
                       <CardMedia
                         component="img"
                         height="194"
+                        width={500}
                         image="https://write.geeksforgeeks.org/static/media/Group%20210.08204759.svg"
                         alt="Paella dish"
                       />

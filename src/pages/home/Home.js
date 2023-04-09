@@ -4,6 +4,7 @@ import { pink } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import image from '../../assets/note-book.jpg'
+import NavBar from '../../components/NavBar/NavBar';
 
 
 export default function Home() {
@@ -19,6 +20,8 @@ export default function Home() {
   return (
 
     <div className='body'>
+
+      <NavBar/>
 
       <div style={{justifyContent:"center",alignItems:"center",display:"flex",flexDirection:"column"}}>
         <Button className='body-button' onClick={handleClick} style={{marginTop:5}}>Start Your Jounrney </Button>
