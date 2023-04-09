@@ -7,6 +7,9 @@ import { Col, Form, Row } from 'react-bootstrap';
 import image from '../../assets/login-image.jpg'
 import { FcGoogle } from "react-icons/fc"
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext'
+import {  signInWithEmailAndPassword   } from 'firebase/auth';
+import { auth } from '../../utils/init-firbase';
 
 
 
@@ -14,6 +17,10 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function Login() {
 
   const [validated, setValidated] = useState(false);
+  const { signInWithGoogle, login } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
    const navigate = useNavigate();
 
  
@@ -35,6 +42,62 @@ export default function Login() {
     navigate('/signup');
   }
 
+  
+  function handleRedirectToOrBack() {
+    navigate('/home');
+  }
+
+  // const userLogin = () => {
+  //   setIsSubmitting(true)
+  //           login(email, password)
+  //             .then(res => {
+  //               handleRedirectToOrBack()
+  //             })
+  //             .catch(error => {
+  //               console.log(error.message)
+  //               // toast({
+  //               //   description: error.message,
+  //               //   status: 'error',
+  //               //   duration: 9000,
+  //               //   isClosable: true,
+  //               // })
+  //             })
+  //             .finally(() => {
+  //               // setTimeout(() => {
+  //               //   mounted.current && setIsSubmitting(false)
+  //               //   console.log(mounted.current)
+  //               // }, 1000)
+  //               setIsSubmitting(false)
+  //               //mounted.current && setIsSubmitting(false)
+  //             })
+  // };
+
+
+  const onLogin = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        navigate('/home')
+        console.log(user);
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage)
+    });
+   
+}
+
+  const signInFromGoogle = () => {
+    signInWithGoogle()
+    .then(user => {
+      handleRedirectToOrBack()
+      console.log(user)
+    })
+    .catch(e => console.log(e.message))
+  };
 
 
 
@@ -71,7 +134,8 @@ export default function Login() {
 
                 <Form.Group className="mb-3" controlId="formGroupEmail">
                   <Form.Label className='form-text'>Email address</Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" required />
+                  <Form.Control type="email" placeholder="Enter email" required   value={email}
+                onChange={e => setEmail(e.target.value)}/>
                   <Form.Control.Feedback type="invalid">
                     Please enter valid email.
                   </Form.Control.Feedback>
@@ -79,7 +143,9 @@ export default function Login() {
 
                 <Form.Group className="mb-3" controlId="formGroupPassword">
                   <Form.Label className='form-text'>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password" required />
+                  <Form.Control type="password" placeholder="Password" value={password}
+                required
+                onChange={e => setPassword(e.target.value)} />
                   <Form.Control.Feedback type="invalid">
                     Please enter valid password.
                   </Form.Control.Feedback>
@@ -91,7 +157,7 @@ export default function Login() {
                   </Col>
                 </Form.Group>
 
-                <Button className='login-btn' type="submit" onClick={handleClick}>Sign In</Button>
+                <Button className='login-btn' type="submit" onClick={onLogin}>Sign In</Button>
                 <br></br>
                 <br></br>
 
@@ -109,7 +175,7 @@ export default function Login() {
                 </Row>
                 <Divider>OR</Divider>
                 <br></br>
-                <Button className='login-google' onClick={handleClick}> <FcGoogle size={"20px"} />
+                <Button className='login-google' onClick={signInFromGoogle}> <FcGoogle size={"20px"} />
                   <InputLabel>  Sign with Google</InputLabel>
                 
                 </Button>

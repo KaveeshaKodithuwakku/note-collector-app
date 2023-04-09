@@ -1,21 +1,23 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getAuth } from 'firebase/auth'
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyANP2Z01VN5AW7KFIcGClb1gWtFsc2Xvqg",
-  authDomain: "react-note-app-37450.firebaseapp.com",
-  projectId: "react-note-app-37450",
-  storageBucket: "react-note-app-37450.appspot.com",
-  messagingSenderId: "745420022098",
-  appId: "1:745420022098:web:4ec3080594bc38e6799a8b",
-  measurementId: "G-7YNMNSF12Y"
+  apiKey: "AIzaSyDZA-i_2kVJrd3v0OcNByXJp_uvDBx-VBY",
+  authDomain: "react--note-collector-app.firebaseapp.com",
+  projectId: "react--note-collector-app",
+  storageBucket: "react--note-collector-app.appspot.com",
+  messagingSenderId: "547152119789",
+  appId: "1:547152119789:web:64acc5f5b11c672d8a09e4",
+  measurementId: "G-2THD80V02W"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+export const auth = getAuth(app)

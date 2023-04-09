@@ -7,6 +7,7 @@ import AddNotes from './pages/addNotes/AddNotes';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ViewNotes from './pages/viewNotes/ViewNotes';
 import SignUp from './pages/signUp/SignUp';
+import AuthContextProvider from './contexts/AuthContext'
 
 
 
@@ -15,8 +16,8 @@ function App() {
   return (
     <div>
 
-    
-      <NavBar/>
+<AuthContextProvider>
+<NavBar/>
       <Routes>
         <Route  path='/home' element={<Home/>}/>
         <Route  path='/add' element={<AddNotes/>}/> 
@@ -24,6 +25,8 @@ function App() {
         <Route exact  path='/' element={<Login/>}/> 
         <Route path='/signup' element={<SignUp/>}/> 
       </Routes>
+  </AuthContextProvider>
+    
         {/* <Login/> */}
     </div>
   );

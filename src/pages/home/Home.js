@@ -21,7 +21,7 @@ export default function Home() {
     <div className='body'>
 
       <div style={{justifyContent:"center",alignItems:"center",display:"flex",flexDirection:"column"}}>
-        <Button className='body-button' onClick={handleClick}>Start Your Jounrney </Button>
+        <Button className='body-button' onClick={handleClick} style={{marginTop:5}}>Start Your Jounrney </Button>
       </div>
 
       <div>
