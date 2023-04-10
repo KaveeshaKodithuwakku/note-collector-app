@@ -34,7 +34,7 @@ export default function AddNotes() {
     console.log( currDate+" " +currTime);
     console.log('====================================');
 
-    setDate(currDate);
+    setDate(currDate+" " +currTime);
   })
 
   //save data
@@ -75,7 +75,7 @@ export default function AddNotes() {
 
   return (
 
-    <div>
+    <div className='add-note-background'>
 
   
     <NavBar/>

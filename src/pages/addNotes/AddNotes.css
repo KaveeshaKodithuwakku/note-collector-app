@@ -3,6 +3,14 @@
     background-image: url(../../assets/wp6725865.jpg) !important;
 }
 
+/* .add-note-background{
+    background-image: url(../../assets/69aeb9250da0d7c396814838662a944b.jpg) !important;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+  } */
+
 .btn-style{
     border-radius: 0 30px !important;
 }

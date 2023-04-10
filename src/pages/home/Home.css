@@ -3,8 +3,11 @@
 
 
 .body{
-    background-image: url(../../assets/back_note.jpg) !important;
+    /* background-image: url(../../assets/491368.jpg) !important; */
+    background-color: rgb(244, 239, 248);
     background-size: cover;
+    /* background: rgb(163, 160, 204) !important;
+    background: linear-gradient(90deg, rgb(25, 15, 223) 0%, rgb(132, 17, 185) 35%, rgb(249, 252, 253) 100%)!important; */
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -24,19 +27,21 @@
 
 
   .body-content{
-    font-family: 'Lobster', cursive;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    /* font-family: 'Lobster', cursive; */
+    font-size: '120px';
     font-size: xx-large;
     color: purple;
     align-items: center;
     display: flex;
     justify-content: center;
-    margin-top: 20vh;
+
 }
 
 .body-content2{
-  font-family: 'Lobster', cursive;
-  font-size: xx-large;
-  color: purple;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: larger;
+  color: rgb(63, 60, 63);
   align-items: center;
   display: flex;
   justify-content: center;

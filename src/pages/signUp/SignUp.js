@@ -8,112 +8,109 @@ import image from '../../assets/signup-1.jpg'
 import { FcGoogle } from "react-icons/fc"
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'
-import {  createUserWithEmailAndPassword  } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../utils/init-firbase';
+import Alert from '@mui/material/Alert';
 
 export default function SignUp() {
 
-    const [validated, setValidated] = useState(false);
-    const { signInWithGoogle, register } = useAuth()
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [conPassword, setConPassword] = useState('')
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const navigate = useNavigate();
+  const [validated, setValidated] = useState(false);
+  const { signInWithGoogle, register } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [conPassword, setConPassword] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
-      const form = event.currentTarget;
-      if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-  
-      setValidated(true);
-    };
-
-    function handleClick() {
-      navigate('/home');
-    }
-  
-    function handleLoginClick() {
-      navigate('/');
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
     }
 
-    function handleRedirectToOrBack() {
-      navigate('/home');
-    }
-  
+    setValidated(true);
+  };
 
-    // const userSignUp = () => {
-    //    setIsSubmitting(true)
-    //   console.log("inside reg******")
-    //         register(email, password)
-    //           .then(user => {
-    //             console.log(user)
-    //             console.log("inside yes ////////")
-    //           //  handleClick()
-    //           })
-    //           .catch(error => {
-    //             console.log(error.message)
-    //             console.log("inside error=======")
-    //             // toast({
-    //             //   description: error.message,
-    //             //   status: 'error',
-    //             //   duration: 9000,
-    //             //   isClosable: true,
-    //             // })
-    //           })
-    //           .finally(() => {
-    //              setIsSubmitting(false)
-    //              console.log("inside finnaly+++++++")
-    //            // mounted.current && setIsSubmitting(false)
-    //           })
-    // };
+  function handleClick() {
+    navigate('/home');
+  }
 
-  
-    const onSubmit = async (e) => {
-      e.preventDefault()
+  function handleLoginClick() {
+    navigate('/');
+  }
 
-      if(email != '' || password != '' || conPassword != ''){
-        if(password == conPassword){
+  function handleRedirectToOrBack() {
+    navigate('/home');
+  }
 
-          await createUserWithEmailAndPassword(auth, email, password)
+
+  // const userSignUp = () => {
+  //    setIsSubmitting(true)
+  //   console.log("inside reg******")
+  //         register(email, password)
+  //           .then(user => {
+  //             console.log(user)
+  //             console.log("inside yes ////////")
+  //           //  handleClick()
+  //           })
+  //           .catch(error => {
+  //             console.log(error.message)
+  //             console.log("inside error=======")
+  //             // toast({
+  //             //   description: error.message,
+  //             //   status: 'error',
+  //             //   duration: 9000,
+  //             //   isClosable: true,
+  //             // })
+  //           })
+  //           .finally(() => {
+  //              setIsSubmitting(false)
+  //              console.log("inside finnaly+++++++")
+  //            // mounted.current && setIsSubmitting(false)
+  //           })
+  // };
+
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+
+    if (email != '' || password != '' || conPassword != '') {
+      if (password == conPassword) {
+
+        await createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
-              // Signed in
-              const user = userCredential.user;
-              console.log(user);
-              handleClick();
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            handleClick();
           })
           .catch((error) => {
-              const errorCode = error.code;
-              const errorMessage = error.message;
-              console.log(errorCode, errorMessage);
-              // ..
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+            // ..
           });
-        } else{
-          console.log("mis match");
-        }
-
-      }else{
-        console.log("please fill all the fields");
+      } else {
+        console.log("mis match");
       }
-     
-     
-     
- 
-   
+
+    } else {
+      console.log("please fill all the fields");
     }
 
-    const signInFromGoogle = () => {
-      signInWithGoogle()
+  }
+
+  const signInFromGoogle = () => {
+    signInWithGoogle()
       .then(user => {
         // handleRedirectToOrBack()
         console.log(user);
         handleClick()
       })
       .catch(e => console.log(e.message))
-    };
-  
+  };
+
 
   return (
 
@@ -157,19 +154,19 @@ export default function SignUp() {
           <br></br>
           <div>
             <TextField value={email}
-                 onChange={e => setEmail(e.target.value)} id="outlined-basic" label="Email*" variant="outlined" size="small" margin="dense" style={{ width: 300,fontSize:''}} />
+              onChange={e => setEmail(e.target.value)} id="outlined-basic" label="Email*" variant="outlined" size="small" margin="dense" style={{ width: 300, fontSize: '' }} />
           </div>
 
           <div>
             <TextField value={password}
-                 onChange={e => setPassword(e.target.value)} id="outlined-basic" label="Password*" variant="outlined" size="small" margin="none" style={{ width: 300 }} />
+              onChange={e => setPassword(e.target.value)} id="outlined-basic" label="Password*" variant="outlined" size="small" margin="none" style={{ width: 300 }} />
           </div>
 
           <div>
             <TextField value={conPassword}
-                 onChange={e => setConPassword(e.target.value)} id="outlined-basic" label="Confirm Password*" variant="outlined" size="small" margin="dense" style={{ width: 300 }} />
+              onChange={e => setConPassword(e.target.value)} id="outlined-basic" label="Confirm Password*" variant="outlined" size="small" margin="dense" style={{ width: 300 }} />
           </div>
-{/* 
+          {/* 
           <div style={{ display: 'flex', justifyItems: 'baseline' }}>
             <Form.Group as={Row} className="mb-3" controlId="formHorizontalCheck">
               <Col>
@@ -184,38 +181,39 @@ export default function SignUp() {
             <Button className='login-btn' type="submit" onClick={onSubmit}>Sign Up</Button>
           </div>
 
-          <div style={{ display: 'flex', fontSize: '12px',marginTop:5 }}>
+          <div style={{ display: 'flex', fontSize: '12px', marginTop: 5 }}>
             <p>Do you already have an account?</p>
-            <p style={{color:'blue',fontWeight:'bold'}} onClick={handleLoginClick}> Sign In</p>
+            <p style={{ color: 'blue', fontWeight: 'bold' }} onClick={handleLoginClick}> Sign In</p>
           </div>
 
 
-<div>
-<Divider style={{fontSize:'13px'}}> OR</Divider>
-</div>
-          
+
+          <div>
+            <Divider style={{ fontSize: '13px' }}> OR</Divider>
+          </div>
+
           <br></br>
           <div>
-          <Button className='login-google' onClick={signInFromGoogle}> <FcGoogle size={"20px"} />
-                  <InputLabel style={{fontSize:'13px'}}>  Sign with Google</InputLabel>
-                
+            <Button className='login-google' onClick={signInFromGoogle}> <FcGoogle size={"20px"} />
+              <InputLabel style={{ fontSize: '13px' }}>  Sign with Google</InputLabel>
+
             </Button>
           </div>
 
-          </CardContent>
+        </CardContent>
 
-</Card>
-</div>
-    
-    
+      </Card>
+    </div>
+
+
     // <div className='body-signup' style={{
     //     display: "flex",
     //     alignItems: "center",
     //     flexDirection: 'column'
     //   }}>
-  
-  
-  
+
+
+
     //     <Card sx={{ maxWidth: '500vw', borderRadius: 1,marginTop:2 }}>
     //       <CardContent style={{
     //         display: "flex",
@@ -224,20 +222,20 @@ export default function SignUp() {
     //         flexDirection: 'column',
     //         marginTop:10
     //       }}>
-  
+
     //         <Row>
-  
+
     //           <Col>
     //             <img src={image} alt="" className='image-style' />
     //           </Col>
     //           <Col >
-  
+
     //             <h4 className='login-title'> Sign Up </h4>
     //             <br></br>
     //             <Form className='text_content' noValidate validated={validated} onSubmit={handleSubmit}>
 
-  
-  
+
+
     //               <Form.Group className="mb-3" controlId="formGroupEmail">
     //                 <Form.Label className='form-text'>Email address</Form.Label>
     //                 <Form.Control type="email" placeholder="Enter email" required  value={email}
@@ -246,7 +244,7 @@ export default function SignUp() {
     //                   Please enter valid email.
     //                 </Form.Control.Feedback>
     //               </Form.Group>
-  
+
     //               <Form.Group className="mb-3" controlId="formGroupPassword">
     //                 <Form.Label className='form-text'>Password</Form.Label>
     //                 <Form.Control type="password" placeholder="Password" required  value={password}
@@ -263,17 +261,17 @@ export default function SignUp() {
     //                   Please entered password.
     //                 </Form.Control.Feedback>
     //               </Form.Group>
-  
+
     //               {/* <Form.Group as={Row} className="mb-3" controlId="formHorizontalCheck">
     //                 <Col>
     //                   <Form.Check label="Remember me" />
     //                 </Col>
     //               </Form.Group> */}
-  
+
     //               <Button className='login-btn' type="submit" onClick={onSubmit}>Sign Up</Button>
     //               <br></br>
     //               <br></br>
-  
+
     //               <Row style={{display:"flex",justifyContent:"center",alignItems: "center"}}>
     //                 <Col className='header-col1'>
     //                   <Form.Text className='header-col1-text'>
@@ -290,20 +288,20 @@ export default function SignUp() {
     //               <br></br>
     //               <Button className='login-google' type="submit" onClick={signInFromGoogle}> <FcGoogle size={"20px"}/>
     //                 <InputLabel>  Sign with Google</InputLabel>
-                  
+
     //               </Button>
-  
+
     //             </Form>
     //           </Col >
-  
+
     //         </Row>
-        //   </CardContent>
-  
-        // </Card>
-  
-  
-  
-  
+    //   </CardContent>
+
+    // </Card>
+
+
+
+
     // </div>
   )
 }

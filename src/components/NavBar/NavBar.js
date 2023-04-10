@@ -43,6 +43,10 @@ export default function NavBar() {
                             <BsGrid />
                             View</Link>
 
+                            {/* <Link className='navbar-text nav-link' to={"/calendar"}>
+                            <BsGrid />
+                            Calendar</Link> */}
+
                     </Nav>
                   
 

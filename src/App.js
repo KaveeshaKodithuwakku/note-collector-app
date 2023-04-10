@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ViewNotes from './pages/viewNotes/ViewNotes';
 import SignUp from './pages/signUp/SignUp';
 import AuthContextProvider from './contexts/AuthContext'
+import Calendar from './pages/calendar/Calendar';
 
 
 
@@ -22,6 +23,7 @@ function App() {
         <Route  path='/home' element={<Home/>}/>
         <Route  path='/add' element={<AddNotes/>}/> 
         <Route  path='/view' element={<ViewNotes/>}/> 
+        <Route  path='/calendar' element={<Calendar/>}/> 
         <Route exact  path='/' element={<Login/>}/> 
         <Route path='/signup' element={<SignUp/>}/> 
       </Routes>
