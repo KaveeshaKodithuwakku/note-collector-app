@@ -86,8 +86,6 @@ export default function UpdateDialog(props) {
     }
 
 
-
-
   return (
     <div>
       {/* <Button variant="primary" onClick={handleShow}>
@@ -108,7 +106,7 @@ export default function UpdateDialog(props) {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>{data.title}</Modal.Title>
+            <Modal.Title>Edit Note</Modal.Title>
           </Modal.Header>
           <Modal.Body>
 
