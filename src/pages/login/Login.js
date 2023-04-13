@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Login.css';
-import { Button, Card, CardContent, Divider, FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, styled, TextField } from '@mui/material';
-import { Google, RememberMe, Style, Visibility, VisibilityOff } from '@mui/icons-material';
-import { pink, purple } from '@mui/material/colors';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Button, Card, CardContent, Divider, InputLabel, TextField } from '@mui/material';
+import { Col, } from 'react-bootstrap';
 import image from '../../assets/login-image.jpg'
 import { FcGoogle } from "react-icons/fc"
 import { Link, useNavigate } from 'react-router-dom';
@@ -13,6 +11,13 @@ import { auth } from '../../utils/init-firbase';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 
 
@@ -24,7 +29,19 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -49,6 +66,10 @@ export default function Login() {
     navigate('/home');
   }
 
+  function handleClickForgotPassword() {
+    navigate('/forgot_password');
+  }
+
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -56,6 +77,11 @@ export default function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+  useEffect(() => {
+    handleClose();
+  }, [])
+
 
   // const userLogin = () => {
   //   setIsSubmitting(true)
@@ -85,18 +111,23 @@ export default function Login() {
 
   const onLogin = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        navigate('/home')
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage)
-      });
+    if (email.length == 0 || password.length == 0) {
+      handleClickOpen();
+    } else {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          navigate('/home')
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage)
+        });
+    }
+
 
   }
 
@@ -109,99 +140,112 @@ export default function Login() {
       .catch(e => console.log(e.message))
   };
 
+  useEffect(() => {
+
+  }, [])
+
+
 
 
   return (
 
-    <div className='body-login' style={{
-      display: "flex",
-      alignItems: "center",
-      height: "100%",
-      flexDirection: 'column',
-    }}>
+    <div>
+
+      <div style={{ position: 'absolute' }}>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }} >
+
+            Please fill all the fileds
+          </Alert>
+        </Snackbar>
+      </div>
+
+
+      <div className='body-login' style={{
+        display: "flex",
+        alignItems: "center",
+        height: "100%",
+        flexDirection: 'column',
+      }}>
 
 
 
-      <Card sx={{ width: '700px', borderRadius: 1, marginTop: 15, display: "flex", boxShadow: 20 }}>
-        <CardContent style={{
-          display: "flex",
-          alignItems: "center",
-          width: "80%",
-          height: "100%",
-          flexDirection: 'column',
-        }}>
+        <Card sx={{ width: '700px', borderRadius: 1, marginTop: 15, display: "flex", boxShadow: 20 }}>
+          <CardContent style={{
+            display: "flex",
+            alignItems: "center",
+            width: "80%",
+            height: "100%",
+            flexDirection: 'column',
+          }}>
 
-          <img src={image} alt="" className='image-style' />
-
-
-
-        </CardContent>
-
-        <CardContent style={{
-          display: "flex",
-
-          height: "100%",
-          width: "80%",
-          flexDirection: 'column',
-          backgroundColor: 'ghostwhite',
-        }}>
-
-          <div>
-            <h4 className='login-title'> Login</h4>
-          </div>
-
-          <br></br>
-          <div>
-            <TextField value={email}
-              onChange={e => setEmail(e.target.value)} id="outlined-basic" label="Email*" variant="outlined" size="small" margin="none" style={{ width: 300, fontSize: '' }} />
-          </div>
-
-          <div>
-            <TextField value={password}
-              onChange={e => setPassword(e.target.value)} id="outlined-basic" label="Password*" variant="outlined" size="small" margin="dense" style={{ width: 300 }} />
-          </div>
-
-          <div style={{ display: 'flex', justifyItems: 'baseline' }}>
-            <Form.Group as={Row} className="mb-3" controlId="formHorizontalCheck">
-              <Col>
-                <Form.Check label="Remember me" fontSize='5px' />
-              </Col>
-            </Form.Group>
-
-            {/* <Checkbox color="secondary" size="small" style={{fontSize:5}}/>
-          <p style={{fontSize:'10px',justifyContent:'center'}}>Remenber Me</p> */}
-            {/* <FormGroup style={{fontSize:'5px'}}>
-              <FormControlLabel control={<Checkbox color="secondary" size="small" style={{fontSize:5}}/>} label="Remember Me" />
-
-            </FormGroup> */}
-          </div>
-
-
-          <div>
-            <Button className='login-btn' type="submit" onClick={onLogin}>Sign In</Button>
-          </div>
-
-          <div style={{ display: 'flex', fontSize: '12px', marginTop: 5 }}>
-            <p>Don't you have an account?</p>
-            <p style={{ color: 'blue', fontWeight: 'bold' }} onClick={handleClickSingUp}>Sign Up</p>
-          </div>
-
-
-          <div>
-            <Divider style={{ fontSize: '13px' }}> OR</Divider>
-          </div>
-
-          <br></br>
-          <div>
-            <Button className='login-google' onClick={signInFromGoogle}> <FcGoogle size={"20px"} />
-              <InputLabel style={{ fontSize: '13px' }}>  Sign with Google</InputLabel>
-
-            </Button>
-          </div>
+            <img src={image} alt="" className='image-style' />
 
 
 
-          {/* <Row>
+          </CardContent>
+
+          <CardContent style={{
+            display: "flex",
+
+            height: "100%",
+            width: "80%",
+            flexDirection: 'column',
+            backgroundColor: 'ghostwhite',
+          }}>
+
+            <div>
+              <h4 className='login-title'> Login</h4>
+            </div>
+
+            <br></br>
+            <div>
+              <TextField value={email}
+                onChange={e => setEmail(e.target.value)} id="outlined-basic" label="Email*" variant="outlined" size="small" margin="none" sx={{ width: 300, fontSize: '10px' }} />
+            </div>
+
+            <div>
+              <TextField value={password}
+                onChange={e => setPassword(e.target.value)} id="outlined-basic" type='password' label="Password*" variant="outlined" size="small" margin="dense" style={{ width: 300 }} />
+            </div>
+
+            <div style={{ display: 'flex',flexDirection:'row' ,justifyItems: 'center', alignItems: 'center' }}>
+
+              <div style={{ display: 'flex',flexDirection:'row' ,justifyItems: 'center', alignItems: 'center' }}>
+              <Checkbox label='Remember Me' size="small" sx={{alignItems:'center',justifyContent:'center'}}/>
+              <p style={{width:150,fontSize:14}}>Remember Me</p>
+              <p style={{ color: 'blue', fontWeight: 'bold', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: '13px' }} onClick={handleClickForgotPassword}>Forgot Password</p>
+
+               </div>
+
+            </div>
+
+
+            <div>
+              <Button className='login-btn' type="submit" onClick={onLogin}>Sign In</Button>
+            </div>
+
+            <div style={{ display: 'flex', fontSize: '12px', marginTop: 5 }}>
+              <p>Don't you have an account?</p>
+              <p style={{ color: 'blue', fontWeight: 'bold' }} onClick={handleClickSingUp}>Sign Up</p>
+            </div>
+
+
+            <div>
+              <Divider style={{ fontSize: '13px' }}> OR</Divider>
+            </div>
+
+            <br></br>
+            <div>
+              <Button className='login-google' onClick={signInFromGoogle}> <FcGoogle size={"20px"} />
+                <InputLabel style={{ fontSize: '13px' }}>  Sign with Google</InputLabel>
+
+              </Button>
+            </div>
+
+
+
+            {/* <Row>
             <Col >
               <h4 className='login-title'> Login</h4>
               <br></br>
@@ -259,13 +303,14 @@ export default function Login() {
             </Col >
 
           </Row> */}
-        </CardContent>
+          </CardContent>
 
-      </Card>
-
-
+        </Card>
 
 
+
+
+      </div>
 
 
 

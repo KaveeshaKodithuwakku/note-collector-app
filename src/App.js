@@ -9,6 +9,8 @@ import ViewNotes from './pages/viewNotes/ViewNotes';
 import SignUp from './pages/signUp/SignUp';
 import AuthContextProvider from './contexts/AuthContext'
 import Calendar from './pages/calendar/Calendar';
+import Settings from './pages/settings/Settings';
+import ForgotPassword from './pages/forgotPassword/ForgotPassword';
 
 
 
@@ -24,6 +26,8 @@ function App() {
         <Route  path='/add' element={<AddNotes/>}/> 
         <Route  path='/view' element={<ViewNotes/>}/> 
         <Route  path='/calendar' element={<Calendar/>}/> 
+        <Route  path='/settings' element={<Settings/>}/> 
+        <Route  path='/forgot_password' element={<ForgotPassword/>}/> 
         <Route exact  path='/' element={<Login/>}/> 
         <Route path='/signup' element={<SignUp/>}/> 
       </Routes>

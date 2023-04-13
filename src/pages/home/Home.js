@@ -21,6 +21,11 @@ export default function Home() {
     navigate('/view');
   }
 
+  function handleClickSettings() {
+    navigate('/settings');
+  }
+
+
   //set space 
   const [spacing, setSpacing] = React.useState(2);
 
@@ -108,7 +113,7 @@ export default function Home() {
               {[0].map((value) => (
                 <Grid key={value} item>
                   <div style={{ width: 300, height: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
-                    <Card>
+                    <Card onClick={handleClickSettings}>
                       <CardContent style={{ width: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
                         <img src={noteImage} alt="Logo" />
 

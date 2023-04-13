@@ -10,7 +10,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../utils/init-firbase';
-import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 
 export default function SignUp() {
 
@@ -19,8 +25,27 @@ export default function SignUp() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [conPassword, setConPassword] = useState('')
+  const [message, setMessage] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate();
+
+  //------------------- alert ------------------------------
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  //--------------------------------------------------------
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -31,7 +56,8 @@ export default function SignUp() {
 
     setValidated(true);
   };
-
+  
+  //-------------- handle navigations ---------------------------
   function handleClick() {
     navigate('/home');
   }
@@ -44,6 +70,7 @@ export default function SignUp() {
     navigate('/home');
   }
 
+  //---------------------------------------------------------
 
   // const userSignUp = () => {
   //    setIsSubmitting(true)
@@ -72,6 +99,8 @@ export default function SignUp() {
   // };
 
 
+  //------------------------- create account -------------------------------
+
   const onSubmit = async (e) => {
     e.preventDefault()
 
@@ -93,13 +122,19 @@ export default function SignUp() {
           });
       } else {
         console.log("mis match");
+        setMessage("Please check password and confirm password again...");
+        handleClickOpen();
       }
 
     } else {
       console.log("please fill all the fields");
+      setMessage("Please fill all the fields...");
+      handleClickOpen();
     }
 
   }
+
+ //-------------------------- sign in from google --------------------------
 
   const signInFromGoogle = () => {
     signInWithGoogle()
@@ -110,11 +145,21 @@ export default function SignUp() {
       })
       .catch(e => console.log(e.message))
   };
-
+//---------------------------------------------------------------------------------
 
   return (
 
-    <div className='body-login' style={{
+    <div>
+
+      <div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+         {message}
+        </Alert>
+      </Snackbar>
+      </div>
+
+<div className='body-login' style={{
       display: "flex",
       alignItems: "center",
       height: "100%",
@@ -159,12 +204,12 @@ export default function SignUp() {
 
           <div>
             <TextField value={password}
-              onChange={e => setPassword(e.target.value)} id="outlined-basic" label="Password*" variant="outlined" size="small" margin="none" style={{ width: 300 }} />
+              onChange={e => setPassword(e.target.value)} id="outlined-basic" label="Password*" type='password' variant="outlined" size="small" margin="none" style={{ width: 300 }} />
           </div>
 
           <div>
             <TextField value={conPassword}
-              onChange={e => setConPassword(e.target.value)} id="outlined-basic" label="Confirm Password*" variant="outlined" size="small" margin="dense" style={{ width: 300 }} />
+              onChange={e => setConPassword(e.target.value)} id="outlined-basic" label="Confirm Password*" type='password' variant="outlined" size="small" margin="dense" style={{ width: 300 }} />
           </div>
           {/* 
           <div style={{ display: 'flex', justifyItems: 'baseline' }}>
@@ -204,6 +249,10 @@ export default function SignUp() {
 
       </Card>
     </div>
+
+    </div>
+
+   
 
 
     // <div className='body-signup' style={{

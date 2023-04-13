@@ -7,6 +7,9 @@ import logo from '../../assets/logo.png'
 import { FaHome, FaPlus, FaRegUser, FaRegUserCircle, FaUser } from "react-icons/fa";
 import { BsGrid } from "react-icons/bs";
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { auth } from '../../utils/init-firbase';
+import { signOut } from 'firebase/auth';
+
 
 
 
@@ -22,8 +25,18 @@ export default function NavBar() {
     const navigate = useNavigate();
 
   function handleClick() {
+    logout();
     navigate('/');
   }
+
+  //------------------------ logout ---------------------------
+
+function logout() {
+    return signOut(auth)
+  }
+  
+  //-----------------------------------------------------------
+  
 
 
     return (
