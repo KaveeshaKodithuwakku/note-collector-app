@@ -5,17 +5,16 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Button, Card, CardContent, TextField } from '@mui/material';
+import { Button, Card, CardContent, Divider, TextField } from '@mui/material';
 import image from '../../assets/Profile.jpg'
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { purple } from '@mui/material/colors';
-import { auth } from '../../utils/init-firbase';
-import { useLocation } from 'react-router-dom';
-import { confirmPasswordReset, sendPasswordResetEmail } from 'firebase/auth';
-
+import { getAuth, updatePassword } from "firebase/auth";
+import { Col, Row } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
 
 
 
@@ -62,13 +61,18 @@ function a11yProps(index) {
 //     })
 //   }
 
-  const forgotPassword = (uEmail, e) => {
-    e.preventDefault();
-    return sendPasswordResetEmail(auth, uEmail, {
-        url: `http://localhost:3000/settings`,
-      })
+//   const forgotPassword = (uEmail, e) => {
+//     e.preventDefault();
+//     return sendPasswordResetEmail(auth, uEmail, {
+//         url: `http://localhost:3000/settings`,
+//       })
 
-  }
+//   }
+
+// function useQuery() {
+//     return new URLSearchParams(useLocation().search)
+//   }
+  
 
 //--------------------------------------------------------------------
 
@@ -77,7 +81,8 @@ function a11yProps(index) {
 export default function Settings() {
 
     const [value, setValue] = React.useState(0);
-    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const auth = getAuth();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -90,13 +95,24 @@ export default function Settings() {
         setExpanded(isExpanded ? panel : false);
     };
 
-    const forgotPassword = (uEmail, e) => {
+   
+
+      const reset = (user,newPassword,e) => {
         e.preventDefault();
-        return sendPasswordResetEmail(auth, uEmail, {
-            url: `http://localhost:3000/`,
-          })
+        console.log('user'+user);
+        
+        updatePassword(user, newPassword).then(() => {
+            // Update successful.
+            console.log('sucess');
+            setPassword('');
+          }).catch((error) => {
+            console.log(error + "failed");
+            // An error ocurred
+            // ...
+          });
     
       }
+
 
     return (
         <div>
@@ -140,9 +156,9 @@ export default function Settings() {
                                             id="panel1bh-header"
                                         >
                                             <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                                                About
+                                                Bio
                                             </Typography>
-                                            <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography>
+                                            <Typography sx={{ color: 'text.secondary' }}>I am an developer</Typography>
                                         </AccordionSummary>
                                         <AccordionDetails>
                                             <Typography>
@@ -157,17 +173,76 @@ export default function Settings() {
                                             aria-controls="panel2bh-content"
                                             id="panel2bh-header"
                                         >
-                                            <Typography sx={{ width: '33%', flexShrink: 0 }}>Occupation</Typography>
+                                            <Typography sx={{ width: '33%', flexShrink: 0 }}>Personal Information</Typography>
                                             <Typography sx={{ color: 'text.secondary' }}>
                                                 You are currently not an owner
                                             </Typography>
                                         </AccordionSummary>
                                         <AccordionDetails>
-                                            <Typography>
+
+                                        <Row>
+                                                <Col style={{width:'50%'}}>
+                                                <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label style={{fontSize:'10px'}}>Email address</Form.Label>
+        <br></br>
+        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px',width:300}}/>
+      </Form.Group>
+                                               
+                                                </Col>
+                                                <Col style={{width:'50%'}}>
+                                                <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label style={{fontSize:'10px'}}>Email address</Form.Label>
+        <br></br>
+        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px',width:300}}/>
+      </Form.Group>
+                                                </Col>
+                                            </Row>
+
+                                        <Row>
+                                                <Col style={{width:'50%'}}>
+                                                <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label style={{fontSize:'10px'}}>Email address</Form.Label>
+        <br></br>
+        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px',width:300}}/>
+      </Form.Group>
+                                                </Col>
+                                                {/* <Col style={{width:'50%'}}>
+                                                <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label style={{fontSize:'10px'}}>Email address</Form.Label>
+        <br></br>
+        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px',width:300}}/>
+      </Form.Group>
+                                                </Col> */}
+                                            </Row>
+                                            <Row>
+                                                <Col style={{width:'50%'}}>
+                                                <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label style={{fontSize:'10px'}}>Email address</Form.Label>
+        <br></br>
+        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px',width:300}}/>
+      </Form.Group>
+                                                </Col>
+                                                <Col style={{width:'50%'}}>
+                                                <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label style={{fontSize:'10px'}}>Email address</Form.Label>
+        <br></br>
+        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px',width:300}}/>
+      </Form.Group>
+                                                </Col>
+                                            </Row>
+                                            {/* <Row>
+                                                <Col style={{width:'50%'}}>
+                                                <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px'}}/>
+                                                </Col>
+                                                <Col style={{width:'50%'}}>
+                                                <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px'}}/>
+                                                </Col>
+                                            </Row> */}
+                                            {/* <Typography>
                                                 Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus,
                                                 varius pulvinar diam eros in elit. Pellentesque convallis laoreet
                                                 laoreet.
-                                            </Typography>
+                                            </Typography> */}
                                         </AccordionDetails>
                                     </Accordion>
 
@@ -177,13 +252,27 @@ export default function Settings() {
                                             aria-controls="panel4bh-content"
                                             id="panel4bh-header"
                                         >
-                                            <Typography sx={{ width: '33%', flexShrink: 0 }}>Personal data</Typography>
+                                            <Typography sx={{ width: '33%', flexShrink: 0 }}>Email Address</Typography>
                                         </AccordionSummary>
                                         <AccordionDetails>
-                                            <Typography>
+
+                                        <Row>
+                                                <Col style={{width:'50%'}}>
+                                                   
+                               
+
+        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px'}}/>
+    
+
+                                        
+                                                </Col>
+                                               
+                                            </Row>
+
+                                            {/* <Typography>
                                                 Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
                                                 amet egestas eros, vitae egestas augue. Duis vel est augue.
-                                            </Typography>
+                                            </Typography> */}
                                         </AccordionDetails>
                                     </Accordion>
                                 </div>
@@ -206,18 +295,18 @@ export default function Settings() {
                                             </div>
 
                                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                                <TextField value={email}
-                                                    onChange={e => setEmail(e.target.value)} id="outlined-basic" label="Email*" variant="outlined" size="small" margin="dense" style={{ width: 370, fontSize: '5px' }} />
+                                                   <TextField value={password}
+                                                    onChange={e => setPassword(e.target.value)} id="outlined-basic" label="Password*" type='password' variant="outlined" size="small" margin="dense" style={{ width: 370, fontSize: '5px',marginTop: 35 }} />
+                                            
                                             </div>
 
                                             <br></br>
 
                                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-end' }}>
-                                                <Button onClick={(e) => forgotPassword(email, e)} sx={{ backgroundColor: 'purple', color: 'white', width: 370 }}>Reset Password</Button>
+                                                <Button  onClick={(e) => reset(auth.currentUser,password,e)} sx={{ backgroundColor: 'purple', color: 'white', width: 370,":hover":{backgroundColor:'purple'} }}>Reset Password</Button>
                                             </div>
 
-
-
+                                           
                                         </div>
 
 

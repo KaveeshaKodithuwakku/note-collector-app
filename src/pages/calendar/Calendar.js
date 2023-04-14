@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import FullCalendar from "@fullcalendar/react";  
 import dayGridPlugin from "@fullcalendar/daygrid";  
+import timeGridPlugin from "@fullcalendar/timegrid";  
+import interactionPlugin from "@fullcalendar/interaction";  
 import NavBar from '../../components/NavBar/NavBar';
 const events = [{ title: "Today", date: new Date() }]; 
 
 export class Calendar extends Component {  
+
     render() {  
+
         return (  
 
 <div>
@@ -20,7 +24,15 @@ export class Calendar extends Component {
                 <FullCalendar  
                     defaultView="dayGridMonth"  
                     plugins={[dayGridPlugin]}  
-                    events={events}  
+                    // plugins={[dayGridPlugin,timeGridPlugin,interactionPlugin]}  
+                    // initialView='dayGridMonth'
+                    // headerToolbar={{left:'prev,next',center:'title',right:'dayGridMonth,timeGridWeek,timeGridDay'}}
+                    events={events} 
+                    // events={this.state.practiceTimes} 
+                    editable={true}
+                    selectable={true}
+                    dayMaxEvents={true}
+                 
                 />  
             </div>  
 </div>
