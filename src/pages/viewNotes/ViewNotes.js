@@ -14,6 +14,9 @@ import NavBar from '../../components/NavBar/NavBar';
 import { BiPlus, BiPlusCircle } from 'react-icons/bi';
 import UpdateDialog from '../../components/UpdateDialog/UpdateDialog';
 import AddNoteDialog from '../../components/AddNoteDialog/AddNoteDialog';
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
 
 
 export default function ViewNotes() {
@@ -22,6 +25,7 @@ export default function ViewNotes() {
   const [spacing, setSpacing] = React.useState(2);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [open, setOpen] = useState(false);
+  const [favorite, setFavorite] = useState(false);
 
 
   const jsx = `
@@ -83,6 +87,40 @@ const handleOpen = () => {
 
   }
 
+  const updateIsFavorite = (id,status,e) => {
+
+
+    if (e.target.checked) {
+      status = 1;
+     console.log('true')
+    } else {
+     status = 0
+      console.log('false')
+    }
+
+    e.preventDefault();
+    // console.log(`http://localhost:8080/note/update-note-favorite/${id}/${status}`);
+    
+    axios.put(`http://localhost:8080/note/update-note-favorite/${id}/${status}`)
+      .then(function (response) {
+        Swal.fire(
+          'Note added to favorite list'
+        )
+        loadData();
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: '<a href="">Why do I have this issue?</a>'
+        })
+      })
+
+  }
+
   useEffect(() => {
     loadData();
   }, [])
@@ -104,7 +142,7 @@ const handleOpen = () => {
           color: 'purple',
           fontFamily: 'sans-serif', marginLeft: 20, width: 1100
         }}>Note List</h3>
-        <Button onClick={handleOpen}   className='add-button' startIcon={<BiPlusCircle/>} style={{marginTop:5,alignItems:'',justifyContent:'flex-end',backgroundColor:'green',color:'white'}}>Add Note </Button>
+        <Button onClick={handleOpen}   className='add-button' startIcon={<BiPlusCircle/>} style={{marginTop:5,alignItems:'',justifyContent:'flex-end',backgroundColor:'gray',color:'white'}}>Add Note </Button>
 
         <AddNoteDialog open={open} onClose={handleClose} onLoad={loadData}/>
       </div>
@@ -143,11 +181,14 @@ const handleOpen = () => {
                               <img src={pin} alt="Logo" />
                             </Avatar>
                           }
-                          // action={
-                          //   <IconButton aria-label="settings">
-                          //     <MoreVertIcon />
-                          //   </IconButton>
-                          // }
+                          action={
+                            <Checkbox onChange={(e) => updateIsFavorite(props.noteId,0,e)} icon={<FavoriteBorder />} checkedIcon={<Favorite />}  sx={{
+                              color: purple[800],
+                              '&.Mui-checked': {
+                                color: purple[600],
+                              },
+                            }}/>
+                          }
                           title={props.title}
                           subheader={props.dateTime}
                         />

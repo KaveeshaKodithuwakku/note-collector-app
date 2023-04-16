@@ -7,6 +7,8 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import noteImage from '../../assets/calendar (1).png'
+import FavoriteNotes from '../favoriteNote/FavoriteNotes';
+
 
 
 export default function Home() {
@@ -14,7 +16,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   function handleClickCalendar() {
-    navigate('/calendar');
+    navigate('/favorite-notes');
   }
 
   function handleClickView() {
