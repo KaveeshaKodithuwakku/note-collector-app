@@ -7,15 +7,6 @@
   position: fixed;
 }
 
-  @font-face {
-    font-family: RubikaMoonro;
-    src: url(../../fonts/RubikMoonrocks-Regular.ttf);
-}
-
-.font-type{
-    font-family: RubikaMoonro !important;
-}
-
 .search-btn{
 border-radius: 2 !important;
 width: 150 !important;
@@ -31,10 +22,15 @@ width: 150 !important;
 }
 
 
-.add-button{
-  background-color: rgb(10, 138, 85) !important;
+.add-note-button-new{
+  /* background-color: rgb(10, 138, 85) !important; */
   color: white !important;
   border-radius: 60 !important;
+  background-color: #9921e8;
+  background-image: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);
+  
 }
+
+
 
 

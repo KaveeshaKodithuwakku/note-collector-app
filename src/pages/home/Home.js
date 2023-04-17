@@ -6,7 +6,9 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import noteImage from '../../assets/calendar (1).png'
+import noteImage from '../../assets/file.png'
+import favImage from '../../assets/favorite.png'
+import profileImage from '../../assets/user.png'
 import FavoriteNotes from '../favoriteNote/FavoriteNotes';
 
 
@@ -42,7 +44,7 @@ export default function Home() {
 
   return (
 
-    <div className='body'>
+    <div className='home-body'>
 
       <NavBar />
 
@@ -72,7 +74,7 @@ export default function Home() {
               /> */}
 
                   <div style={{ width: 300, height: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
-                    <Card onClick={handleClickView}>
+                    <Card onClick={handleClickView} className='title-btn'>
                       <CardContent style={{ width: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
                         <img src={noteImage} alt="Logo" />
 
@@ -82,7 +84,7 @@ export default function Home() {
                       <CardContent style={{ width: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
 
 
-                        <h5>Notes</h5>
+                        <h5 className='title-btn'>Notes</h5>
                       </CardContent>
                     </Card>
                   </div>
@@ -96,7 +98,7 @@ export default function Home() {
                   <div style={{ width: 300, height: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
                     <Card onClick={handleClickCalendar}>
                       <CardContent style={{ width: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
-                        <img src={noteImage} alt="Logo" />
+                        <img src={favImage} alt="Logo" />
 
 
                       </CardContent>
@@ -104,7 +106,7 @@ export default function Home() {
                       <CardContent style={{ width: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
 
 
-                        <h5>Calendar</h5>
+                        <h5 style={{color:'blue'}}> Favorites</h5>
                       </CardContent>
                     </Card>
                   </div>
@@ -117,7 +119,7 @@ export default function Home() {
                   <div style={{ width: 300, height: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
                     <Card onClick={handleClickSettings}>
                       <CardContent style={{ width: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
-                        <img src={noteImage} alt="Logo" />
+                        <img src={profileImage} alt="Logo" />
 
 
                       </CardContent>
@@ -125,7 +127,7 @@ export default function Home() {
                       <CardContent style={{ width: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
 
 
-                        <h5>Profile</h5>
+                        <h5 style={{color:'blue'}}>Profile</h5>
                       </CardContent>
                     </Card>
                   </div>

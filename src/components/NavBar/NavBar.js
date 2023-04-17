@@ -9,6 +9,10 @@ import { BsGrid } from "react-icons/bs";
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { auth } from '../../utils/init-firbase';
 import { signOut } from 'firebase/auth';
+import { IconName, IoNotifications, IoNotificationsOutline } from "react-icons/io5";
+import swal from 'sweetalert';
+import Swal from 'sweetalert2';
+
 
 
 
@@ -25,8 +29,29 @@ export default function NavBar() {
     const navigate = useNavigate();
 
   function handleClick() {
-    logout();
-    navigate('/');
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Are you sure that you want to logout?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'green',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, logout!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+            logout();
+            navigate('/');
+        }else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            
+          }
+      })
+
+
   }
 
   //------------------------ logout ---------------------------
@@ -49,9 +74,9 @@ function logout() {
                     <Nav className="me-auto">
                         <Link className='navbar-text nav-link' to={"/home"}>
                             <FaHome className='navbar-icon'/> Home </Link>
-                        <Link className='navbar-text nav-link' to={"/add"}>
-                            <FaPlus />
-                            Add Notes</Link>
+                        <Link className='navbar-text nav-link' to={"/reminders"}>
+                            <IoNotifications/>
+                            Reminders</Link>
                         <Link className='navbar-text nav-link' to={"/view"}>
                             <BsGrid />
                             View</Link>

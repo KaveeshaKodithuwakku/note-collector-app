@@ -1,13 +1,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Lobster&family=Monofett&family=Roboto&family=Rubik+Gemstones&family=Secular+One&display=swap');
 
 
-.body{
+.home-body{
     /* background-image: url(../../assets/491368.jpg) !important; */
     background-color: rgb(244, 239, 248);
     background-size: cover;
-    /* background: rgb(163, 160, 204) !important;
-    background: linear-gradient(90deg, rgb(25, 15, 223) 0%, rgb(132, 17, 185) 35%, rgb(249, 252, 253) 100%)!important; */
+     /* background: rgb(244, 239, 248) !important; 
+    background: linear-gradient(90deg, rgb(244, 239, 248) 0%, rgb(169, 105, 230) 35%, rgb(158, 162, 163) 100%)!important;  */
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -27,10 +28,11 @@
 
 
   .body-content{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Secular One', sans-serif;
     /* font-family: 'Lobster', cursive; */
     font-size: '120px';
     font-size: xx-large;
+    font-weight: bold;
     color: purple;
     align-items: center;
     display: flex;
@@ -66,6 +68,15 @@
     display: flex;
     justify-content: center;
 }
+
+.title-btn{
+  width: 150 !important;
+  height: 50 !important;
+  color: blue !important; 
+
+}
+
+
 
   /* body {
     background-image: url("/img/bg-image.jpg");

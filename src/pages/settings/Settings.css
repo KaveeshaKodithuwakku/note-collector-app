@@ -3,3 +3,7 @@
     font-weight: bolder !important;
 }
 
+
+.icon-color{
+      background: linear-gradient(90deg, rgb(30, 100, 192) 0%, rgb(132, 17, 185) 35%, rgb(134, 150, 155) 100%)!important; 
+}

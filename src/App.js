@@ -12,6 +12,7 @@ import Calendar from './pages/calendar/Calendar';
 import Settings from './pages/settings/Settings';
 import ForgotPassword from './pages/forgotPassword/ForgotPassword';
 import FavoriteNotes from './pages/favoriteNote/FavoriteNotes';
+import Reminders from './pages/reminders/Reminders';
 
 
 
@@ -24,10 +25,11 @@ function App() {
 {/* <NavBar/> */}
       <Routes>
         <Route  path='/home' element={<Home/>}/>
-        <Route  path='/add' element={<AddNotes/>}/> 
+        {/* <Route  path='/add' element={<AddNotes/>}/>  */}
         <Route  path='/view' element={<ViewNotes/>}/> 
         <Route  path='/calendar' element={<Calendar/>}/> 
         <Route  path='/favorite-notes' element={<FavoriteNotes/>}/> 
+        <Route  path='/reminders' element={<Reminders/>}/>
         <Route  path='/settings' element={<Settings/>}/> 
         <Route  path='/forgot_password' element={<ForgotPassword/>}/> 
         <Route exact  path='/' element={<Login/>}/> 

@@ -17,6 +17,9 @@ import AddNoteDialog from '../../components/AddNoteDialog/AddNoteDialog';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
+import './ViewNotes.css';
+import swal from 'sweetalert';
+
 
 
 export default function ViewNotes() {
@@ -67,10 +70,24 @@ const handleOpen = () => {
   //delete data by id
   const deleteRow = (id, e) => {
     e.preventDefault();
-    axios.delete(`http://localhost:8080/note/delete-note/${id}`)
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+       axios.delete(`http://localhost:8080/note/delete-note/${id}`)
       .then(function (response) {
         Swal.fire(
-          'Note Deleted Success!'
+          'Deleted!',
+          'Your note has been deleted.',
+          'success'
         )
         loadData();
       })
@@ -81,11 +98,17 @@ const handleOpen = () => {
           icon: 'error',
           title: 'Oops...',
           text: 'Something went wrong!',
-          footer: '<a href="">Why do I have this issue?</a>'
         })
       })
+      }
+    })
 
+    
+
+    
   }
+
+
 
   const updateIsFavorite = (id,status,e) => {
 
@@ -103,9 +126,10 @@ const handleOpen = () => {
     
     axios.put(`http://localhost:8080/note/update-note-favorite/${id}/${status}`)
       .then(function (response) {
-        Swal.fire(
-          'Note added to favorite list'
-        )
+        swal("Note added to favorite list", "", "success", {
+          button: "Ok",
+     
+        });
         loadData();
       })
       .catch(function (error) {
@@ -142,7 +166,7 @@ const handleOpen = () => {
           color: 'purple',
           fontFamily: 'sans-serif', marginLeft: 20, width: 1100
         }}>Note List</h3>
-        <Button onClick={handleOpen}   className='add-button' startIcon={<BiPlusCircle/>} style={{marginTop:5,alignItems:'',justifyContent:'flex-end',backgroundColor:'gray',color:'white'}}>Add Note </Button>
+        <Button onClick={handleOpen}   className='add-note-button-new' startIcon={<BiPlusCircle/>} >Add Note </Button>
 
         <AddNoteDialog open={open} onClose={handleClose} onLoad={loadData}/>
       </div>

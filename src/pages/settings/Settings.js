@@ -15,6 +15,10 @@ import { purple } from '@mui/material/colors';
 import { getAuth, updatePassword } from "firebase/auth";
 import { Col, Row } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import image1 from '../../assets/pen.png';
 
 
 
@@ -165,7 +169,14 @@ export default function Settings() {
                                                 Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
                                                 Aliquam eget maximus est, id dignissim quam.
                                             </Typography>
+                                            <br></br>
+                                                                                    
+<div>
+<img src={image1} alt="img" style={{display:'flex',justifyContent:'flex-end',alignContent:'end',width:20,height:20,boxShadow:30}}/>
+</div>
                                         </AccordionDetails>
+
+
                                     </Accordion>
                                     <Accordion expanded={expanded === 'panel2'} onChange={handleChangeExpand('panel2')}>
                                         <AccordionSummary
@@ -230,6 +241,10 @@ export default function Settings() {
       </Form.Group>
                                                 </Col>
                                             </Row>
+
+                                            <div>
+<img src={image1} alt="img" style={{display:'flex',justifyContent:'flex-end',alignContent:'end',width:20,height:20,boxShadow:30}}/>
+</div>
                                             {/* <Row>
                                                 <Col style={{width:'50%'}}>
                                                 <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px'}}/>
@@ -263,11 +278,14 @@ export default function Settings() {
 
         <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px'}}/>
     
-
                                         
                                                 </Col>
                                                
                                             </Row>
+
+                                            <div>
+<img src={image1} alt="img" style={{display:'flex',justifyContent:'flex-end',alignContent:'end',width:20,height:20,boxShadow:30,marginTop:20}}/>
+</div>
 
                                             {/* <Typography>
                                                 Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit

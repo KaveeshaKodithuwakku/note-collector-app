@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import './Login.css';
 import { Button, Card, CardContent, Divider, InputLabel, TextField } from '@mui/material';
-import { Col, } from 'react-bootstrap';
-import image from '../../assets/login-image.jpg'
+import { Col, Row, } from 'react-bootstrap';
+import image from '../../assets/login-background-new.jpg'
+import loginImage from '../../assets/login (1).png'
 import { FcGoogle } from "react-icons/fc"
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'
@@ -11,6 +12,7 @@ import { auth } from '../../utils/init-firbase';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+
 
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
@@ -27,7 +29,7 @@ export default function Login() {
   const { signInWithGoogle, login } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isChecked, setIsChecked] = useState(false)
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
 
@@ -117,6 +119,15 @@ export default function Login() {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in
+          if(isChecked){
+            localStorage.setEmail = email;
+            localStorage.setPassword = password;
+            localStorage.setIsChecked = isChecked;
+          }else{
+            localStorage.setEmail = '';
+            localStorage.setPassword = '';
+            localStorage.setIsChecked = false;
+          }
           const user = userCredential.user;
           navigate('/home')
           console.log(user);
@@ -194,27 +205,52 @@ export default function Login() {
             backgroundColor: 'ghostwhite',
           }}>
 
+{/* <div>
+<img className='login-icon-image ' src={loginImage} />
+
+             
+            </div> */}
+
+            {/* <div >
+              <img className='login-icon-image ' src={loginImage} />
+            </div> */}
+
+
             <div>
-              <h4 className='login-title'> Login</h4>
+            <Divider> <h4 className='login-title'> Login</h4></Divider>
+             
             </div>
 
             <br></br>
             <div>
               <TextField value={email}
-                onChange={e => setEmail(e.target.value)} id="outlined-basic" label="Email*" variant="outlined" size="small" margin="none" sx={{ width: 300, fontSize: '10px' }} />
+                onChange={e => setEmail(e.target.value)} id="outlined-basic" label="Email*" variant="outlined" size="small" margin="none" sx={{ width: 300, fontSize: '5px' }} />
             </div>
 
             <div>
               <TextField value={password}
-                onChange={e => setPassword(e.target.value)} id="outlined-basic" type='password' label="Password*" variant="outlined" size="small" margin="dense" style={{ width: 300 }} />
+                onChange={e => setPassword(e.target.value)} id="outlined-basic" type='password' label="Password*"  variant="outlined" size="small" margin="dense" style={{ width: 300 }} />
             </div>
 
             <div style={{ display: 'flex',flexDirection:'row' ,justifyItems: 'center', alignItems: 'center' }}>
 
-              <div style={{ display: 'flex',flexDirection:'row' ,justifyItems: 'center', alignItems: 'center' }}>
-              <Checkbox label='Remember Me' size="small" sx={{alignItems:'center',justifyContent:'center'}}/>
-              <p style={{width:150,fontSize:14}}>Remember Me</p>
-              <p style={{ color: 'blue', fontWeight: 'bold', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: '13px' }} onClick={handleClickForgotPassword}>Forgot Password</p>
+{/* 
+            <FormGroup>
+  <FormControlLabel control={<Checkbox  size="small" value={password}
+                onChange={e => setPassword(e.target.value)}/>} label="Remember Me" />
+  
+          
+</FormGroup> */}
+
+<input type="checkbox"  name="lsRememberMe" value={isChecked}
+                onChange={e => setIsChecked(e.target.value)}/>
+
+<label style={{fontSize:'13px'}}>Remember me</label>
+
+              <div style={{ display: 'flex',flexDirection:'row' ,justifyItems: 'center', alignItems: 'center' ,marginTop: 15,marginLeft: 35}}>
+              {/* <Checkbox label='Remember Me' size="small" sx={{alignItems:'center',justifyContent:'center'}}/> */}
+              {/* <p style={{width:150,fontSize:14}}>Remember Me</p> */}
+              <p style={{ color: 'blue', fontWeight: 'bold', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: '13px' }} onClick={handleClickForgotPassword}>Forgot Password ?</p>
 
                </div>
 
