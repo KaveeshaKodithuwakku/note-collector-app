@@ -120,13 +120,21 @@ export default function Login() {
         .then((userCredential) => {
           // Signed in
           if(isChecked){
-            localStorage.setEmail = email;
-            localStorage.setPassword = password;
-            localStorage.setIsChecked = isChecked;
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
+            localStorage.setItem('isCheked', isChecked);
+            console.log(isChecked);
+            console.log("email -"+localStorage.getItem('email'));
+            console.log("password -"+localStorage.getItem('password'));
+            console.log("isCheked -"+localStorage.getItem('isCheked'));
           }else{
-            localStorage.setEmail = '';
-            localStorage.setPassword = '';
-            localStorage.setIsChecked = false;
+            localStorage.setItem('email', '');
+            localStorage.setItem('password', '');
+            localStorage.setItem('isCheked', false);
+            console.log(isChecked);
+            console.log("email -"+localStorage.getItem('email'));
+            console.log("password -"+localStorage.getItem('password'));
+            console.log("isCheked -"+localStorage.getItem('isCheked'));
           }
           const user = userCredential.user;
           navigate('/home')
@@ -152,6 +160,11 @@ export default function Login() {
   };
 
   useEffect(() => {
+
+
+     setEmail(localStorage.getItem('email'));
+     setPassword(localStorage.getItem('password'));
+     setIsChecked(localStorage.getItem('isCheked'));
 
   }, [])
 
@@ -243,7 +256,7 @@ export default function Login() {
 </FormGroup> */}
 
 <input type="checkbox"  name="lsRememberMe" value={isChecked}
-                onChange={e => setIsChecked(e.target.value)}/>
+                onChange={e => setIsChecked(e.target.checked)}/>
 
 <label style={{fontSize:'13px'}}>Remember me</label>
 

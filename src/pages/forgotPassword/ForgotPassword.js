@@ -26,8 +26,6 @@ export default function ForgotPassword() {
                 <Card sx={{ width: '400px', height: '500px', borderRadius: 1, display: "flex", boxShadow: 2, margin: 5 }}>
                     <CardContent style={{display: "flex",width: "50%",height: "100%"}}>
 
-                      
-
                         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
 
                         <div style={{height:'60px',marginTop: 50,display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
