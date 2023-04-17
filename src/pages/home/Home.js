@@ -61,18 +61,7 @@ export default function Home() {
             <Grid container justifyContent="center" spacing={spacing}>
               {[0].map((value) => (
                 <Grid key={value} item>
-                  {/* <Paper
-                sx={{
-                  height: 140,
-                  width: 200,
-                  backgroundColor: (theme) =>
-                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                    backgroundImage: 
-                }}
-                
               
-              /> */}
-
                   <div style={{ width: 300, height: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
                     <Card onClick={handleClickView} className='title-btn'>
                       <CardContent style={{ width: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>

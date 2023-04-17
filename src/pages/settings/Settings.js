@@ -19,6 +19,10 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import image1 from '../../assets/pen.png';
+import { FaUndo, FaUser } from 'react-icons/fa';
+import { MdEmail, MdLocationOn } from "react-icons/md";
+import { IoIosCall } from "react-icons/io";
+import { BsCalendar, BsFillCalendar2Fill } from 'react-icons/bs';
 
 
 
@@ -75,20 +79,20 @@ export default function Settings() {
         setExpanded(isExpanded ? panel : false);
     };
 
-      const reset = (user,newPassword,e) => {
+    const reset = (user, newPassword, e) => {
         e.preventDefault();
-        console.log('user'+user);
-        
+        console.log('user' + user);
+
         updatePassword(user, newPassword).then(() => {
             // Update successful.
             console.log('sucess');
             setPassword('');
-          }).catch((error) => {
+        }).catch((error) => {
             console.log(error + "failed");
             // An error ocurred
             // ...
-          });
-      }
+        });
+    }
 
 
     return (
@@ -143,10 +147,10 @@ export default function Settings() {
                                                 Aliquam eget maximus est, id dignissim quam.
                                             </Typography>
                                             <br></br>
-                                                                                    
-<div>
-<img src={image1} alt="img" style={{display:'flex',justifyContent:'flex-end',alignContent:'end',width:20,height:20,boxShadow:30}}/>
-</div>
+
+                                            <div>
+                                                <img src={image1} alt="img" style={{ display: 'flex', justifyContent: 'flex-end', alignContent: 'end', width: 20, height: 20, boxShadow: 30 }} />
+                                            </div>
                                         </AccordionDetails>
 
 
@@ -164,60 +168,59 @@ export default function Settings() {
                                         </AccordionSummary>
                                         <AccordionDetails>
 
-                                        <Row>
-                                                <Col style={{width:'50%'}}>
-                                                <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label style={{fontSize:'10px'}}>Email address</Form.Label>
-        <br></br>
-        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px',width:300}}/>
-      </Form.Group>
-                                               
+                                            <Row>
+                                                <Col style={{ width: '50%' }}>
+                                                    <Form.Group className="mb-3" controlId="formBasicFirstName">
+                                                        <FaUser/>
+                                                        <Form.Label style={{ fontSize: '12px' ,marginLeft: 20}}>First Name</Form.Label>
+                                                        <br></br>
+                                                        <input value={'Kaveesha'} disabled='true' style={{ fontSize: '12px', width: 300 }} />
+                                                    </Form.Group>
+
                                                 </Col>
-                                                <Col style={{width:'50%'}}>
-                                                <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label style={{fontSize:'10px'}}>Email address</Form.Label>
-        <br></br>
-        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px',width:300}}/>
-      </Form.Group>
+                                                <Col style={{ width: '50%' }}>
+                                                    <Form.Group className="mb-3" controlId="formBasicLastName">
+                                                    <FaUser/>
+                                                        <Form.Label style={{ fontSize: '12px' ,marginLeft: 20}}>Last Name</Form.Label>
+                                                        <br></br>
+                                                        <input value={'Kodithuwakku'} disabled='true' style={{ fontSize: '12px', width: 300 }} />
+                                                    </Form.Group>
                                                 </Col>
                                             </Row>
 
-                                        <Row>
-                                                <Col style={{width:'50%'}}>
-                                                <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label style={{fontSize:'10px'}}>Email address</Form.Label>
-        <br></br>
-        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px',width:300}}/>
-      </Form.Group>
-                                                </Col>
-                                                {/* <Col style={{width:'50%'}}>
-                                                <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label style={{fontSize:'10px'}}>Email address</Form.Label>
-        <br></br>
-        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px',width:300}}/>
-      </Form.Group>
-                                                </Col> */}
-                                            </Row>
                                             <Row>
-                                                <Col style={{width:'50%'}}>
-                                                <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label style={{fontSize:'10px'}}>Email address</Form.Label>
-        <br></br>
-        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px',width:300}}/>
-      </Form.Group>
+                                                <Col style={{ width: '50%' }}>
+                                                    <Form.Group className="mb-3" controlId="formBasicAddress">
+                                                        <MdLocationOn/>
+                                                        <Form.Label style={{ fontSize: '12px',marginLeft: 20 }}>Address</Form.Label>
+                                                        <br></br>
+                                                        <input value={'Matara,Sri Lanka'} disabled='true' style={{ fontSize: '12px', width: 300 }} />
+                                                    </Form.Group>
                                                 </Col>
-                                                <Col style={{width:'50%'}}>
-                                                <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label style={{fontSize:'10px'}}>Email address</Form.Label>
-        <br></br>
-        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px',width:300}}/>
-      </Form.Group>
+                                            </Row>
+
+                                            <Row>
+                                                <Col style={{ width: '50%' }}>
+                                                    <Form.Group className="mb-3" controlId="formBasicContact">
+                                                        <IoIosCall/>
+                                                        <Form.Label style={{ fontSize: '12px',marginLeft: 20 }}>Contact</Form.Label>
+                                                        <br></br>
+                                                        <input value={'0715246300'} disabled='true' style={{ fontSize: '12px', width: 300 }} />
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col style={{ width: '50%' }}>
+                                                    <Form.Group className="mb-3" controlId="formBasicDob">
+                                                        <BsFillCalendar2Fill/>
+                                                        <Form.Label style={{ fontSize: '12px',marginLeft: 20  }}>Date Of Birth</Form.Label>
+                                                        <br></br>
+                                                        <input value={'2011-05-20'} disabled='true' style={{ fontSize: '12px', width: 300 }} />
+                                                    </Form.Group>
                                                 </Col>
                                             </Row>
 
                                             <div>
-<img src={image1} alt="img" style={{display:'flex',justifyContent:'flex-end',alignContent:'end',width:20,height:20,boxShadow:30}}/>
-</div>
+                                                <img src={image1} alt="img" style={{ display: 'flex', justifyContent: 'flex-end', alignContent: 'end', width: 20, height: 20, boxShadow: 30 }} />
+                                            </div>
                                             {/* <Row>
                                                 <Col style={{width:'50%'}}>
                                                 <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px'}}/>
@@ -240,25 +243,22 @@ export default function Settings() {
                                             aria-controls="panel4bh-content"
                                             id="panel4bh-header"
                                         >
-                                            <Typography sx={{ width: '33%', flexShrink: 0 }}>Email Address</Typography>
+                                            <Typography sx={{ width: '33%', flexShrink: 0 }} startIcon={<FaUndo/>} >Email Address</Typography>
                                         </AccordionSummary>
                                         <AccordionDetails>
 
-                                        <Row>
-                                                <Col style={{width:'50%'}}>
-                                                   
-                               
 
-        <input value={'Kaveesha'} disabled='true' style={{fontSize:'10px'}}/>
-    
-                                        
-                                                </Col>
-                                               
-                                            </Row>
+                                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                                        <MdEmail/>
+                                                        <Form.Label style={{ fontSize: '12px',marginLeft: 20  }}>Email</Form.Label>
+                                                        <br></br>
+                                                        <input value={auth.currentUser.email} disabled='true' style={{ fontSize: '12px',width:300 }} />
+                                                    </Form.Group>
+
 
                                             <div>
-<img src={image1} alt="img" style={{display:'flex',justifyContent:'flex-end',alignContent:'end',width:20,height:20,boxShadow:30,marginTop:20}}/>
-</div>
+                                                <img src={image1} alt="img" style={{ display: 'flex', justifyContent: 'flex-end', alignContent: 'end', width: 20, height: 20, boxShadow: 30, marginTop: 20 }} />
+                                            </div>
 
                                             {/* <Typography>
                                                 Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
@@ -286,18 +286,18 @@ export default function Settings() {
                                             </div>
 
                                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                                   <TextField value={password}
-                                                    onChange={e => setPassword(e.target.value)} id="outlined-basic" label="Password*" type='password' variant="outlined" size="small" margin="dense" style={{ width: 370, fontSize: '5px',marginTop: 35 }} />
-                                            
+                                                <TextField value={password}
+                                                    onChange={e => setPassword(e.target.value)} id="outlined-basic" label="Password*" type='password' variant="outlined" size="small" margin="dense" style={{ width: 370, fontSize: '5px', marginTop: 35 }} />
+
                                             </div>
 
                                             <br></br>
 
                                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-end' }}>
-                                                <Button  onClick={(e) => reset(auth.currentUser,password,e)} sx={{ backgroundColor: 'purple', color: 'white', width: 370,":hover":{backgroundColor:'purple'} }}>Reset Password</Button>
+                                                <Button onClick={(e) => reset(auth.currentUser, password, e)} sx={{ backgroundColor: 'purple', color: 'white', width: 370, ":hover": { backgroundColor: 'purple' } }}>Reset Password</Button>
                                             </div>
 
-                                           
+
                                         </div>
 
 
