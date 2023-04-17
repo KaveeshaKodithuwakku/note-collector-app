@@ -193,13 +193,14 @@ export default function SignUp() {
         }}>
 
           <div>
-            <h4 className='login-title'> Sign Up</h4>
+          <Divider>  <h4 className='login-title'> Sign Up</h4></Divider>
+          
           </div>
 
           <br></br>
           <div>
             <TextField value={email}
-              onChange={e => setEmail(e.target.value)} id="outlined-basic" label="Email*" variant="outlined" size="small" margin="dense" style={{ width: 300, fontSize: '' }} />
+              onChange={e => setEmail(e.target.value)} id="outlined-basic" label="Email*" variant="outlined" size="small" margin="dense" style={{ width: 300}} />
           </div>
 
           <div>
@@ -209,7 +210,7 @@ export default function SignUp() {
 
           <div>
             <TextField value={conPassword}
-              onChange={e => setConPassword(e.target.value)} id="outlined-basic" label="Confirm Password*" type='password' variant="outlined" size="small" margin="dense" style={{ width: 300 }} />
+              onChange={e => setConPassword(e.target.value)} id="outlined-basic" label="Confirm Password*" type='password' variant="outlined" size="small" margin="none" style={{ width: 300 ,marginTop: 5,marginBottom:10}} />
           </div>
           {/* 
           <div style={{ display: 'flex', justifyItems: 'baseline' }}>

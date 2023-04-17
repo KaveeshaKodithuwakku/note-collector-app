@@ -24,6 +24,7 @@ export default function FavoriteNotes() {
 const [spacing, setSpacing] = React.useState(2);
 const [searchTerm, setSearchTerm] = React.useState('');
 const [open, setOpen] = useState(false);
+const [openUp, setOpenUp] = useState(false);
 
 
 const jsx = `
@@ -44,6 +45,8 @@ const handleClose = () => {
 const handleOpen = () => {
 setOpen(true);
 };
+
+
 
 
 //get data from url
@@ -207,7 +210,11 @@ useEffect(() => {
                       </CardContent>
                       <CardActions disableSpacing>
 
-                        <UpdateDialog noteId={props.noteId} onLoad={loadData} />
+                      <IconButton color="primary" aria-label="edit" component="label" onClick={handleOpen}>
+        <input hidden accept="image/*" />
+        <Edit />
+      </IconButton>
+                          <UpdateDialog open={open} onClose={handleClose} noteId={props.noteId} onLoad={loadData} />
                         <IconButton onClick={(e) => deleteRow(props.noteId, e)} color="primary" aria-label="upload picture" component="label">
                           <input hidden accept="image/*" />
                           <Delete />

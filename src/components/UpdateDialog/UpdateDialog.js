@@ -1,45 +1,49 @@
 import React, { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import { Edit } from '@mui/icons-material';
+import Modal from '@mui/material/Modal';
 import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import { BiImageAdd } from "react-icons/bi";
 import Swal from 'sweetalert2'
+import { GrFormClose } from "react-icons/gr";
+import { Col, Row } from 'react-bootstrap';
 
 
 
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 2,
+};
 
 export default function UpdateDialog(props) {
 
-  const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
   const [title, setTitle] = useState('');
   const [cdate, setDate] = useState('');
   const [description, setDescription] = useState('');
-  const [userId, setUserId] = useState('');
   const [image, setImage] = useState(null);
+
 
   const currDate = new Date().toLocaleDateString();
   const currTime = new Date().toLocaleTimeString();
-
-  const handleClose = () => {
-    setShow(false);
-  };
-
-  const handleShow = () => {
-    setShow(true);
-  };
-
 
   useEffect(() => {
 
     showDetails(props.noteId);
     console.log("id - " + props.noteId);
-    setDate(currDate+" " +currTime);
+    setDate(currDate + " " + currTime);
   }, [])
-
 
 
   const showDetails = (id) => {
@@ -56,92 +60,114 @@ export default function UpdateDialog(props) {
       })
   }
 
-    const updateDetails = (id,e) => {
-   e.preventDefault();
+  const updateDetails = (id, e) => {
+    e.preventDefault();
 
-      axios.put(`http://localhost:8080/note/update-note/${id}`, {
-        title: title,
-        dateTime: cdate,
-        description: description,
-        image: image,
+    axios.put(`http://localhost:8080/note/update-note/${id}`, {
+      title: title,
+      dateTime: cdate,
+      description: description,
+      image: image,
+    })
+      .then(function (response) {
+
+        Swal.fire(
+          'Success!',
+          'Note Update successfully!',
+          'success'
+        )
+        props.onClose();
+        props.onLoad();
+        clearFeilds();
       })
-        .then(function (response) {
-          Swal.fire(
-            'Success!',
-            'Note Update successfully!',
-            'success'
-          )
-          handleClose();
-            props.onLoad();
+      .catch(function (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: '<a href="">Why do I have this issue?</a>'
         })
-        .catch(function (error) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-            footer: '<a href="">Why do I have this issue?</a>'
-          })
-        });
+      });
 
-    }
+  }
+
+  const clearFeilds = () => {
+    setTitle('');
+    setDescription('');
+    setImage('');
+
+  }
 
 
   return (
     <div>
-      {/* <Button variant="primary" onClick={handleShow}>
-        Launch static backdrop modal
-      </Button> */}
 
-      <IconButton color="primary" aria-label="edit" component="label" onClick={handleShow}>
-        <input hidden accept="image/*" />
-        <Edit />
-      </IconButton>
+      <Modal
+        // {...props}
+        open={props.open}
+        onClose={props.onClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
 
-<div>
+          <Row>
 
-        <Modal
-          show={show}
-          onHide={handleClose}
-          backdrop="static"
-          keyboard={false}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Edit Note</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
 
-         <div style={{display:'flex',flexDirection:'column'}}>
+            <Col>
 
-         <TextField value={title} onChange={(e) => { setTitle(e.target.value) }} label="Title" id="outlined-size-small" size="small"/>
 
-<TextField value={description} onChange={(e) => { setDescription(e.target.value) }} label="Description" id="outlined-size-small" size="small" margin='dense'/>
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
 
-          </div> 
+                <Typography style={{ width: '90%' }} id="modal-modal-title" variant="h6" component="h2">
+                  Edit Note
+                </Typography>
 
-          <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-          <TextField value={image} onChange={(e) => { setImage(e.target.value) }} style={{width:'90%'}} label="Image" id="outlined-size-small" size="small" margin='dense'/>
 
-          <IconButton style={{width:'10%'}} color="primary" aria-label="upload picture" component="label">
-                          <input hidden accept="image/*" type="image" />
-                          <BiImageAdd color='black'/>
-                        </IconButton>
+              </div>
+
+            </Col>
+
+            <Col>
+              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 0 }}>
+                <IconButton onClick={props.onClose} style={{ size: '50px' }} color="primary" aria-label="close" component="label">
+                  <input hidden accept="image/*" />
+                  <GrFormClose color='gray' />
+                </IconButton>
+              </div>
+            </Col>
+          </Row>
+
+
+
+
+
+          <div style={{ display: 'flex', flexDirection: 'column', marginTop: 10 }}>
+
+            <TextField value={title} onChange={(e) => { setTitle(e.target.value) }} label="Title" id="outlined-size-small" size="small" />
+
+            <TextField value={description} onChange={(e) => { setDescription(e.target.value) }} label="Description" id="outlined-size-small" size="small" margin='dense' />
+
+
           </div>
- 
-         
 
-          </Modal.Body>
-          <Modal.Footer>
-            {/* <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button> */}
-            <Button variant="primary" onClick={(e) => updateDetails(data.noteId, e)}>Update</Button>
-          </Modal.Footer>
-        </Modal>
-  
+          <div className='text-field-div'>
+            <TextField value={image} onChange={(e) => { setImage(e.target.value) }} style={{ width: '90%' }} label="Image" id="outlined-size-small" size="small" margin='dense' />
 
-</div>
+            <IconButton style={{ width: '10%' }} color="primary" aria-label="upload picture" component="label">
+              <input hidden accept="image/*" type="file" onChange={({ target: { files } }) => {
+                files[0] && setImage(files[0].name)
+              }} />
+              <BiImageAdd color='black' type="file" />
+            </IconButton>
+          </div>
 
-      
+
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginTop: 5 }}>
+            <Button onClick={(e) => updateDetails(data.noteId, e)} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Update</Button>
+          </div>
+        </Box>
+      </Modal>
 
     </div>
   )

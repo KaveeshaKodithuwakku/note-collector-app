@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import { blue, green, purple, yellow } from '@mui/material/colors';
 import axios from 'axios';
 import pin from '../../assets/pin.png'
-import { Add, Delete, Edit, PlusOne, Update } from '@mui/icons-material';
+import { Add, Delete, Edit} from '@mui/icons-material';
 import Swal from 'sweetalert2'
 import NavBar from '../../components/NavBar/NavBar';
 import { BiPlus, BiPlusCircle } from 'react-icons/bi';
@@ -22,12 +22,14 @@ import swal from 'sweetalert';
 
 
 
+
 export default function ViewNotes() {
 
   //set space
   const [spacing, setSpacing] = React.useState(2);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [open, setOpen] = useState(false);
+  const [openUp, setOpenUp] = useState(false);
   const [favorite, setFavorite] = useState(false);
 
 
@@ -49,6 +51,15 @@ export default function ViewNotes() {
 const handleOpen = () => {
   setOpen(true);
 };
+
+  const handleCloseUp = () => {
+    setOpenUp(false);
+};
+
+const handleOpenUp = () => {
+  setOpenUp(true);
+};
+
 
 
   //get data from url
@@ -175,7 +186,7 @@ const handleOpen = () => {
 
 
       <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', marginTop: 20 }}>
-        <Form.Control style={{ width: '500px', marginLeft: 20, borderRadius: 25 }} size="sm" type="text" placeholder="Search"
+        <Form.Control style={{ width: '500px', marginLeft: 20, borderRadius: 25 }} size="sm" type="text" placeholder="Search....."
           value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value) }} />
 
       </div>
@@ -232,7 +243,11 @@ const handleOpen = () => {
                         </CardContent>
                         <CardActions disableSpacing>
 
-                          <UpdateDialog noteId={props.noteId} onLoad={loadData} />
+                        <IconButton color="primary" aria-label="edit" component="label" onClick={handleOpenUp}>
+        <input hidden accept="image/*" />
+        <Edit />
+      </IconButton>
+                          <UpdateDialog open={openUp} onClose={handleCloseUp} noteId={props.noteId} onLoad={loadData} />
                           <IconButton onClick={(e) => deleteRow(props.noteId, e)} color="primary" aria-label="upload picture" component="label">
                             <input hidden accept="image/*" />
                             <Delete />

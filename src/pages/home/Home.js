@@ -54,7 +54,7 @@ export default function Home() {
 
         <p className='body-content'>The simpleset way to </p>
         <p className='body-content'>keep notes.  </p>
-        <p className='body-content2'>One combined workspace all you works.My Notes is simplest tool that helps your works get organized and aligned.</p>
+        <p className='body-content2'>One combined workspace all your works.My Notes is simplest tool that helps your works get organized and aligned.</p>
 
         <Grid sx={{ flexGrow: 10 }} container spacing={5}>
           <Grid item xs={12}>

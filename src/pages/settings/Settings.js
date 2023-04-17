@@ -6,7 +6,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Button, Card, CardContent, Divider, TextField } from '@mui/material';
-import image from '../../assets/Profile.jpg'
+import image from '../../assets/profile-image.jpg'
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -56,30 +56,6 @@ function a11yProps(index) {
     };
 }
 
-// ------------------password reset ------------------------------
-
-
-// function forgotPassword(email) {
-//     return sendPasswordResetEmail(auth, email, {
-//       url: `http://localhost:3000/settings`,
-//     })
-//   }
-
-//   const forgotPassword = (uEmail, e) => {
-//     e.preventDefault();
-//     return sendPasswordResetEmail(auth, uEmail, {
-//         url: `http://localhost:3000/settings`,
-//       })
-
-//   }
-
-// function useQuery() {
-//     return new URLSearchParams(useLocation().search)
-//   }
-  
-
-//--------------------------------------------------------------------
-
 
 
 export default function Settings() {
@@ -99,8 +75,6 @@ export default function Settings() {
         setExpanded(isExpanded ? panel : false);
     };
 
-   
-
       const reset = (user,newPassword,e) => {
         e.preventDefault();
         console.log('user'+user);
@@ -114,7 +88,6 @@ export default function Settings() {
             // An error ocurred
             // ...
           });
-    
       }
 
 
@@ -132,11 +105,11 @@ export default function Settings() {
                 flexDirection: 'row',
             }}>
 
-                <Card sx={{ width: '100%', height: '100%', borderRadius: 1, display: "flex", boxShadow: 2, margin: 1 }}>
+                <Card sx={{ width: '100%', height: '575px', borderRadius: 1, display: "flex", boxShadow: 2, margin: 1 }}>
                     <CardContent style={{
                         display: "flex",
                         alignItems: "center",
-                        width: "70%",
+                        width: "60%",
                         height: "100%",
                         flexDirection: 'column',
                     }}>
@@ -298,11 +271,11 @@ export default function Settings() {
                             </TabPanel>
                             <TabPanel value={value} index={1}>
 
-                                <Card sx={{ width: '50%', height: '100%', borderRadius: 1, display: "flex", boxShadow: 2, margin: 1 }}>
+                                <Card sx={{ width: '60%', height: '100%', borderRadius: 1, display: "flex", boxShadow: 2, margin: 1 }}>
                                     <CardContent style={{
                                         display: "flex",
 
-                                        width: "50%",
+                                        width: "60%",
                                         height: "100%",
                                     }}>
 
@@ -345,7 +318,7 @@ export default function Settings() {
                     <CardContent style={{
                         display: "flex",
                         alignItems: "center",
-                        width: "30%",
+                        width: "40%",
                         height: "100%",
                         flexDirection: 'column',
                     }}>

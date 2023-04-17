@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import { BiImageAdd } from "react-icons/bi";
 import { GrFormClock, GrFormClose, IconName } from "react-icons/gr";
 import Swal from 'sweetalert2'
+import { Col, Row } from 'react-bootstrap';
 
 
 
@@ -32,8 +33,8 @@ export default function AddNoteDialog(props) {
     const [title, setTitle] = useState('');
     const [cdate, setDate] = useState('');
     const [description, setDescription] = useState('');
-    const [userId, setUserId] = useState('');
     const [image, setImage] = useState(null);
+
 
     const currDate = new Date().toLocaleDateString();
     const currTime = new Date().toLocaleTimeString();
@@ -76,7 +77,7 @@ export default function AddNoteDialog(props) {
                 props.onLoad();
                 clearFeilds();
 
-               
+
             });
 
     }
@@ -85,40 +86,50 @@ export default function AddNoteDialog(props) {
         setTitle('');
         setDescription('');
         setImage('');
-       
-      }
-    
 
-  return (
-    <div>
-        
-        <Modal
-            // {...props}
+    }
+
+    return (
+        <div>
+
+            <Modal
+                // {...props}
                 open={props.open}
-                 onClose={props.onClose}
+                onClose={props.onClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
 
-                    <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-end',alignItems:'flex-end',marginTop:0}}>
-          <IconButton onClick={props.onClose} style={{ size:'50px' }} color="primary" aria-label="close" component="label">
-                            <input hidden accept="image/*"  />
-                            <GrFormClose color='gray'/>
-                        </IconButton>
-                    </div>
-
-                    <div style={{display:'flex',flexDirection:'row'}}>
-
-                    <Typography style={{width:'90%'}} id="modal-modal-title" variant="h6" component="h2">
-            Add Note 
-          </Typography>
+                    <Row>
 
 
-                    </div>
+                        <Col>
 
 
-          
+                            <div style={{ display: 'flex', flexDirection: 'row' }}>
+
+                                <Typography style={{ width: '90%' }} id="modal-modal-title" variant="h6" component="h2">
+                                    Add Note
+                                </Typography>
+
+
+                            </div>
+
+                        </Col>
+
+                        <Col>
+                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 0 }}>
+                                <IconButton onClick={props.onClose} style={{ size: '50px' }} color="primary" aria-label="close" component="label">
+                                    <input hidden accept="image/*" />
+                                    <GrFormClose color='gray' />
+                                </IconButton>
+                            </div>
+                        </Col>
+                    </Row>
+
+
+
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
 
                         <TextField value={title} onChange={(e) => { setTitle(e.target.value) }} label="Title" id="outlined-size-small" size="small" />
@@ -131,18 +142,20 @@ export default function AddNoteDialog(props) {
                         <TextField value={image} onChange={(e) => { setImage(e.target.value) }} style={{ width: '90%' }} label="Image" id="outlined-size-small" size="small" margin='dense' />
 
                         <IconButton style={{ width: '10%' }} color="primary" aria-label="upload picture" component="label">
-                            <input hidden accept="image/*" type="image" />
-                            <BiImageAdd color='black' />
+                            <input hidden accept="image/*" type="file" onChange={({ target: { files } }) => {
+                                files[0] && setImage(files[0].name)
+                            }} />
+                            <BiImageAdd color='black' type="file" />
                         </IconButton>
                     </div>
 
-        
+
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginTop: 5 }}>
-                        <Button onClick={savePost} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' ,color:'white', backgroundColor:'green',":hover":{backgroundColor:'green'}}} >Save Note</Button>
+                        <Button onClick={savePost} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Save Note</Button>
                     </div>
                 </Box>
             </Modal>
 
-    </div>
-  )
+        </div>
+    )
 }
