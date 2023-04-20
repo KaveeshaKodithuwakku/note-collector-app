@@ -33,6 +33,8 @@ export default function UpdateDialog(props) {
   const [cdate, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
+  const [favorite, setFavorite] = useState(false);
+
 
 
   const currDate = new Date().toLocaleDateString();
@@ -53,6 +55,7 @@ export default function UpdateDialog(props) {
         setTitle(response.data.title)
         setDescription(response.data.description)
         setImage(response.data.image)
+        setFavorite(response.data.favorite)
       })
       .catch(function (error) {
         // handle error
@@ -63,29 +66,33 @@ export default function UpdateDialog(props) {
   const updateDetails = (id, e) => {
     e.preventDefault();
 
-    axios.put(`http://localhost:8080/note/update-note/${id}`, {
+    axios.put(`http://localhost:8080/note/update-note-without-image/${id}`, {
+      // axios.put(`http://localhost:8080/note/update-note/${id}`, {
       title: title,
       dateTime: cdate,
       description: description,
       image: image,
+      favorite:favorite,
+      userId:localStorage.getItem('userId'),
     })
       .then(function (response) {
-
+        props.onClose();
         Swal.fire(
           'Success!',
           'Note Update successfully!',
           'success'
         )
-        props.onClose();
+       
         props.onLoad();
         clearFeilds();
       })
       .catch(function (error) {
+        props.onClose();
+        clearFeilds();
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Something went wrong!',
-          footer: '<a href="">Why do I have this issue?</a>'
         })
       });
 
@@ -163,8 +170,8 @@ export default function UpdateDialog(props) {
           </div>
 
 
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginTop: 5 }}>
-            <Button onClick={(e) => updateDetails(data.noteId, e)} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Update</Button>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
+            <Button onClick={(e) => updateDetails(data.noteId, e)} sx={{ height:30,fontSize:12,display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Update</Button>
           </div>
         </Box>
       </Modal>

@@ -17,6 +17,8 @@ import AddNoteDialog from '../../components/AddNoteDialog/AddNoteDialog';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
+import swal from 'sweetalert';
+
 
 export default function FavoriteNotes() {
 
@@ -54,7 +56,10 @@ const [data, setData] = useState([]);
 
 //get all data
 const loadData = () => {
-  axios.get('http://localhost:8080/note/get-all-favorites')
+
+  const userId = localStorage.getItem('userId');
+  
+  axios.get(`http://localhost:8080/note/get-all-favorites/${userId}`)
     .then(function (response) {
       setData(response.data)
     })
@@ -103,7 +108,7 @@ const updateIsFavorite = (id,status,e) => {
     
     axios.put(`http://localhost:8080/note/update-note-favorite/${id}/${status}`)
       .then(function (response) {
-        Swal.fire(
+        swal.fire(
           'Note remove from favorite list successfully'
         )
         loadData();
@@ -111,11 +116,10 @@ const updateIsFavorite = (id,status,e) => {
       .catch(function (error) {
         // handle error
         console.log(error);
-        Swal.fire({
+        swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Something went wrong!',
-          footer: '<a href="">Why do I have this issue?</a>'
         })
       })
 
@@ -139,12 +143,12 @@ useEffect(() => {
       marginTop: 5,
     }}>
 
-      <h3 style={{
+      <h5 style={{
         color: 'purple',
         fontFamily: 'sans-serif', marginLeft: 20, width: 700
-      }}>Favorite Note List</h3>
+      }}>Favorite Note List</h5>
 
-<Form.Control style={{ width: '500px', marginLeft: 20, borderRadius: 5 }} size="sm" type="text" placeholder="Search"
+<Form.Control style={{ width: '500px', marginLeft: 20, borderRadius: 20 }} size="sm" type="text" placeholder="Search......"
         value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value) }} />
       
     </div>

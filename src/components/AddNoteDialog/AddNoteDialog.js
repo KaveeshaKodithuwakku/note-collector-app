@@ -4,11 +4,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
-import { Edit } from '@mui/icons-material';
 import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import { BiImageAdd } from "react-icons/bi";
-import { GrFormClock, GrFormClose, IconName } from "react-icons/gr";
+import {  GrFormClose } from "react-icons/gr";
 import Swal from 'sweetalert2'
 import { Col, Row } from 'react-bootstrap';
 
@@ -34,6 +33,7 @@ export default function AddNoteDialog(props) {
     const [cdate, setDate] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
+    const [favorite, setFavorite] = useState(false);
 
 
     const currDate = new Date().toLocaleDateString();
@@ -48,12 +48,40 @@ export default function AddNoteDialog(props) {
     //save data
     const savePost = () => {
 
-        axios.post('http://localhost:8080/note/save-notes', {
+        const formData = new FormData()
+        formData.append('title',title)
+        formData.append('description',description)
+        formData.append('dateTime',cdate)
+        formData.append('favorite',favorite)
+        formData.append('image',image)
+        formData.append('userId',localStorage.getItem('userId'))
+
+        // axios.post('http://localhost:8080/note/save-notes',{
+        //     title: title,
+        //     dateTime: cdate,
+        //     description: description,
+        //     favorite:favorite,
+        //     image: image,
+        //     userId:localStorage.getItem('userId'),
+        //     headers: { "Content-Type": "multipart/form-data" },
+        // })
+
+
+        axios.post('http://localhost:8080/note/save-notes-without-image',{
             title: title,
             dateTime: cdate,
             description: description,
+            favorite:favorite,
             image: image,
+            userId:localStorage.getItem('userId'),
         })
+
+    // axios({
+    //     method: "post",
+    //     url: "http://localhost:8080/note/save-notes",
+    //     data: formData,
+    //     headers: { "Content-Type": "multipart/form-data" },
+    //   })
             .then(function (response) {
                 Swal.fire(
                     'Good job!',
@@ -70,7 +98,6 @@ export default function AddNoteDialog(props) {
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Something went wrong!',
-                    footer: '<a href="">Why do I have this issue?</a>'
                 })
                 console.log(error);
                 props.onClose();
@@ -150,8 +177,8 @@ export default function AddNoteDialog(props) {
                     </div>
 
 
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginTop: 5 }}>
-                        <Button onClick={savePost} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Save Note</Button>
+                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
+                        <Button onClick={savePost} sx={{ height:30,fontSize:12,display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Save Note</Button>
                     </div>
                 </Box>
             </Modal>

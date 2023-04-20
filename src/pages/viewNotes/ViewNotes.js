@@ -23,6 +23,7 @@ import swal from 'sweetalert';
 
 
 
+
 export default function ViewNotes() {
 
   //set space
@@ -67,7 +68,11 @@ const handleOpenUp = () => {
 
   //get all data
   const loadData = () => {
-    axios.get('http://localhost:8080/note/get-all')
+
+    const userId = localStorage.getItem('userId');
+
+    axios.get(`http://localhost:8080/note/get-notes-by-user-id/${userId}`)
+    // axios.get('http://localhost:8080/note/get-all')
       .then(function (response) {
         setData(response.data)
       })
@@ -137,10 +142,17 @@ const handleOpenUp = () => {
     
     axios.put(`http://localhost:8080/note/update-note-favorite/${id}/${status}`)
       .then(function (response) {
-        swal("Note added to favorite list", "", "success", {
-          button: "Ok",
-     
-        });
+        if(status == 1){
+          swal("Note added to favorite list", "", "success", {
+            button: "Ok",
+       
+          });
+        }else if(status == 0){
+          swal("Note remove from favorite list", "", "success", {
+            button: "Ok",
+       
+          });
+        }
         loadData();
       })
       .catch(function (error) {
@@ -150,7 +162,7 @@ const handleOpenUp = () => {
           icon: 'error',
           title: 'Oops...',
           text: 'Something went wrong!',
-          footer: '<a href="">Why do I have this issue?</a>'
+
         })
       })
 
@@ -173,10 +185,10 @@ const handleOpenUp = () => {
         marginTop: 5,
       }}>
 
-        <h3 style={{
+        <h5 style={{
           color: 'purple',
           fontFamily: 'sans-serif', marginLeft: 20, width: 1100
-        }}>Note List</h3>
+        }}>Note List</h5>
         <Button onClick={handleOpen}   className='add-note-button-new' startIcon={<BiPlusCircle/>} >Add Note </Button>
 
         <AddNoteDialog open={open} onClose={handleClose} onLoad={loadData}/>
@@ -217,7 +229,7 @@ const handleOpenUp = () => {
                             </Avatar>
                           }
                           action={
-                            <Checkbox onChange={(e) => updateIsFavorite(props.noteId,0,e)} icon={<FavoriteBorder />} checkedIcon={<Favorite />}  sx={{
+                            <Checkbox defaultChecked={props.favorite}  onChange={(e) => updateIsFavorite(props.noteId,0,e)} icon={<FavoriteBorder />} checkedIcon={<Favorite />}  sx={{
                               color: purple[800],
                               '&.Mui-checked': {
                                 color: purple[600],
@@ -229,7 +241,7 @@ const handleOpenUp = () => {
                         />
                         <CardMedia
                           component="img"
-                          height={200}
+                          height={170}
                           width={500}
                           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeuTdF4ia0TGiqrI0j5o_wm3MJA64SUsaPGQ&usqp=CAU"
                           alt="image"

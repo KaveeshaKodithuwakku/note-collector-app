@@ -88,3 +88,13 @@ ul > li img{
 .upcoming{
     margin-top: 1em;
 }
+
+.add-btn-reminder{
+    /* background-color: rgb(10, 138, 85) !important; */
+    color: white !important;
+    border-radius: 60 !important;
+    background-color: #9921e8;
+    background-image: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);
+    
+  }
+  

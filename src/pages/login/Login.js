@@ -10,6 +10,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../utils/init-firbase';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import Swal from 'sweetalert2';
+
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -76,6 +78,11 @@ export default function Login() {
     } else {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
+
+        //   Swal.fire({
+        //     icon: 'success',
+        //     text: 'Login success',
+        // })
           // Signed in
           if (Checked) {
             localStorage.setItem('email', email);
@@ -86,19 +93,42 @@ export default function Login() {
             console.log("password -" + localStorage.getItem('password'));
             console.log("isCheked -" + localStorage.getItem('isCheked'));
           } else {
-            localStorage.setItem('email', '');
-            localStorage.setItem('password', '');
+            localStorage.setItem('email', "");
+            localStorage.setItem('password', "");
             localStorage.setItem('isCheked', false);
-            console.log(Checked);
+            console.log("Not Checked"+Checked);
             console.log("email -" + localStorage.getItem('email'));
             console.log("password -" + localStorage.getItem('password'));
             console.log("isCheked -" + localStorage.getItem('isCheked'));
           }
           const user = userCredential.user;
+          localStorage.setItem('userId',userCredential.user.uid);
           navigate('/home')
           console.log(user);
+          console.log("user id"+localStorage.getItem('userId'));
         })
         .catch((error) => {
+          if(error.code == 'auth/wrong-password'){
+            Swal.fire({
+              icon: 'error',
+              title: 'Wrong Password',
+              text: 'Please check your credentials and try again...',
+          })
+          }else if(error.code == 'auth/invalid-email'){
+            Swal.fire({
+              icon: 'error',
+              title: 'Invalid Email',
+              text: 'Please check your credentials and try again...',
+          })
+          }
+          else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+          })
+          }
+         
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorCode, errorMessage)
@@ -118,7 +148,8 @@ export default function Login() {
   useEffect(() => {
     setEmail(localStorage.getItem('email'));
     setPassword(localStorage.getItem('password'));
-    setIsChecked(localStorage.getItem('isCheked'));
+    //setIsChecked(localStorage.getItem('isCheked'));
+    console.log("useEffect checked"+localStorage.getItem('isCheked'))
 
   }, [])
 
@@ -186,7 +217,7 @@ export default function Login() {
 
             <div style={{ display: 'flex', flexDirection: 'row', justifyItems: 'center', alignItems: 'center' }}>
 
-              <input type="checkbox" name="lsRememberMe" value={Checked}
+              <input type="checkbox" name="lsRememberMe"  defaultChecked={localStorage.getItem('isCheked')}
                 onChange={e => setIsChecked(e.target.checked)} />
 
               <label style={{ fontSize: '13px',marginLeft:10 }}>Remember me</label>
@@ -203,7 +234,7 @@ export default function Login() {
 
             <div style={{ display: 'flex', fontSize: '12px', marginTop: 5 }}>
               <p>Don't you have an account?</p>
-              <p style={{ color: 'blue', fontWeight: 'bold' }} onClick={handleClickSingUp}>Sign Up</p>
+              <p style={{ color: 'blue', fontWeight: 'bold',marginLeft: 10 }} onClick={handleClickSingUp}>Sign Up</p>
             </div>
 
             <div>

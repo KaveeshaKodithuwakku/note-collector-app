@@ -30,7 +30,7 @@ export default function List(props) {
     axios.delete(`http://localhost:8080/reminder/delete-reminder/${id}`)
       .then(function (response) {
         Swal.fire(
-          'Note Deleted Success!'
+          'Reminder Deleted Success!'
         )
         propsI.onLoad();
       })
@@ -41,7 +41,6 @@ export default function List(props) {
           icon: 'error',
           title: 'Oops...',
           text: 'Something went wrong!',
-          footer: '<a href="">Why do I have this issue?</a>'
         })
       })
 

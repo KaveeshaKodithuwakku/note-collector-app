@@ -6,13 +6,24 @@ import axios from 'axios';
 import { Col, Row } from 'react-bootstrap';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import { Card, CardContent } from '@mui/material';
+import { Button, Card, CardContent } from '@mui/material';
+import image from '../../assets/forgot-password.jpg';
+import AddReminderDialog from '../../components/AddReminderDialog/AddReminderDialog';
 
 
 
 export default function Reminders() {
 
   const [data, setData] = useState([]);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+};
+
+const handleOpen = () => {
+  setOpen(true);
+};
 
 
   useEffect(() => {
@@ -38,25 +49,27 @@ export default function Reminders() {
     <div>
       <NavBar />
 
+      <div style={{ display: "flex" ,justifyContent:'right',marginTop: 10,marginRight: 20}}>
+      <Button onClick={handleOpen}  className='add-btn-reminder'>Add Reminder </Button>
+      {/* <Button onClick={handleOpen}   className='add-note-button-new' startIcon={<BiPlusCircle/>} >Add Note </Button> */}
+
+<AddReminderDialog open={open} onClose={handleClose} onLoad={loadData}/>
+</div>
+
+      <Row style={{marginTop: 10}}>
+      <h3 className="main-title" style={{ marginTop: 0 }}>Task Remainder</h3>
+      
+      </Row>
+
+      
+
       <Row style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-        <Col style={{ width: "25%" }}>
-
-          <Card sx={{ width:300,height:300,justifyContent:'center' }}>
-            <CardContent style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',marginTop: 50}}>
-              <Fab color="secondary" aria-label="add">
-                <AddIcon />
-              </Fab>
-            </CardContent>
-
-          </Card>
-
-
-        </Col>
+       
 
         <Col style={{ width: "50%" }}>
           <div id='site-main'>
 
-            <h3 className="main-title" style={{ marginTop: 0 }}>Task Remainder</h3>
+          
 
             <div className="board">
               {/* <h2 className='upcoming text-dark'>Today</h2> */}
