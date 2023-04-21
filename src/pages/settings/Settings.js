@@ -11,18 +11,16 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { purple } from '@mui/material/colors';
 import { getAuth, updatePassword } from "firebase/auth";
 import { Col, Row } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
 import image1 from '../../assets/pen.png';
 import { FaUndo, FaUser } from 'react-icons/fa';
 import { MdEmail, MdLocationOn } from "react-icons/md";
 import { IoIosCall } from "react-icons/io";
-import { BsCalendar, BsFillCalendar2Fill } from 'react-icons/bs';
+import {BsFillCalendar2Fill } from 'react-icons/bs';
+import Swal from 'sweetalert2';
+
 
 
 
@@ -85,9 +83,30 @@ export default function Settings() {
 
         updatePassword(user, newPassword).then(() => {
             // Update successful.
+            Swal.fire(
+                'Good job!',
+                'New password update successfully!',
+                'success'
+            )
             console.log('sucess');
             setPassword('');
         }).catch((error) => {
+            console.log(error.code);
+
+            if(error.code == 'auth/requires-recent-login'){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Requires recent login',
+                    text: 'Please login from fireabse account!',
+                })
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
+            }
+           
             console.log(error + "failed");
             // An error ocurred
             // ...
