@@ -24,8 +24,6 @@ const style = {
     p: 2,
 };
 
-
-
 export default function AddNoteDialog(props) {
 
     const [title, setTitle] = useState('');
@@ -38,19 +36,7 @@ export default function AddNoteDialog(props) {
     const currDate = new Date().toLocaleDateString();
     const currTime = new Date().toLocaleTimeString();
 
-    const formData = new FormData();
-
-    formData.append("userId", localStorage.getItem('userId'))
-    formData.append("title", title)
-    formData.append("description", description)
-    formData.append("dateTime", cdate)
-    formData.append("favorite", favorite)
-    formData.append("image", image);
-    // for (let i = 0; i < image.length; i++) {
-    //     formData.append("image", image[i]);
-    // }
-
-
+  
     useEffect(() => {
         setDate(currDate + " " + currTime);
     }, [])
@@ -96,7 +82,6 @@ export default function AddNoteDialog(props) {
         //     //   }
         //    formData.append('',image)
 
-        console.log(formData.getAll);
         // axios.post('http://localhost:8080/note/save-notes',{
         //     title: title,
         //     dateTime: cdate,
@@ -124,7 +109,17 @@ export default function AddNoteDialog(props) {
         //     headers: { "Content-Type": "multipart/form-data" },
         //   })
 
-        axios.post('http://localhost:8080/note/save-notes', formData)
+        const formData = new FormData();
+
+        formData.append('userId', localStorage.getItem('userId'))
+        formData.append('title', title)
+        formData.append('description', description)
+        formData.append('dateTime', cdate)
+        formData.append('favorite', favorite)
+        formData.append('image', image);
+
+        try{
+            axios.post('http://localhost:8080/note/save-notes', formData)
             .then(function (response) {
                 Swal.fire(
                     'Good job!',
@@ -149,6 +144,11 @@ export default function AddNoteDialog(props) {
 
 
             });
+        }catch(error){
+            console.error(error);
+        }
+    
+      
 
     }
 
