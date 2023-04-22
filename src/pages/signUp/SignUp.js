@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './SignUp.css';
-import { Button, Card, CardContent, Divider, InputLabel,  TextField } from '@mui/material';
+import { Button, Card, CardContent, Divider, InputLabel, TextField } from '@mui/material';
 import image from '../../assets/signup-1.jpg'
 import { FcGoogle } from "react-icons/fc"
 import { useNavigate } from 'react-router-dom';
@@ -159,11 +159,11 @@ export default function SignUp() {
       <div className='body-signup'>
 
         <Card sx={{ width: '700px', borderRadius: 1, marginTop: 15, display: "flex", boxShadow: 20 }}>
-          <CardContent style={{display: "flex",alignItems: "center",width: "80%",height: "100%",flexDirection: 'column'}}>
+          <CardContent style={{ display: "flex", alignItems: "center", width: "80%", height: "100%", flexDirection: 'column' }}>
             <img src={image} alt="" className='image-style' />
           </CardContent>
 
-          <CardContent style={{display: "flex",height: "100%",width: "80%",flexDirection: 'column',backgroundColor: 'ghostwhite',}}>
+          <CardContent style={{ display: "flex", height: "100%", width: "80%", flexDirection: 'column', backgroundColor: 'ghostwhite', }}>
             <div>
               <Divider>  <h4 className='login-title'> Sign Up</h4></Divider>
             </div>
@@ -183,7 +183,7 @@ export default function SignUp() {
               <TextField value={conPassword}
                 onChange={e => setConPassword(e.target.value)} id="outlined-basic" label="Confirm Password*" type='password' variant="outlined" size="small" margin="none" style={{ width: 300, marginTop: 5, marginBottom: 10 }} />
             </div>
-   
+
             <div>
               <Button className='login-btn' type="submit" onClick={onSubmit}>Sign Up</Button>
             </div>

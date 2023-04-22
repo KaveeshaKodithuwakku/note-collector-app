@@ -10,8 +10,8 @@ export default function List(props) {
 
   return (
     <div>
-         <ul>
-          {iterate(props)}
+      <ul>
+        {iterate(props)}
       </ul>
     </div>
   )
@@ -19,9 +19,9 @@ export default function List(props) {
 
 
 // function iterate(data, flag,props){
-    function iterate(propsI){
-    if (!propsI.info) return;
-    const bgColor = propsI.upcoming ? { backgroundColor : "#F1EDEC"} : {};
+function iterate(propsI) {
+  if (!propsI.info) return;
+  const bgColor = propsI.upcoming ? { backgroundColor: "#F1EDEC" } : {};
 
 
   //delete data by id
@@ -46,33 +46,33 @@ export default function List(props) {
 
   }
 
-    return (
-        <>
-            {
-                propsI.info.map( (task, index) => {
-                   
-                    return (
-                        <li key={index}>
-                            <div className="flex" style={bgColor}>
-                                <div style={{margin: '5px',marginLeft:30,alignItems:'center',justifyItems:'center'}}>
-                                <img src={image} alt="img" style={{width:20,height:20,alignItems:'center',justifyItems:'center'}}/>
-                                </div>
-                              
-                                <div style={{width:300,alignItems:'center',justifyItems:'center',display:'flex'}}>
-                                    
-                                    <h5  style={{color:'darkblue',gap:'1em'}}>{task.title}</h5>
-                                  
-                                    <h6 style={{marginLeft: 20,marginRight:20}}>{task.date + " " +task.time}</h6>
+  return (
+    <>
+      {
+        propsI.info.map((task, index) => {
 
-                                    <FaWindowClose color='red' onClick={(e) => deleteRow(task.reminderId, e)} />
-                                </div>
+          return (
+            <li key={index}>
+              <div className="flex" style={bgColor}>
+                <div style={{ margin: '5px', marginLeft: 30, alignItems: 'center', justifyItems: 'center' }}>
+                  <img src={image} alt="img" style={{ width: 20, height: 20, alignItems: 'center', justifyItems: 'center' }} />
+                </div>
 
-                               
-                            </div>
-                        </li>
-                    )
-                })
-            }
-        </>
-    )
+                <div style={{ width: 300, alignItems: 'center', justifyItems: 'center', display: 'flex' }}>
+
+                  <h5 style={{ color: 'darkblue', gap: '1em' }}>{task.title}</h5>
+
+                  <h6 style={{ marginLeft: 20, marginRight: 20 }}>{task.date + " " + task.time}</h6>
+
+                  <FaWindowClose color='red' onClick={(e) => deleteRow(task.reminderId, e)} />
+                </div>
+
+
+              </div>
+            </li>
+          )
+        })
+      }
+    </>
+  )
 }

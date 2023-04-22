@@ -72,8 +72,8 @@ export default function UpdateDialog(props) {
       dateTime: cdate,
       description: description,
       image: image,
-      favorite:favorite,
-      userId:localStorage.getItem('userId'),
+      favorite: favorite,
+      userId: localStorage.getItem('userId'),
     })
       .then(function (response) {
         props.onClose();
@@ -82,7 +82,7 @@ export default function UpdateDialog(props) {
           'Note Update successfully!',
           'success'
         )
-       
+
         props.onLoad();
         clearFeilds();
       })
@@ -138,13 +138,13 @@ export default function UpdateDialog(props) {
 
           <div className='edit-text-line-style'>
             <TextField value={title} onChange={(e) => { setTitle(e.target.value) }} label="Title" id="outlined-size-small" size="small" />
-          
+
             <TextField value={description} onChange={(e) => { setDescription(e.target.value) }} label="Description" id="outlined-size-small" size="small" margin='dense' />
 
           </div>
 
           <div className='edit-text-field-div'>
-            <TextField value={image} onChange={(e) => { setImage(e.target.value) }} sx={{ width: '90%',marginTop:0.5 }} label="Image" id="outlined-size-small" size="small" />
+            <TextField value={image} onChange={(e) => { setImage(e.target.value) }} sx={{ width: '90%', marginTop: 0.5 }} label="Image" id="outlined-size-small" size="small" />
 
             <IconButton sx={{ width: '10%' }} color="primary" aria-label="upload picture" component="label">
               <input hidden accept="image/*" type="file" onChange={({ target: { files } }) => {
@@ -155,7 +155,7 @@ export default function UpdateDialog(props) {
           </div>
 
           <div className='edit-btn-save-line'>
-            <Button onClick={(e) => updateDetails(data.noteId, e)} sx={{ height:30,fontSize:12, marginTop: 1,color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Update</Button>
+            <Button onClick={(e) => updateDetails(data.noteId, e)} sx={{ height: 30, fontSize: 12, marginTop: 1, color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Update</Button>
           </div>
         </Box>
       </Modal>

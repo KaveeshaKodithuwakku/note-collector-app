@@ -7,12 +7,10 @@ import IconButton from '@mui/material/IconButton';
 import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import { BiImageAdd } from "react-icons/bi";
-import {  GrFormClose } from "react-icons/gr";
+import { GrFormClose } from "react-icons/gr";
 import Swal from 'sweetalert2'
 import { Col, Row } from 'react-bootstrap';
 import './AddNoteDialog.css';
-
-
 
 const style = {
     position: 'absolute',
@@ -42,15 +40,15 @@ export default function AddNoteDialog(props) {
 
     const formData = new FormData();
 
-    formData.append("userId",localStorage.getItem('userId'))
-            formData.append("title",title)
-            formData.append("description",description)
-            formData.append("dateTime",cdate)
-            formData.append("favorite",favorite)
-            formData.append("image", image);
-            // for (let i = 0; i < image.length; i++) {
-            //     formData.append("image", image[i]);
-            // }
+    formData.append("userId", localStorage.getItem('userId'))
+    formData.append("title", title)
+    formData.append("description", description)
+    formData.append("dateTime", cdate)
+    formData.append("favorite", favorite)
+    formData.append("image", image);
+    // for (let i = 0; i < image.length; i++) {
+    //     formData.append("image", image[i]);
+    // }
 
 
     useEffect(() => {
@@ -58,47 +56,47 @@ export default function AddNoteDialog(props) {
     }, [])
 
 
-//     const onSubmit = async (e) => {
-//         e.preventDefault();
-//         await axios.post("http://localhost:8080/note/save-notes", formData)
-//     .then(function (response) {
-     
-//         Swal.fire(
-//                                 'Good job!',
-//                                 'Note Saved successfully!',
-//                                 'success'
-//                             )
-//                             props.onClose();
-//                             props.onLoad();
-//                             clearFeilds();
-      
-//     })
-//     .catch(function (error) {
-//       Swal.fire({
-//         icon: 'error',
-//         title: 'Oops...',
-//         text: 'Something went wrong!',
-//       })
-//     });
-// }
+    //     const onSubmit = async (e) => {
+    //         e.preventDefault();
+    //         await axios.post("http://localhost:8080/note/save-notes", formData)
+    //     .then(function (response) {
 
-   
+    //         Swal.fire(
+    //                                 'Good job!',
+    //                                 'Note Saved successfully!',
+    //                                 'success'
+    //                             )
+    //                             props.onClose();
+    //                             props.onLoad();
+    //                             clearFeilds();
+
+    //     })
+    //     .catch(function (error) {
+    //       Swal.fire({
+    //         icon: 'error',
+    //         title: 'Oops...',
+    //         text: 'Something went wrong!',
+    //       })
+    //     });
+    // }
+
+
 
     //save data
     const savePost = () => {
 
-    //     const formData = new FormData()
-    //     formData.append('userId',localStorage.getItem('userId'))
-    //     formData.append('title',title)
-    //     formData.append('description',description)
-    //     formData.append('dateTime',cdate)
-    //     formData.append('favorite',favorite)
-    //     // for (let i = 0; i < image.length; i++) {
-    //     //     formData.append('images', image[i]);
-    //     //   }
-    //    formData.append('',image)
+        //     const formData = new FormData()
+        //     formData.append('userId',localStorage.getItem('userId'))
+        //     formData.append('title',title)
+        //     formData.append('description',description)
+        //     formData.append('dateTime',cdate)
+        //     formData.append('favorite',favorite)
+        //     // for (let i = 0; i < image.length; i++) {
+        //     //     formData.append('images', image[i]);
+        //     //   }
+        //    formData.append('',image)
 
-console.log(formData.getAll);
+        console.log(formData.getAll);
         // axios.post('http://localhost:8080/note/save-notes',{
         //     title: title,
         //     dateTime: cdate,
@@ -108,7 +106,7 @@ console.log(formData.getAll);
         //     userId:localStorage.getItem('userId'),    
         // })
 
-      
+
 
         // axios.post('http://localhost:8080/note/save-notes-without-image',{
         //     title: title,
@@ -119,14 +117,14 @@ console.log(formData.getAll);
         //     userId:localStorage.getItem('userId'),
         // })
 
-    // axios({
-    //     method: "POST",
-    //     url: "http://localhost:8080/note/save-notes",
-    //     data: formData,
-    //     headers: { "Content-Type": "multipart/form-data" },
-    //   })
+        // axios({
+        //     method: "POST",
+        //     url: "http://localhost:8080/note/save-notes",
+        //     data: formData,
+        //     headers: { "Content-Type": "multipart/form-data" },
+        //   })
 
-    axios.post('http://localhost:8080/note/save-notes',formData)
+        axios.post('http://localhost:8080/note/save-notes', formData)
             .then(function (response) {
                 Swal.fire(
                     'Good job!',
@@ -203,7 +201,7 @@ console.log(formData.getAll);
                     </div>
 
                     <div className='text-field-div'>
-                        <TextField value={image} onChange={(e) => { setImage(e.target.value) }} style={{ width: '90%',marginTop:5,marginBottom: 10 }} label="Image" id="outlined-size-small" size="small" margin='none'/>
+                        <TextField value={image} onChange={(e) => { setImage(e.target.value) }} style={{ width: '90%', marginTop: 5, marginBottom: 10 }} label="Image" id="outlined-size-small" size="small" margin='none' />
 
                         <IconButton style={{ width: '10%' }} color="primary" aria-label="upload picture" component="label">
                             <input hidden accept="image/*" type="file" onChange={({ target: { files } }) => {
@@ -215,7 +213,7 @@ console.log(formData.getAll);
 
 
                     <div className='btn-save-line'>
-                        <Button  onClick={savePost} sx={{ height:30,fontSize:12, color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Save Note</Button>
+                        <Button onClick={savePost} sx={{ height: 30, fontSize: 12, color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Save Note</Button>
                     </div>
                 </Box>
             </Modal>

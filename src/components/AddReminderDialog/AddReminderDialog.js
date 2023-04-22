@@ -125,12 +125,12 @@ export default function AddReminderDialog(props) {
 
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['DatePicker']}>
-                                <DatePicker  label={'"year", "month" and "day"'}
-  views={['year', 'month', 'day']} value={date} onChange={(newValue) => {
-                                    setDate(newValue);
-                                }
-                                }
-                                    renderInput={(params) => <TextField {...params} format="DD-MM-YYYY"/>} />
+                                <DatePicker label={'"year", "month" and "day"'}
+                                    views={['year', 'month', 'day']} value={date} onChange={(newValue) => {
+                                        setDate(newValue);
+                                    }
+                                    }
+                                    renderInput={(params) => <TextField {...params} format="DD-MM-YYYY" />} />
                             </DemoContainer>
                         </LocalizationProvider>
 
@@ -155,7 +155,7 @@ export default function AddReminderDialog(props) {
 
 
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
-                        <Button onClick={savePost} sx={{ height:30,fontSize:12,display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Save Reminder</Button>
+                        <Button onClick={savePost} sx={{ height: 30, fontSize: 12, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Save Reminder</Button>
                     </div>
                 </Box>
             </Modal>

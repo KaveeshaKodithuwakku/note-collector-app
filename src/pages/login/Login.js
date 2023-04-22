@@ -79,10 +79,10 @@ export default function Login() {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
 
-        //   Swal.fire({
-        //     icon: 'success',
-        //     text: 'Login success',
-        // })
+          //   Swal.fire({
+          //     icon: 'success',
+          //     text: 'Login success',
+          // })
           // Signed in
           if (Checked) {
             localStorage.setItem('email', email);
@@ -96,39 +96,39 @@ export default function Login() {
             localStorage.setItem('email', "");
             localStorage.setItem('password', "");
             localStorage.setItem('isCheked', false);
-            console.log("Not Checked"+Checked);
+            console.log("Not Checked" + Checked);
             console.log("email -" + localStorage.getItem('email'));
             console.log("password -" + localStorage.getItem('password'));
             console.log("isCheked -" + localStorage.getItem('isCheked'));
           }
           const user = userCredential.user;
-          localStorage.setItem('userId',userCredential.user.uid);
+          localStorage.setItem('userId', userCredential.user.uid);
           navigate('/home')
           console.log(user);
-          console.log("user id"+localStorage.getItem('userId'));
+          console.log("user id" + localStorage.getItem('userId'));
         })
         .catch((error) => {
-          if(error.code == 'auth/wrong-password'){
+          if (error.code == 'auth/wrong-password') {
             Swal.fire({
               icon: 'error',
               title: 'Wrong Password',
               text: 'Please check your credentials and try again...',
-          })
-          }else if(error.code == 'auth/invalid-email'){
+            })
+          } else if (error.code == 'auth/invalid-email') {
             Swal.fire({
               icon: 'error',
               title: 'Invalid Email',
               text: 'Please check your credentials and try again...',
-          })
+            })
           }
-          else{
+          else {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
               text: 'Something went wrong!',
-          })
+            })
           }
-         
+
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorCode, errorMessage)
@@ -149,7 +149,7 @@ export default function Login() {
     setEmail(localStorage.getItem('email'));
     setPassword(localStorage.getItem('password'));
     //setIsChecked(localStorage.getItem('isCheked'));
-    console.log("useEffect checked"+localStorage.getItem('isCheked'))
+    console.log("useEffect checked" + localStorage.getItem('isCheked'))
 
   }, [])
 
@@ -217,10 +217,10 @@ export default function Login() {
 
             <div style={{ display: 'flex', flexDirection: 'row', justifyItems: 'center', alignItems: 'center' }}>
 
-              <input type="checkbox" name="lsRememberMe"  defaultChecked={localStorage.getItem('isCheked')}
+              <input type="checkbox" name="lsRememberMe" defaultChecked={localStorage.getItem('isCheked')}
                 onChange={e => setIsChecked(e.target.checked)} />
 
-              <label style={{ fontSize: '13px',marginLeft:10 }}>Remember me</label>
+              <label style={{ fontSize: '13px', marginLeft: 10 }}>Remember me</label>
 
               <div style={{ display: 'flex', flexDirection: 'row', justifyItems: 'center', alignItems: 'center', marginTop: 15, marginLeft: 80 }}>
                 <p style={{ color: 'blue', fontWeight: 'bold', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: '13px' }} onClick={handleClickForgotPassword}>Forgot Password ?</p>
@@ -234,7 +234,7 @@ export default function Login() {
 
             <div style={{ display: 'flex', fontSize: '12px', marginTop: 5 }}>
               <p>Don't you have an account?</p>
-              <p style={{ color: 'blue', fontWeight: 'bold',marginLeft: 10 }} onClick={handleClickSingUp}>Sign Up</p>
+              <p style={{ color: 'blue', fontWeight: 'bold', marginLeft: 10 }} onClick={handleClickSingUp}>Sign Up</p>
             </div>
 
             <div>

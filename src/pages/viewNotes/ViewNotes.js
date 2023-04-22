@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import { blue, green, purple, yellow } from '@mui/material/colors';
 import axios from 'axios';
 import pin from '../../assets/pin.png'
-import { Add, Delete, Edit} from '@mui/icons-material';
+import { Add, Delete, Edit } from '@mui/icons-material';
 import Swal from 'sweetalert2'
 import NavBar from '../../components/NavBar/NavBar';
 import { BiPlus, BiPlusCircle } from 'react-icons/bi';
@@ -47,19 +47,19 @@ export default function ViewNotes() {
 
   const handleClose = () => {
     setOpen(false);
-};
+  };
 
-const handleOpen = () => {
-  setOpen(true);
-};
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const handleCloseUp = () => {
     setOpenUp(false);
-};
+  };
 
-const handleOpenUp = () => {
-  setOpenUp(true);
-};
+  const handleOpenUp = () => {
+    setOpenUp(true);
+  };
 
 
 
@@ -72,7 +72,7 @@ const handleOpenUp = () => {
     const userId = localStorage.getItem('userId');
 
     axios.get(`http://localhost:8080/note/get-notes-by-user-id/${userId}`)
-    // axios.get('http://localhost:8080/note/get-all')
+      // axios.get('http://localhost:8080/note/get-all')
       .then(function (response) {
         setData(response.data)
       })
@@ -98,53 +98,53 @@ const handleOpenUp = () => {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-       axios.delete(`http://localhost:8080/note/delete-note/${id}`)
-      .then(function (response) {
-        Swal.fire(
-          'Deleted!',
-          'Your note has been deleted.',
-          'success'
-        )
-        loadData();
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        })
-      })
+        axios.delete(`http://localhost:8080/note/delete-note/${id}`)
+          .then(function (response) {
+            Swal.fire(
+              'Deleted!',
+              'Your note has been deleted.',
+              'success'
+            )
+            loadData();
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            })
+          })
       }
-    })  
+    })
   }
 
 
-  const updateIsFavorite = (id,status,e) => {
+  const updateIsFavorite = (id, status, e) => {
 
     if (e.target.checked) {
       status = 1;
-     console.log('true')
+      console.log('true')
     } else {
-     status = 0
+      status = 0
       console.log('false')
     }
 
     e.preventDefault();
     // console.log(`http://localhost:8080/note/update-note-favorite/${id}/${status}`);
-    
+
     axios.put(`http://localhost:8080/note/update-note-favorite/${id}/${status}`)
       .then(function (response) {
-        if(status === 1){
+        if (status === 1) {
           swal("Note added to favorite list", "", "success", {
             button: "Ok",
-       
+
           });
-        }else if(status === 0){
+        } else if (status === 0) {
           swal("Note remove from favorite list", "", "success", {
             button: "Ok",
-       
+
           });
         }
         loadData();
@@ -183,9 +183,9 @@ const handleOpenUp = () => {
           color: 'purple',
           fontFamily: 'sans-serif', marginLeft: 20, width: 1100
         }}>Note List</h5>
-        <Button onClick={handleOpen}   className='add-note-button-new' startIcon={<BiPlusCircle/>} >Add Note </Button>
+        <Button onClick={handleOpen} className='add-note-button-new' startIcon={<BiPlusCircle />} >Add Note </Button>
 
-        <AddNoteDialog open={open} onClose={handleClose} onLoad={loadData}/>
+        <AddNoteDialog open={open} onClose={handleClose} onLoad={loadData} />
       </div>
 
       <Divider style={{ height: 10 }}></Divider>
@@ -223,12 +223,12 @@ const handleOpenUp = () => {
                             </Avatar>
                           }
                           action={
-                            <Checkbox defaultChecked={props.favorite}  onChange={(e) => updateIsFavorite(props.noteId,0,e)} icon={<FavoriteBorder />} checkedIcon={<Favorite />}  sx={{
+                            <Checkbox defaultChecked={props.favorite} onChange={(e) => updateIsFavorite(props.noteId, 0, e)} icon={<FavoriteBorder />} checkedIcon={<Favorite />} sx={{
                               color: purple[800],
                               '&.Mui-checked': {
                                 color: purple[600],
                               },
-                            }}/>
+                            }} />
                           }
                           title={props.title}
                           subheader={props.dateTime}
@@ -249,10 +249,10 @@ const handleOpenUp = () => {
                         </CardContent>
                         <CardActions disableSpacing>
 
-                        <IconButton color="primary" aria-label="edit" component="label" onClick={handleOpenUp}>
-        <input hidden accept="image/*" />
-        <Edit />
-      </IconButton>
+                          <IconButton color="primary" aria-label="edit" component="label" onClick={handleOpenUp}>
+                            <input hidden accept="image/*" />
+                            <Edit />
+                          </IconButton>
                           <UpdateDialog open={openUp} onClose={handleCloseUp} noteId={props.noteId} onLoad={loadData} />
                           <IconButton onClick={(e) => deleteRow(props.noteId, e)} color="primary" aria-label="upload picture" component="label">
                             <input hidden accept="image/*" />
