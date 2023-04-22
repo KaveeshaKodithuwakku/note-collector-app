@@ -4,7 +4,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import { Button, Card, CardContent, TextField } from '@mui/material';
 import { useAuth } from '../../contexts/AuthContext';
 import image from '../../assets/forgot-password.jpg'
-
+import './ForgotPassword.css';
 
 
 export default function ForgotPassword() {
@@ -20,13 +20,12 @@ export default function ForgotPassword() {
       }
     
     return (
-        <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',marginTop:10}}>
+        <div className='main-line-forgot'>
            
-
-                <Card sx={{ width: '400px', height: '500px', borderRadius: 1, display: "flex", boxShadow: 2, margin: 5 }}>
+                <Card sx={{ width: '400px', height: '500px', borderRadius: 1, display: "flex", boxShadow: 2, margin: 10 }}>
                     <CardContent style={{display: "flex",width: "50%",height: "100%"}}>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <div className='card-div'>
 
                         <div style={{height:'60px',marginTop: 50,display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <img src={image} alt="" className='image-style' />

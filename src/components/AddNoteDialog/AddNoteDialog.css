@@ -4,3 +4,24 @@
     justify-content: center;
     align-items: center;
 }
+/* style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 0 }} */
+
+.btn-close-line{
+ display: flex ;
+ flex-direction: row;
+ justify-content: flex-end;
+ align-items: flex-end;
+margin-top: 0;
+}
+
+.text-line-style{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-save-line{
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+}

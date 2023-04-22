@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import './SignUp.css';
-import { Button, Card, CardContent, Divider, FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, styled, TextField } from '@mui/material';
-import { Google, RememberMe, Style, Visibility, VisibilityOff } from '@mui/icons-material';
-import { pink, purple } from '@mui/material/colors';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Button, Card, CardContent, Divider, InputLabel,  TextField } from '@mui/material';
 import image from '../../assets/signup-1.jpg'
 import { FcGoogle } from "react-icons/fc"
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +27,6 @@ export default function SignUp() {
   const [password, setPassword] = useState('')
   const [conPassword, setConPassword] = useState('')
   const [message, setMessage] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate();
 
   //------------------- alert ------------------------------
@@ -74,42 +70,14 @@ export default function SignUp() {
     navigate('/home');
   }
 
-  //---------------------------------------------------------
-
-  // const userSignUp = () => {
-  //    setIsSubmitting(true)
-  //   console.log("inside reg******")
-  //         register(email, password)
-  //           .then(user => {
-  //             console.log(user)
-  //             console.log("inside yes ////////")
-  //           //  handleClick()
-  //           })
-  //           .catch(error => {
-  //             console.log(error.message)
-  //             console.log("inside error=======")
-  //             // toast({
-  //             //   description: error.message,
-  //             //   status: 'error',
-  //             //   duration: 9000,
-  //             //   isClosable: true,
-  //             // })
-  //           })
-  //           .finally(() => {
-  //              setIsSubmitting(false)
-  //              console.log("inside finnaly+++++++")
-  //            // mounted.current && setIsSubmitting(false)
-  //           })
-  // };
-
 
   //------------------------- create account -------------------------------
 
   const onSubmit = async (e) => {
     e.preventDefault()
 
-    if (email != '' || password != '' || conPassword != '') {
-      if (password == conPassword) {
+    if (email !== '' || password !== '' || conPassword !== '') {
+      if (password === conPassword) {
 
         await createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
@@ -124,13 +92,13 @@ export default function SignUp() {
 
           })
           .catch((error) => {
-            if (error.code == 'auth/invalid-email') {
+            if (error.code === 'auth/invalid-email') {
               Swal.fire({
                 icon: 'error',
                 title: 'Invalid Email',
                 text: 'Please check your credentials and try again...',
               })
-            } else if (error.code == 'auth/missing-password') {
+            } else if (error.code === 'auth/missing-password') {
               Swal.fire({
                 icon: 'error',
                 title: 'Missing Password ',
@@ -188,42 +156,16 @@ export default function SignUp() {
         </Snackbar>
       </div>
 
-      <div className='body-login' style={{
-        display: "flex",
-        alignItems: "center",
-        height: "100%",
-        flexDirection: 'column',
-      }}>
-
-
+      <div className='body-signup'>
 
         <Card sx={{ width: '700px', borderRadius: 1, marginTop: 15, display: "flex", boxShadow: 20 }}>
-          <CardContent style={{
-            display: "flex",
-            alignItems: "center",
-            width: "80%",
-            height: "100%",
-            flexDirection: 'column',
-          }}>
-
+          <CardContent style={{display: "flex",alignItems: "center",width: "80%",height: "100%",flexDirection: 'column'}}>
             <img src={image} alt="" className='image-style' />
-
-
-
           </CardContent>
 
-          <CardContent style={{
-            display: "flex",
-
-            height: "100%",
-            width: "80%",
-            flexDirection: 'column',
-            backgroundColor: 'ghostwhite',
-          }}>
-
+          <CardContent style={{display: "flex",height: "100%",width: "80%",flexDirection: 'column',backgroundColor: 'ghostwhite',}}>
             <div>
               <Divider>  <h4 className='login-title'> Sign Up</h4></Divider>
-
             </div>
 
             <br></br>
@@ -241,17 +183,7 @@ export default function SignUp() {
               <TextField value={conPassword}
                 onChange={e => setConPassword(e.target.value)} id="outlined-basic" label="Confirm Password*" type='password' variant="outlined" size="small" margin="none" style={{ width: 300, marginTop: 5, marginBottom: 10 }} />
             </div>
-            {/* 
-          <div style={{ display: 'flex', justifyItems: 'baseline' }}>
-            <Form.Group as={Row} className="mb-3" controlId="formHorizontalCheck">
-              <Col>
-                <Form.Check label="Remember me" fontSize= '5px' />
-              </Col>
-            </Form.Group>
-
-          </div> */}
-
-
+   
             <div>
               <Button className='login-btn' type="submit" onClick={onSubmit}>Sign Up</Button>
             </div>
@@ -261,8 +193,6 @@ export default function SignUp() {
               <p style={{ color: 'blue', fontWeight: 'bold', marginLeft: 10 }} onClick={handleLoginClick}> Sign In</p>
             </div>
 
-
-
             <div>
               <Divider style={{ fontSize: '13px' }}> OR</Divider>
             </div>
@@ -271,116 +201,11 @@ export default function SignUp() {
             <div>
               <Button className='login-google' onClick={signInFromGoogle}> <FcGoogle size={"20px"} />
                 <InputLabel style={{ fontSize: '13px' }}>  Sign with Google</InputLabel>
-
               </Button>
             </div>
-
           </CardContent>
-
         </Card>
       </div>
-
     </div>
-
-
-
-
-    // <div className='body-signup' style={{
-    //     display: "flex",
-    //     alignItems: "center",
-    //     flexDirection: 'column'
-    //   }}>
-
-
-
-    //     <Card sx={{ maxWidth: '500vw', borderRadius: 1,marginTop:2 }}>
-    //       <CardContent style={{
-    //         display: "flex",
-    //         alignItems: "center",
-    //         height: "540px",
-    //         flexDirection: 'column',
-    //         marginTop:10
-    //       }}>
-
-    //         <Row>
-
-    //           <Col>
-    //             <img src={image} alt="" className='image-style' />
-    //           </Col>
-    //           <Col >
-
-    //             <h4 className='login-title'> Sign Up </h4>
-    //             <br></br>
-    //             <Form className='text_content' noValidate validated={validated} onSubmit={handleSubmit}>
-
-
-
-    //               <Form.Group className="mb-3" controlId="formGroupEmail">
-    //                 <Form.Label className='form-text'>Email address</Form.Label>
-    //                 <Form.Control type="email" placeholder="Enter email" required  value={email}
-    //             onChange={e => setEmail(e.target.value)}/>
-    //                 <Form.Control.Feedback type="invalid">
-    //                   Please enter valid email.
-    //                 </Form.Control.Feedback>
-    //               </Form.Group>
-
-    //               <Form.Group className="mb-3" controlId="formGroupPassword">
-    //                 <Form.Label className='form-text'>Password</Form.Label>
-    //                 <Form.Control type="password" placeholder="Password" required  value={password}
-    //             onChange={e => setPassword(e.target.value)}/>
-    //                 <Form.Control.Feedback type="invalid">
-    //                   Please enter valid password.
-    //                 </Form.Control.Feedback>
-    //               </Form.Group>
-
-    //               <Form.Group className="mb-3" controlId="formGroupPassword">
-    //                 <Form.Label className='form-text'>Confirm Password</Form.Label>
-    //                 <Form.Control type="password" placeholder="Password" required />
-    //                 <Form.Control.Feedback type="invalid">
-    //                   Please entered password.
-    //                 </Form.Control.Feedback>
-    //               </Form.Group>
-
-    //               {/* <Form.Group as={Row} className="mb-3" controlId="formHorizontalCheck">
-    //                 <Col>
-    //                   <Form.Check label="Remember me" />
-    //                 </Col>
-    //               </Form.Group> */}
-
-    //               <Button className='login-btn' type="submit" onClick={onSubmit}>Sign Up</Button>
-    //               <br></br>
-    //               <br></br>
-
-    //               <Row style={{display:"flex",justifyContent:"center",alignItems: "center"}}>
-    //                 <Col className='header-col1'>
-    //                   <Form.Text className='header-col1-text'>
-    //                     You already have an account?
-    //                   </Form.Text>
-    //                 </Col>
-    //                 <Col className='header-col2'>
-    //                   <Form.Text className='header-col2-text' onClick={handleLoginClick}>
-    //                     Sign In
-    //                   </Form.Text>
-    //                 </Col>
-    //               </Row>
-    //               <Divider>OR</Divider>
-    //               <br></br>
-    //               <Button className='login-google' type="submit" onClick={signInFromGoogle}> <FcGoogle size={"20px"}/>
-    //                 <InputLabel>  Sign with Google</InputLabel>
-
-    //               </Button>
-
-    //             </Form>
-    //           </Col >
-
-    //         </Row>
-    //   </CardContent>
-
-    // </Card>
-
-
-
-
-    // </div>
   )
 }

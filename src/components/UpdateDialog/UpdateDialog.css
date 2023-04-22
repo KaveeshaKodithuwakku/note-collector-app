@@ -1,0 +1,33 @@
+.title-line{
+display: flex;
+flex-direction: row;
+width: '90%';
+}
+
+
+.edit-btn-close-line{
+    display: flex ;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+   margin-top: 0;
+   }
+   
+   .edit-text-line-style{
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-text-field-div{
+    display: flex;
+    direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-btn-save-line{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}

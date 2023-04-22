@@ -1,14 +1,54 @@
-.body-signup {
-    background-image: url(../../assets/background-cover.jpg) !important;
-    background-size: cover;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-  }
 
-  
+.body-signup {
+  background-image: url(../../assets/background-cover.jpg) !important;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+display: flex;
+align-items: center;
+flex-direction: column;
+
+}
+
+
 .text_content {
   width: 300px !important;
   height: 30vh;
 }
+
+.image-card{
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: "80%" !important;
+  height: "100%" !important;
+}
   
+.detail-card{
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: "100%" !important;
+  height: "100%" !important;
+  background-color: ghostwhite !important;
+}
+
+.signup-btn {
+  width: 120px !important;
+  border-radius: 20px !important;
+  background-color: blueviolet !important;
+  color: white !important;
+  font-size: 0.78rem !important;
+  justify-items: flex-start !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.signup-text-line{
+ display: 'flex';
+ font-size: "12px";
+ margin-top: 5;
+}
+
+

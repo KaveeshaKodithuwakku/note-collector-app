@@ -117,17 +117,11 @@ const handleOpenUp = () => {
         })
       })
       }
-    })
-
-    
-
-    
+    })  
   }
 
 
-
   const updateIsFavorite = (id,status,e) => {
-
 
     if (e.target.checked) {
       status = 1;
@@ -142,12 +136,12 @@ const handleOpenUp = () => {
     
     axios.put(`http://localhost:8080/note/update-note-favorite/${id}/${status}`)
       .then(function (response) {
-        if(status == 1){
+        if(status === 1){
           swal("Note added to favorite list", "", "success", {
             button: "Ok",
        
           });
-        }else if(status == 0){
+        }else if(status === 0){
           swal("Note remove from favorite list", "", "success", {
             button: "Ok",
        
@@ -209,7 +203,7 @@ const handleOpenUp = () => {
 
         <Row md={4}>
           {data.filter((val) => {
-            if (searchTerm == "") {
+            if (searchTerm === "") {
               return val
             } else if (val.title.toLowerCase().includes(searchTerm)) {
               return val
