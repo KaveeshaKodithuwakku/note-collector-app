@@ -5,13 +5,13 @@ import { Col, Form, Row } from 'react-bootstrap';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import { blue, green, purple, yellow } from '@mui/material/colors';
+import { blue,purple} from '@mui/material/colors';
 import axios from 'axios';
 import pin from '../../assets/pin.png'
-import { Add, Delete, Edit } from '@mui/icons-material';
+import { Delete, Edit } from '@mui/icons-material';
 import Swal from 'sweetalert2'
 import NavBar from '../../components/NavBar/NavBar';
-import { BiPlus, BiPlusCircle } from 'react-icons/bi';
+import { BiPlusCircle } from 'react-icons/bi';
 import UpdateDialog from '../../components/UpdateDialog/UpdateDialog';
 import AddNoteDialog from '../../components/AddNoteDialog/AddNoteDialog';
 import Checkbox from '@mui/material/Checkbox';
@@ -31,7 +31,6 @@ export default function ViewNotes() {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [open, setOpen] = useState(false);
   const [openUp, setOpenUp] = useState(false);
-  const [favorite, setFavorite] = useState(false);
   const [data, setData] = useState([]);
 
 
@@ -39,13 +38,7 @@ export default function ViewNotes() {
     <Grid container spacing={${spacing}}>
     `;
 
-  const [expanded, setExpanded] = React.useState(false);
-
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
+ 
   const handleClose = () => {
     setOpen(false);
   };
