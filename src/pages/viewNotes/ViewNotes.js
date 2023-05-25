@@ -32,6 +32,7 @@ export default function ViewNotes() {
   const [open, setOpen] = useState(false);
   const [openUp, setOpenUp] = useState(false);
   const [favorite, setFavorite] = useState(false);
+  const [data, setData] = useState([]);
 
 
   const jsx = `
@@ -62,28 +63,20 @@ export default function ViewNotes() {
   };
 
 
-
-  //get data from url
-  const [data, setData] = useState([]);
-
-  //get all data
   const loadData = () => {
 
     const userId = localStorage.getItem('userId');
 
     axios.get(`http://localhost:8080/note/get-notes-by-user-id/${userId}`)
-      // axios.get('http://localhost:8080/note/get-all')
       .then(function (response) {
         setData(response.data)
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
       })
   }
 
 
-  //delete data by id
   const deleteRow = (id, e) => {
     e.preventDefault();
 
@@ -108,7 +101,6 @@ export default function ViewNotes() {
             loadData();
           })
           .catch(function (error) {
-            // handle error
             console.log(error);
             Swal.fire({
               icon: 'error',
@@ -122,7 +114,6 @@ export default function ViewNotes() {
 
 
   const updateIsFavorite = (id, status, e) => {
-
     if (e.target.checked) {
       status = 1;
       console.log('true')
@@ -132,8 +123,7 @@ export default function ViewNotes() {
     }
 
     e.preventDefault();
-    // console.log(`http://localhost:8080/note/update-note-favorite/${id}/${status}`);
-
+   
     axios.put(`http://localhost:8080/note/update-note-favorite/${id}/${status}`)
       .then(function (response) {
         if (status === 1) {
@@ -150,7 +140,6 @@ export default function ViewNotes() {
         loadData();
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
         Swal.fire({
           icon: 'error',

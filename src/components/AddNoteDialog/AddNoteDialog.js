@@ -41,77 +41,11 @@ export default function AddNoteDialog(props) {
         setDate(currDate + " " + currTime);
     }, [])
 
-
-    //     const onSubmit = async (e) => {
-    //         e.preventDefault();
-    //         await axios.post("http://localhost:8080/note/save-notes", formData)
-    //     .then(function (response) {
-
-    //         Swal.fire(
-    //                                 'Good job!',
-    //                                 'Note Saved successfully!',
-    //                                 'success'
-    //                             )
-    //                             props.onClose();
-    //                             props.onLoad();
-    //                             clearFeilds();
-
-    //     })
-    //     .catch(function (error) {
-    //       Swal.fire({
-    //         icon: 'error',
-    //         title: 'Oops...',
-    //         text: 'Something went wrong!',
-    //       })
-    //     });
-    // }
-
-
-
-    //save data
     const savePost = () => {
-
-        //     const formData = new FormData()
-        //     formData.append('userId',localStorage.getItem('userId'))
-        //     formData.append('title',title)
-        //     formData.append('description',description)
-        //     formData.append('dateTime',cdate)
-        //     formData.append('favorite',favorite)
-        //     // for (let i = 0; i < image.length; i++) {
-        //     //     formData.append('images', image[i]);
-        //     //   }
-        //    formData.append('',image)
-
-        // axios.post('http://localhost:8080/note/save-notes',{
-        //     title: title,
-        //     dateTime: cdate,
-        //     description: description,
-        //     favorite:favorite,
-        //     image: image,
-        //     userId:localStorage.getItem('userId'),    
-        // })
-
-
-
-        // axios.post('http://localhost:8080/note/save-notes-without-image',{
-        //     title: title,
-        //     dateTime: cdate,
-        //     description: description,
-        //     favorite:favorite,
-        //     image: image,
-        //     userId:localStorage.getItem('userId'),
-        // })
-
-        // axios({
-        //     method: "POST",
-        //     url: "http://localhost:8080/note/save-notes",
-        //     data: formData,
-        //     headers: { "Content-Type": "multipart/form-data" },
-        //   })
 
         const formData = new FormData();
 
-        formData.append('userId', localStorage.getItem('userId'))
+        formData.append('userId', localStorage.getItem("userId"))
         formData.append('title', title)
         formData.append('description', description)
         formData.append('dateTime', cdate)
@@ -119,8 +53,15 @@ export default function AddNoteDialog(props) {
         formData.append('image', image);
 
         try{
-            axios.post('http://localhost:8080/note/save-notes', formData)
-            .then(function (response) {
+            axios({
+                method:"post",
+                url:"http://localhost:8080/note/save-notes",
+                data: formData,
+                headers:{"Content-Type":"multipart/formData"}
+            }) 
+            .then(res=>{
+                console.log(res);
+                console.log(res.data);
                 Swal.fire(
                     'Good job!',
                     'Note Saved successfully!',
@@ -147,9 +88,6 @@ export default function AddNoteDialog(props) {
         }catch(error){
             console.error(error);
         }
-    
-      
-
     }
 
     const clearFeilds = () => {
@@ -205,7 +143,7 @@ export default function AddNoteDialog(props) {
 
                         <IconButton style={{ width: '10%' }} color="primary" aria-label="upload picture" component="label">
                             <input hidden accept="image/*" type="file" onChange={({ target: { files } }) => {
-                                files[0] && setImage(files[0].name)
+                                files[0] && setImage(files[0])
                             }} />
                             <BiImageAdd color='black' type="file" />
                         </IconButton>
