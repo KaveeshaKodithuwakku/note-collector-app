@@ -58,7 +58,6 @@ export default function UpdateDialog(props) {
         setFavorite(response.data.favorite)
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
       })
   }
@@ -67,7 +66,6 @@ export default function UpdateDialog(props) {
     e.preventDefault();
 
     axios.put(`http://localhost:8080/note/update-note-without-image/${id}`, {
-      // axios.put(`http://localhost:8080/note/update-note/${id}`, {
       title: title,
       dateTime: cdate,
       description: description,
@@ -148,7 +146,7 @@ export default function UpdateDialog(props) {
 
             <IconButton sx={{ width: '10%' }} color="primary" aria-label="upload picture" component="label">
               <input hidden accept="image/*" type="file" onChange={({ target: { files } }) => {
-                files[0] && setImage(files[0].name)
+                files[0] && setImage(files[0])
               }} />
               <BiImageAdd color='black' type="file" />
             </IconButton>
