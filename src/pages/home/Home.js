@@ -25,18 +25,7 @@ export default function Home() {
     navigate('/settings');
   }
 
-
-  //set space 
   const [spacing, setSpacing] = React.useState(2);
-
-  const handleChange = (event) => {
-    setSpacing(Number(event.target.value));
-  };
-
-  const jsx = `
-<Grid container spacing={${spacing}}>
-`;
-
 
   return (
 

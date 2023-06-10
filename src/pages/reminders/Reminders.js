@@ -4,13 +4,8 @@ import List from '../../components/List/List';
 import NavBar from '../../components/NavBar/NavBar';
 import axios from 'axios';
 import { Col, Row } from 'react-bootstrap';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
-import { Button, Card, CardContent } from '@mui/material';
-import image from '../../assets/forgot-password.jpg';
+import { Button } from '@mui/material';
 import AddReminderDialog from '../../components/AddReminderDialog/AddReminderDialog';
-
-
 
 export default function Reminders() {
 
@@ -19,60 +14,49 @@ export default function Reminders() {
 
   const handleClose = () => {
     setOpen(false);
-};
+  };
 
-const handleOpen = () => {
-  setOpen(true);
-};
-
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   useEffect(() => {
     loadData();
   }, [])
 
-
-  //get all data
   const loadData = () => {
     axios.get('http://localhost:8080/reminder/get-all-reminders')
       .then(function (response) {
         setData(response.data)
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
       })
   }
-
- 
+  
   return (
 
     <div>
-      <NavBar />
+      <div>
+        <NavBar />
+      </div>
 
-      <div style={{ display: "flex" ,justifyContent:'right',marginTop: 10,marginRight: 20}}>
-      <Button onClick={handleOpen}  className='add-btn-reminder'>Add Reminder </Button>
-      {/* <Button onClick={handleOpen}   className='add-note-button-new' startIcon={<BiPlusCircle/>} >Add Note </Button> */}
+      <div style={{ display: "flex", justifyContent: 'right', marginTop: 10, marginRight: 20 }}>
+        <Button onClick={handleOpen} className='add-btn-reminder'>Add Reminder </Button>
 
-<AddReminderDialog open={open} onClose={handleClose} onLoad={loadData}/>
-</div>
+        <AddReminderDialog open={open} onClose={handleClose} onLoad={loadData} />
+      </div>
 
-      <Row style={{marginTop: 10}}>
-      <h3 className="main-title" style={{ marginTop: 0 }}>Task Remainder</h3>
-      
+      <Row style={{ marginTop: 10 }}>
+        <h3 className="main-title" style={{ marginTop: 0 }}>Task Remainder</h3>
       </Row>
 
-      
-
-      <Row style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-       
+      <Row style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 
         <Col style={{ width: "50%" }}>
           <div id='site-main'>
 
-          
-
             <div className="board">
-              {/* <h2 className='upcoming text-dark'>Today</h2> */}
               <List info={Today(data)} onLoad={loadData}></List>
               <h4 className='upcoming text-dark'>Upcoming</h4>
               <List info={Upcoming(data, 2)} upcoming={true} onLoad={loadData}></List>
@@ -83,11 +67,7 @@ const handleOpen = () => {
         </Col>
 
       </Row>
-
-
     </div>
-
-
   )
 }
 
@@ -100,11 +80,10 @@ function Today(task) {
     let day = new Date(data.date).getDate();
     let month = new Date(data.date).getMonth();
 
-    return currentDay == day && currentMonth == month;
+    return currentDay === day && currentMonth === month;
   })
   return filter;
 }
-
 
 // upcoming reminders
 function Upcoming(task, toMonth) {
@@ -115,7 +94,7 @@ function Upcoming(task, toMonth) {
     let month = new Date(data.date).getMonth();
     let day = new Date(data.date).getDate();
 
-    if (currentDay == day) return;
+    if (currentDay === day) return true;
     return month >= currentMonth && month <= currentMonth + toMonth;
   })
 

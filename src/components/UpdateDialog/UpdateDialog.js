@@ -12,8 +12,6 @@ import { GrFormClose } from "react-icons/gr";
 import { Col, Row } from 'react-bootstrap';
 import './UpdateDialog.css';
 
-
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -27,34 +25,44 @@ const style = {
 };
 
 export default function UpdateDialog(props) {
-
+ 
   const [data, setData] = useState([]);
+  const [nId, setNId] = useState('');
   const [title, setTitle] = useState('');
   const [cdate, setDate] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('No Image Selected');
   const [favorite, setFavorite] = useState(false);
 
-
-
-  const currDate = new Date().toLocaleDateString();
-  const currTime = new Date().toLocaleTimeString();
-
   useEffect(() => {
+    if(localStorage.getItem('noteId') === ""){
+      setData([]);
+      setTitle("No Title");
+      setDescription("No Description");
+      setImage("No Image Selected");
+      setFavorite(false);
+    }else{
+      showDetails(localStorage.getItem('noteId'));
+    }
+   
+    console.log("44"+localStorage.getItem('noteId'));
+    setCurrentDateTime();
+  }, [props.noteId])
 
-    showDetails(props.noteId);
-    console.log("id - " + props.noteId);
+  const setCurrentDateTime = () => {
+    const currDate = new Date().toLocaleDateString();
+    const currTime = new Date().toLocaleTimeString();
     setDate(currDate + " " + currTime);
-  }, [])
+}
 
+  const showDetails = async (id) => {
 
-  const showDetails = (id) => {
-    axios.get(`http://localhost:8080/note/get-note/${id}`)
+   await axios.get(`http://localhost:8080/api/v1/note/get-note/${id}`)
       .then(function (response) {
         setData(response.data)
         setTitle(response.data.title)
         setDescription(response.data.description)
-        setImage(response.data.image)
+        setImage(response.data.file_path)
         setFavorite(response.data.favorite)
       })
       .catch(function (error) {
@@ -65,7 +73,7 @@ export default function UpdateDialog(props) {
   const updateDetails = (id, e) => {
     e.preventDefault();
 
-    axios.put(`http://localhost:8080/note/update-note-without-image/${id}`, {
+    axios.put(`http://localhost:8080/api/v1/note/update-note-without-image/${id}`, {
       title: title,
       dateTime: cdate,
       description: description,
@@ -89,26 +97,24 @@ export default function UpdateDialog(props) {
         clearFeilds();
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
           text: 'Something went wrong!',
         })
       });
-
   }
 
-  const clearFeilds = () => {
+  const clearFeilds = async () => {
     setTitle('');
     setDescription('');
     setImage('');
-
+    await localStorage.setItem('noteId',"");
   }
-
 
   return (
     <div>
 
       <Modal
-        // {...props}
+        //  {...props}
+       
         open={props.open}
         onClose={props.onClose}
         aria-labelledby="modal-modal-title"

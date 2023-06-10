@@ -32,14 +32,16 @@ export default function AddNoteDialog(props) {
     const [image, setImage] = useState(null);
     const [favorite, setFavorite] = useState(false);
 
-
-    const currDate = new Date().toLocaleDateString();
-    const currTime = new Date().toLocaleTimeString();
-
-  
     useEffect(() => {
-        setDate(currDate + " " + currTime);
+        clearFeilds();
+        setCurrentDateTime();
     }, [])
+
+    const setCurrentDateTime = () => {
+        const currDate = new Date().toLocaleDateString();
+        const currTime = new Date().toLocaleTimeString();
+        setDate(currDate + " " + currTime);
+    }
 
     const savePost = () => {
 
@@ -55,13 +57,11 @@ export default function AddNoteDialog(props) {
         try{
             axios({
                 method:"post",
-                url:"http://localhost:8080/note/save-notes",
+                url:"http://localhost:8080/api/v1/note/save-notes",
                 data: formData,
                 headers:{"Content-Type":"multipart/formData"}
             }) 
             .then(res=>{
-                console.log(res);
-                console.log(res.data);
                 Swal.fire(
                     'Good job!',
                     'Note Saved successfully!',
@@ -78,12 +78,9 @@ export default function AddNoteDialog(props) {
                     title: 'Oops...',
                     text: 'Something went wrong!',
                 })
-                console.log(error);
                 props.onClose();
                 props.onLoad();
                 clearFeilds();
-
-
             });
         }catch(error){
             console.error(error);

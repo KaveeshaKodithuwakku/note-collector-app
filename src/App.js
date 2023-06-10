@@ -12,14 +12,12 @@ import ForgotPassword from './pages/forgotPassword/ForgotPassword';
 import FavoriteNotes from './pages/favoriteNote/FavoriteNotes';
 import Reminders from './pages/reminders/Reminders';
 
-
-
-
 function App() {
   return (
     <div>
-
+  
 <AuthContextProvider>
+  
       <Routes>
         <Route  path='/home' element={<Home/>}/>
         <Route  path='/view' element={<ViewNotes/>}/> 
@@ -32,8 +30,7 @@ function App() {
         <Route path='/signup' element={<SignUp/>}/> 
       </Routes>
   </AuthContextProvider>
-    
-        {/* <Login/> */}
+
     </div>
   );
 }

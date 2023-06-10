@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './Login.css';
 import { Button, Card, CardContent, Divider, InputLabel, TextField } from '@mui/material';
 import image from '../../assets/login-background-new.jpg'
-import loginImage from '../../assets/login (1).png'
 import { FcGoogle } from "react-icons/fc"
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../utils/init-firbase';
@@ -19,7 +18,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function Login() {
 
-  const [validated, setValidated] = useState(false);
   const { signInWithGoogle, login } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -38,14 +36,6 @@ export default function Login() {
     setOpen(false);
   };
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    setValidated(true);
-  };
 
   function handleClickSingUp() {
     navigate('/signup');
@@ -59,62 +49,38 @@ export default function Login() {
     navigate('/forgot_password');
   }
 
-  const [showPassword, setShowPassword] = React.useState(false);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
   useEffect(() => {
     handleClose();
   }, [])
 
   const onLogin = (e) => {
     e.preventDefault();
-    if (email.length == 0 || password.length == 0) {
+    if (email.length === 0 || password.length === 0) {
       handleClickOpen();
     } else {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
 
-          //   Swal.fire({
-          //     icon: 'success',
-          //     text: 'Login success',
-          // })
-          // Signed in
           if (Checked) {
             localStorage.setItem('email', email);
             localStorage.setItem('password', password);
             localStorage.setItem('isCheked', Checked);
-            console.log(Checked);
-            console.log("email -" + localStorage.getItem('email'));
-            console.log("password -" + localStorage.getItem('password'));
-            console.log("isCheked -" + localStorage.getItem('isCheked'));
           } else {
             localStorage.setItem('email', "");
             localStorage.setItem('password', "");
             localStorage.setItem('isCheked', false);
-            console.log("Not Checked" + Checked);
-            console.log("email -" + localStorage.getItem('email'));
-            console.log("password -" + localStorage.getItem('password'));
-            console.log("isCheked -" + localStorage.getItem('isCheked'));
           }
-          const user = userCredential.user;
           localStorage.setItem('userId', userCredential.user.uid);
           navigate('/home')
-          console.log(user);
-          console.log("user id" + localStorage.getItem('userId'));
         })
         .catch((error) => {
-          if (error.code == 'auth/wrong-password') {
+          if (error.code === 'auth/wrong-password') {
             Swal.fire({
               icon: 'error',
               title: 'Wrong Password',
               text: 'Please check your credentials and try again...',
             })
-          } else if (error.code == 'auth/invalid-email') {
+          } else if (error.code === 'auth/invalid-email') {
             Swal.fire({
               icon: 'error',
               title: 'Invalid Email',
@@ -128,10 +94,6 @@ export default function Login() {
               text: 'Something went wrong!',
             })
           }
-
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage)
         });
     }
   }
@@ -139,8 +101,7 @@ export default function Login() {
   const signInFromGoogle = () => {
     signInWithGoogle()
       .then(user => {
-        handleRedirectToOrBack()
-        console.log(user)
+        handleRedirectToOrBack();
       })
       .catch(e => console.log(e.message))
   };
@@ -148,9 +109,6 @@ export default function Login() {
   useEffect(() => {
     setEmail(localStorage.getItem('email'));
     setPassword(localStorage.getItem('password'));
-    //setIsChecked(localStorage.getItem('isCheked'));
-    console.log("useEffect checked" + localStorage.getItem('isCheked'))
-
   }, [])
 
   return (
@@ -194,10 +152,6 @@ export default function Login() {
             flexDirection: 'column',
             backgroundColor: 'ghostwhite',
           }}>
-
-            {/* <div>
-<img className='login-icon-image ' src={loginImage} />
-            </div> */}
 
             <div>
               <Divider> <h4 className='login-title'> Login</h4></Divider>

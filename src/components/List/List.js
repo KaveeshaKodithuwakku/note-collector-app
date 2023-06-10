@@ -4,8 +4,6 @@ import { FaWindowClose } from 'react-icons/fa';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-
-
 export default function List(props) {
 
   return (
@@ -17,14 +15,10 @@ export default function List(props) {
   )
 }
 
-
-// function iterate(data, flag,props){
 function iterate(propsI) {
   if (!propsI.info) return;
   const bgColor = propsI.upcoming ? { backgroundColor: "#F1EDEC" } : {};
 
-
-  //delete data by id
   const deleteRow = (id, e) => {
     e.preventDefault();
     axios.delete(`http://localhost:8080/reminder/delete-reminder/${id}`)
@@ -35,7 +29,6 @@ function iterate(propsI) {
         propsI.onLoad();
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
         Swal.fire({
           icon: 'error',
@@ -43,7 +36,6 @@ function iterate(propsI) {
           text: 'Something went wrong!',
         })
       })
-
   }
 
   return (
@@ -66,7 +58,6 @@ function iterate(propsI) {
 
                   <FaWindowClose color='red' onClick={(e) => deleteRow(task.reminderId, e)} />
                 </div>
-
 
               </div>
             </li>

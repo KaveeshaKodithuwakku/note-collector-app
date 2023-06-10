@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 import { auth } from '../../utils/init-firbase';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { Button, Card, CardContent, TextField } from '@mui/material';
-import { useAuth } from '../../contexts/AuthContext';
 import image from '../../assets/forgot-password.jpg'
 import './ForgotPassword.css';
-
 
 export default function ForgotPassword() {
 
@@ -16,7 +14,6 @@ export default function ForgotPassword() {
         return sendPasswordResetEmail(auth, uEmail, {
             url: `http://localhost:3000/`,
         })
-
     }
 
     return (
@@ -55,7 +52,6 @@ export default function ForgotPassword() {
                 </CardContent>
             </Card>
         </div>
-
     )
 }
 

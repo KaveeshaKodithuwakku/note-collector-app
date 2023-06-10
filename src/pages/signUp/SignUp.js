@@ -12,24 +12,18 @@ import MuiAlert from '@mui/material/Alert';
 import Swal from 'sweetalert2';
 import swal from 'sweetalert';
 
-
-
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-
 export default function SignUp() {
 
-  const [validated, setValidated] = useState(false);
   const { signInWithGoogle, register } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [conPassword, setConPassword] = useState('')
   const [message, setMessage] = useState('')
   const navigate = useNavigate();
-
-  //------------------- alert ------------------------------
 
   const [open, setOpen] = React.useState(false);
 
@@ -45,19 +39,6 @@ export default function SignUp() {
     setOpen(false);
   };
 
-  //--------------------------------------------------------
-
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    setValidated(true);
-  };
-
-  //-------------- handle navigations ---------------------------
   function handleClick() {
     navigate('/home');
   }
@@ -65,13 +46,6 @@ export default function SignUp() {
   function handleLoginClick() {
     navigate('/');
   }
-
-  function handleRedirectToOrBack() {
-    navigate('/home');
-  }
-
-
-  //------------------------- create account -------------------------------
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -81,15 +55,12 @@ export default function SignUp() {
 
         await createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
-            // Signed in
-
             swal("Success!", "Create account successfully", "success")
               .then((value) => {
                 const user = userCredential.user;
                 console.log(user);
                 handleClick();
               });
-
           })
           .catch((error) => {
             if (error.code === 'auth/invalid-email') {
@@ -115,20 +86,17 @@ export default function SignUp() {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode, errorMessage);
-            // ..
           });
       } else {
         console.log("mis match");
         setMessage("Please check your password and confirm password again...");
         handleClickOpen();
       }
-
     } else {
       console.log("please fill all the fields");
       setMessage("Please fill all the fields...");
       handleClickOpen();
     }
-
   }
 
   //-------------------------- sign in from google --------------------------
@@ -136,7 +104,6 @@ export default function SignUp() {
   const signInFromGoogle = () => {
     signInWithGoogle()
       .then(user => {
-        // handleRedirectToOrBack()
         console.log(user);
         handleClick()
       })
