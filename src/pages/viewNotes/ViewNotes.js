@@ -178,7 +178,7 @@ export default function ViewNotes() {
 
       <div style={{ paddingLeft: 50, paddingRight: 30 }}>
 
-        <Row md={4}>
+        <Row md={3}>
           {data.filter((val) => {
             if (searchTerm === "") {
               return val
@@ -186,14 +186,14 @@ export default function ViewNotes() {
               return val
             }
             return false;
-          }).map((props) => {
+          }).map((props,index) => {
             return (
               <Col>
 
-                <Grid sx={{ flexGrow: 1 }} container spacing={5}>
+                <Grid sx={{ flexGrow: 1 }} container spacing={2}>
                   <Grid item xs={12}>
-                    <Grid container justifyContent="center" maxWidth={"500px"} marginTop={5} spacing={spacing}>
-                      <Card sx={{ maxWidth: "500px", maxHeight: '500px' }}>
+                    <Grid container justifyContent="center" marginTop={5} spacing={spacing}>
+                      <Card sx={{ maxWidth: "500px", maxHeight: '500px' }} key={index}>
                 <CardHeader
                   avatar={
                     <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
@@ -201,7 +201,7 @@ export default function ViewNotes() {
                     </Avatar>
                   }
                   action={
-                    <Checkbox Checked={props.favorite} onChange={(e) => updateIsFavorite(props.noteId, 0, e)} icon={<FavoriteBorder />} checkedIcon={<Favorite />} sx={{
+                    <Checkbox value={props.favorite} onChange={(e) => updateIsFavorite(props.noteId, 0, e)} icon={<FavoriteBorder />} checkedIcon={<Favorite />} sx={{
                       color: purple[800],
                       '&.Mui-checked': {
                         color: purple[600],
@@ -240,11 +240,11 @@ export default function ViewNotes() {
 
               </Card>
                     </Grid>
-                  </Grid>
+                   </Grid>
 
-                </Grid>
+                 </Grid>
 
-              </Col>
+               </Col>
             )
           })}
         </Row>

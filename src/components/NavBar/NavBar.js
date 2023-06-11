@@ -53,9 +53,9 @@ export default function NavBar() {
                 <Nav className="me-auto">
                     <Link className='navbar-text nav-link' to={"/home"}>
                         <FaHome className='navbar-icon' /> Home </Link>
-                    <Link className='navbar-text nav-link' to={"/reminders"}>
+                    {/* <Link className='navbar-text nav-link' to={"/reminders"}>
                         <IoNotifications />
-                        Reminders</Link>
+                        Reminders</Link> */}
                     <Link className='navbar-text nav-link' to={"/view"}>
                         <BsGrid />
                         View</Link>
@@ -63,8 +63,8 @@ export default function NavBar() {
 
                 <Navbar.Collapse className="justify-content-end">
                     <FaRegUserCircle color='white' />
-                    {[false].map((expand) => (
-                        <NavDropdown className='navbar-text '
+                    {[false].map((expand,index) => (
+                        <NavDropdown key={index} className='navbar-text '
                             title="Signed in "
                             id={`offcanvasNavbarDropdown-expand-${expand}`}
                         >

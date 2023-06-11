@@ -58,7 +58,7 @@ function a11yProps(index) {
 export default function Settings() {
 
     const [value, setValue] = React.useState(0);
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('');
     const auth = getAuth();
 
     const handleChange = (event, newValue) => {
@@ -121,14 +121,14 @@ export default function Settings() {
                         <Box sx={{ width: '100%' }}>
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                    <Tab label="Profile" {...a11yProps(0)} />
-                                    <Tab label="Reset Password" {...a11yProps(1)} />
+                                    {/* <Tab label="Profile" {...a11yProps(0)} /> */}
+                                    <Tab label="Reset Password" {...a11yProps(0)} />
                                 </Tabs>
                             </Box>
-                            <TabPanel value={value} index={0}>
+                            {/* <TabPanel value={value} index={0}>
 
-                                <div>
-                                    <Accordion expanded={expanded === 'panel1'} onChange={handleChangeExpand('panel1')}>
+                                <div> */}
+                                    {/* <Accordion expanded={expanded === 'panel1'} onChange={handleChangeExpand('panel1')}>
                                         <AccordionSummary
                                             expandIcon={<ExpandMoreIcon />}
                                             aria-controls="panel1bh-content"
@@ -172,7 +172,7 @@ export default function Settings() {
                                                         <FaUser />
                                                         <Form.Label style={{ fontSize: '12px', marginLeft: 20 }}>First Name</Form.Label>
                                                         <br></br>
-                                                        <input value={'Kaveesha'} disabled='true' style={{ fontSize: '12px', width: 300 }} />
+                                                        <input value={'Kaveesha'} readonly='readonly' style={{ fontSize: '12px', width: 300 }} />
                                                     </Form.Group>
 
                                                 </Col>
@@ -181,7 +181,7 @@ export default function Settings() {
                                                         <FaUser />
                                                         <Form.Label style={{ fontSize: '12px', marginLeft: 20 }}>Last Name</Form.Label>
                                                         <br></br>
-                                                        <input value={'Kodithuwakku'} disabled='true' style={{ fontSize: '12px', width: 300 }} />
+                                                        <input value={'Kodithuwakku'} readonly='readonly' style={{ fontSize: '12px', width: 300 }} />
                                                     </Form.Group>
                                                 </Col>
                                             </Row>
@@ -192,7 +192,7 @@ export default function Settings() {
                                                         <MdLocationOn />
                                                         <Form.Label style={{ fontSize: '12px', marginLeft: 20 }}>Address</Form.Label>
                                                         <br></br>
-                                                        <input value={'Matara,Sri Lanka'} disabled='true' style={{ fontSize: '12px', width: 300 }} />
+                                                        <input value={'Matara,Sri Lanka'} readonly='readonly' style={{ fontSize: '12px', width: 300 }} />
                                                     </Form.Group>
                                                 </Col>
                                             </Row>
@@ -203,7 +203,7 @@ export default function Settings() {
                                                         <IoIosCall />
                                                         <Form.Label style={{ fontSize: '12px', marginLeft: 20 }}>Contact</Form.Label>
                                                         <br></br>
-                                                        <input value={'0715246300'} disabled='true' style={{ fontSize: '12px', width: 300 }} />
+                                                        <input value={'0715246300'} readonly='readonly' style={{ fontSize: '12px', width: 300 }} />
                                                     </Form.Group>
                                                 </Col>
                                                 <Col style={{ width: '50%' }}>
@@ -211,7 +211,7 @@ export default function Settings() {
                                                         <BsFillCalendar2Fill />
                                                         <Form.Label style={{ fontSize: '12px', marginLeft: 20 }}>Date Of Birth</Form.Label>
                                                         <br></br>
-                                                        <input value={'2011-05-20'} disabled='true' style={{ fontSize: '12px', width: 300 }} />
+                                                        <input value={'2011-05-20'} readonly='readonly' style={{ fontSize: '12px', width: 300 }} />
                                                     </Form.Group>
                                                 </Col>
                                             </Row>
@@ -236,7 +236,7 @@ export default function Settings() {
                                                 <MdEmail />
                                                 <Form.Label style={{ fontSize: '12px', marginLeft: 20 }}>Email</Form.Label>
                                                 <br></br>
-                                                <input value={auth.currentUser.email} disabled='true' style={{ fontSize: '12px', width: 300 }} />
+                                                <input value={"k.kaveesha@gmail.com"} style={{ fontSize: '12px', width: 300 }} />
                                             </Form.Group>
                                             <div>
                                                 <img src={image1} alt="img" style={{ display: 'flex', justifyContent: 'flex-end', alignContent: 'end', width: 20, height: 20, boxShadow: 30, marginTop: 20 }} />
@@ -245,8 +245,8 @@ export default function Settings() {
                                     </Accordion>
                                 </div>
 
-                            </TabPanel>
-                            <TabPanel value={value} index={1}>
+                            </TabPanel> */}
+                            <TabPanel value={value} index={0}>
 
                                 <Card sx={{ width: '60%', height: '100%', borderRadius: 1, display: "flex", boxShadow: 2, margin: 1 }}>
                                     <CardContent style={{
@@ -258,7 +258,7 @@ export default function Settings() {
                                         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
 
                                             <div style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                                <h5 style={{ fontWeight: 'bolder' }}>Reset Password</h5>
+                                                <Typography style={{ fontWeight: 'bolder' }}>Reset Password</Typography>
                                             </div>
 
                                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>

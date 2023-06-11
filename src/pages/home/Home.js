@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import noteImage from '../../assets/file.png'
 import favImage from '../../assets/favorite.png'
-import profileImage from '../../assets/user.png'
+import settingsImage from '../../assets/cog.png'
 
 export default function Home() {
 
@@ -87,11 +87,11 @@ export default function Home() {
                       <div style={{ width: 300, height: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
                         <Card onClick={handleClickSettings}>
                           <CardContent style={{ width: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
-                            <img src={profileImage} alt="Logo" />
+                            <img src={settingsImage} alt="Logo" />
                           </CardContent>
 
                           <CardContent style={{ width: 200, justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
-                            <h5 style={{ color: 'blue' }}>Profile</h5>
+                            <h5 style={{ color: 'blue' }}>Settings</h5>
                           </CardContent>
                         </Card>
                       </div>

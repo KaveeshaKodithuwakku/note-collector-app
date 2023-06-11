@@ -41,13 +41,10 @@ export default function FavoriteNotes() {
         setData(response.data)
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
       })
   }
 
-
-  //delete data by id
   const deleteRow = (id, e) => {
     e.preventDefault();
     axios.delete(`http://localhost:8080/api/v1/note/delete-note/${id}`)
@@ -58,16 +55,12 @@ export default function FavoriteNotes() {
         loadData();
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
           text: 'Something went wrong!',
-          footer: '<a href="">Why do I have this issue?</a>'
         })
       })
-
   }
 
   const updateIsFavorite = (id, status, e) => {
@@ -152,7 +145,7 @@ export default function FavoriteNotes() {
                       </Avatar>
                     }
                     action={
-                      <Checkbox Checked={props.favorite} onChange={(e) => updateIsFavorite(props.noteId, 0, e)} icon={<FavoriteBorder />} checkedIcon={<Favorite />} sx={{
+                      <Checkbox value={props.favorite} onChange={(e) => updateIsFavorite(props.noteId, 0, e)} icon={<FavoriteBorder />} checkedIcon={<Favorite />} sx={{
                         color: purple[800],
                         '&.Mui-checked': {
                           color: purple[600],

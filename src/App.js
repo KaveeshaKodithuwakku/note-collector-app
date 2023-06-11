@@ -23,7 +23,7 @@ function App() {
         <Route  path='/view' element={<ViewNotes/>}/> 
         <Route  path='/calendar' element={<Calendar/>}/> 
         <Route  path='/favorite-notes' element={<FavoriteNotes/>}/> 
-        <Route  path='/reminders' element={<Reminders/>}/>
+        {/* <Route  path='/reminders' element={<Reminders/>}/> */}
         <Route  path='/settings' element={<Settings/>}/> 
         <Route  path='/forgot_password' element={<ForgotPassword/>}/> 
         <Route exact  path='/' element={<Login/>}/> 
