@@ -21,7 +21,7 @@ function iterate(propsI) {
 
   const deleteRow = (id, e) => {
     e.preventDefault();
-    axios.delete(`http://localhost:8080/reminder/delete-reminder/${id}`)
+    axios.delete(`reminder/delete-reminder/${id}`)
       .then(function (response) {
         Swal.fire(
           'Reminder Deleted Success!'

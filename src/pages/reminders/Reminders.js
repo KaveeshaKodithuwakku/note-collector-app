@@ -25,7 +25,7 @@ export default function Reminders() {
   }, [])
 
   const loadData = () => {
-    axios.get('http://localhost:8080/reminder/get-all-reminders')
+    axios.get('reminder/get-all-reminders')
       .then(function (response) {
         setData(response.data)
       })

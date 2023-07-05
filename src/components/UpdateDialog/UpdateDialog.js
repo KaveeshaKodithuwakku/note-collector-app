@@ -25,27 +25,28 @@ const style = {
 };
 
 export default function UpdateDialog(props) {
- 
+
   const [data, setData] = useState([]);
   const [nId, setNId] = useState('');
   const [title, setTitle] = useState('');
   const [cdate, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('No Image Selected');
+  const [previousImage, setPreviousImage] = React.useState("");
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
-    if(localStorage.getItem('noteId') === ""){
+    if (localStorage.getItem('noteId') === "") {
       setData([]);
       setTitle("No Title");
       setDescription("No Description");
       setImage("No Image Selected");
       setFavorite(false);
-    }else{
+    } else {
       showDetails(localStorage.getItem('noteId'));
     }
-   
-    console.log("44"+localStorage.getItem('noteId'));
+
+    console.log("44" + localStorage.getItem('noteId'));
     setCurrentDateTime();
   }, [props.noteId])
 
@@ -53,27 +54,39 @@ export default function UpdateDialog(props) {
     const currDate = new Date().toLocaleDateString();
     const currTime = new Date().toLocaleTimeString();
     setDate(currDate + " " + currTime);
-}
+  }
 
   const showDetails = async (id) => {
 
-   await axios.get(`http://localhost:8080/api/v1/note/get-note/${id}`)
+    await axios.get(`api/v1/note/get-note/${id}`)
       .then(function (response) {
-        setData(response.data)
-        setTitle(response.data.title)
-        setDescription(response.data.description)
-        setImage(response.data.file_path)
-        setFavorite(response.data.favorite)
+        setData(response.data);
+        setTitle(response.data.title);
+        setDescription(response.data.description);
+        setImage(response.data.file_path);
+        setPreviousImage(response.data.file_path);
+        setFavorite(response.data.favorite);
       })
       .catch(function (error) {
         console.log(error);
       })
   }
 
-  const updateDetails = (id, e) => {
-    e.preventDefault();
+  const handleUpdate = async (id, e) => {
 
-    axios.put(`http://localhost:8080/api/v1/note/update-note-without-image/${id}`, {
+     e.preventDefault();
+
+    if ((title.trim().length > 0 || description.trim().length > 0) && image === previousImage) {
+      updateNoteTitleAndDescription(id);
+    } else {
+      updateNoteWithImage(id);
+    }
+  }
+
+
+  const updateNoteTitleAndDescription = (id) => {
+
+    axios.put(`api/v1/note/update-note-without-image/${id}`, {
       title: title,
       dateTime: cdate,
       description: description,
@@ -102,11 +115,53 @@ export default function UpdateDialog(props) {
       });
   }
 
+  const updateNoteWithImage = (id) => {
+
+    const formData = new FormData();
+
+    formData.append('userId', localStorage.getItem("userId"))
+    formData.append('title', title)
+    formData.append('description', description)
+    formData.append('dateTime', cdate)
+    formData.append('favorite', favorite)
+    formData.append('image', image);
+
+    try {
+      axios({
+        method: "put",
+        url: `api/v1/note/update-note/${id}`,
+        data: formData,
+        headers:{"Content-Type":"multipart/formData"}
+      })
+        .then(function (response) {
+          props.onClose();
+          Swal.fire(
+            'Success!',
+            'Note Update successfully!',
+            'success'
+          )
+
+          props.onLoad();
+          clearFeilds();
+        })
+        .catch(function (error) {
+          props.onClose();
+          clearFeilds();
+          Swal.fire({
+            icon: 'error',
+            text: 'Something went wrong!',
+          })
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const clearFeilds = async () => {
     setTitle('');
     setDescription('');
     setImage('');
-    await localStorage.setItem('noteId',"");
+    await localStorage.setItem('noteId', "");
   }
 
   return (
@@ -114,7 +169,7 @@ export default function UpdateDialog(props) {
 
       <Modal
         //  {...props}
-       
+
         open={props.open}
         onClose={props.onClose}
         aria-labelledby="modal-modal-title"
@@ -159,7 +214,7 @@ export default function UpdateDialog(props) {
           </div>
 
           <div className='edit-btn-save-line'>
-            <Button onClick={(e) => updateDetails(data.noteId, e)} sx={{ height: 30, fontSize: 12, marginTop: 1, color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Update</Button>
+            <Button onClick={(e) => handleUpdate(data.noteId, e)} sx={{ height: 30, fontSize: 12, marginTop: 1, color: 'white', backgroundColor: 'green', ":hover": { backgroundColor: 'green' } }} >Update</Button>
           </div>
         </Box>
       </Modal>

@@ -65,7 +65,7 @@ export default function ViewNotes() {
 
     const userId = localStorage.getItem('userId');
 
-    axios.get(`http://localhost:8080/api/v1/note/get-notes-by-user-id/${userId}`)
+    axios.get(`api/v1/note/get-notes-by-user-id/${userId}`)
       .then(function (response) {
         setData(response.data);
         console.log(response.data);
@@ -89,7 +89,7 @@ export default function ViewNotes() {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:8080/api/v1/note/delete-note/${id}`)
+        axios.delete(`api/v1/note/delete-note/${id}`)
           .then(function (response) {
             Swal.fire(
               'Deleted!',
@@ -121,7 +121,7 @@ export default function ViewNotes() {
 
     e.preventDefault();
 
-    axios.put(`http://localhost:8080/api/v1/note/update-note-favorite/${id}/${status}`)
+    axios.put(`api/v1/note/update-note-favorite/${id}/${status}`)
       .then(function (response) {
         if (status === 1) {
           swal("Note added to favorite list", "", "success", {
@@ -188,11 +188,11 @@ export default function ViewNotes() {
             return false;
           }).map((props,index) => {
             return (
-              <Col>
+              <Col key={index}>
 
-                <Grid sx={{ flexGrow: 1 }} container spacing={2}>
+                <Grid sx={{ flexGrow: 1 }} container spacing={2} >
                   <Grid item xs={12}>
-                    <Grid container justifyContent="center" marginTop={5} spacing={spacing}>
+                    <Grid container justifyContent="center" marginTop={5} spacing={spacing} >
                       <Card sx={{ maxWidth: "500px", maxHeight: '500px' }} key={index}>
                 <CardHeader
                   avatar={
@@ -208,7 +208,7 @@ export default function ViewNotes() {
                       },
                     }} />
                   }
-                  title={props.title+props.noteId}
+                  title={props.title}
                   subheader={props.dateTime}
                 />
 
@@ -216,7 +216,7 @@ export default function ViewNotes() {
                   component="img"
                   height={170}
                   width={500}
-                  image={('http://localhost:8080/api/v1/note/download/'+props.file_path)} 
+                  image={(axios.defaults.baseURL +'api/v1/note/download/'+props.file_path)} 
                   alt="image"
                 />
 

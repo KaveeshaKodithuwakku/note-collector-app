@@ -57,7 +57,7 @@ export default function AddNoteDialog(props) {
         try{
             axios({
                 method:"post",
-                url:"http://localhost:8080/api/v1/note/save-notes",
+                url:"api/v1/note/save-notes",
                 data: formData,
                 headers:{"Content-Type":"multipart/formData"}
             }) 

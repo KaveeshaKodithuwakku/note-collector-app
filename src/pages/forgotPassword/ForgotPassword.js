@@ -12,7 +12,7 @@ export default function ForgotPassword() {
     const forgotPassword = (uEmail, e) => {
         e.preventDefault();
         return sendPasswordResetEmail(auth, uEmail, {
-            url: `http://localhost:3000/`,
+            url: `http://localhost:3000`,
         })
     }
 

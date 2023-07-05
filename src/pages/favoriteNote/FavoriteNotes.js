@@ -30,13 +30,21 @@ export default function FavoriteNotes() {
     setOpen(true);
   };
 
+  const getNoteIdToEdit = async (id,e) => {
+    console.log("**** id --- "+id);
+    e.preventDefault();
+  await localStorage.setItem('noteId',id);
+  handleOpen();
+  };
+
+
   const [data, setData] = useState([]);
 
   const loadData = () => {
 
     const userId = localStorage.getItem('userId');
 
-    axios.get(`http://localhost:8080/api/v1/note/get-all-favorites/${userId}`)
+    axios.get(`api/v1/note/get-all-favorites/${userId}`)
       .then(function (response) {
         setData(response.data)
       })
@@ -47,7 +55,7 @@ export default function FavoriteNotes() {
 
   const deleteRow = (id, e) => {
     e.preventDefault();
-    axios.delete(`http://localhost:8080/api/v1/note/delete-note/${id}`)
+    axios.delete(`api/v1/note/delete-note/${id}`)
       .then(function (response) {
         Swal.fire(
           'Note Deleted Success!'
@@ -75,7 +83,7 @@ export default function FavoriteNotes() {
 
     e.preventDefault();
 
-    axios.put(`http://localhost:8080/api/v1/note/update-note-favorite/${id}/${status}`)
+    axios.put(`api/v1/note/update-note-favorite/${id}/${status}`)
       .then(function (response) {
         if (status === 1) {
           swal("Note added to favorite list", "", "success", {
@@ -159,7 +167,7 @@ export default function FavoriteNotes() {
                     component="img"
                     height={170}
                     width={500}
-                    image={('http://localhost:8080/api/v1/note/download/'+props.file_path)} 
+                    image={(axios.defaults.baseURL +'api/v1/note/download/'+props.file_path)} 
                     alt="image"
                   />
 
@@ -170,12 +178,12 @@ export default function FavoriteNotes() {
                   </CardContent>
                   <CardActions disableSpacing>
 
-                    <IconButton color="primary" aria-label="edit" component="label" onClick={handleOpen}>
+                    <IconButton color="primary" aria-label="edit" component="label" onClick={(e) => getNoteIdToEdit(props.noteId, e)}>
                       <input hidden accept="image/*" />
                       <Edit />
                     </IconButton>
-
-                    <UpdateDialog open={open} onClose={handleClose} noteId={props.noteId} onLoad={loadData} />
+                 
+                    <UpdateDialog open={open} onClose={handleClose} noteId={localStorage.getItem('noteId')} onLoad={loadData} />
 
                     <IconButton onClick={(e) => deleteRow(props.noteId, e)} color="primary" aria-label="upload picture" component="label">
                       <input hidden accept="image/*" />

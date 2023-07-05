@@ -146,7 +146,6 @@ export default function Login() {
 
           <CardContent style={{
             display: "flex",
-
             height: "100%",
             width: "80%",
             flexDirection: 'column',

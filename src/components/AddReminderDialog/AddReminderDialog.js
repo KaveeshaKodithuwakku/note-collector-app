@@ -34,7 +34,7 @@ export default function AddReminderDialog(props) {
 
     const savePost = () => {
 
-        axios.post('http://localhost:8080/reminder/save-reminder', {
+        axios.post('reminder/save-reminder', {
             title: title,
             description: description,
             date: date,
